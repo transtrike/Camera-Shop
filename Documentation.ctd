@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+<cherrytree>
+	<node custom_icon_id="0" foreground="" is_bold="True" name="Application Info" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589112848.53" ts_lastsave="1589147601.84" unique_id="4">
+		<rich_text># ASP.NET Application
+- Has to include CRUD operations(preferably with LINQ)
+- Database: MySQL or MariaDB
+- Name: Camera Shop
+- One common header and footer
+- MVC type application
+
+# Main Idea
+- Camera Shop 
+- You can choose a camera from the menu at index page
+- Every camera will have a big image of it and sectons(bars/buttons)
+--- Section 1: Specifications (view the camera's specifications)
+--- Section 2: Photos (photos, made by the camera/can be submitted by the users)
+--- Section 3: Reviews (users made reviews about the product)
+</rich_text>
+	</node>
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Controllers" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589112674.68" ts_lastsave="1589121814.36" unique_id="1">
+		<rich_text># Controller list
+- DBController
+- </rich_text>
+		<rich_text link="node 5">IndexController</rich_text>
+		<rich_text>
+
+# Properties
+- Every controller will contain a main header and footer
+
+</rich_text>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="DBController" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589112712.26" ts_lastsave="1589147704.33" unique_id="2">
+			<rich_text># Controller for the database
+- Makes the connection to and from the database
+- All requests go though the controller 
+- Includes validation of the given data to prevent SQL injections
+
+# Constructor
+- Establishes the connection to the database and stores it localy
+
+# Destructor
+- Closes the connection and clears the data
+
+# Connection()
+- Returns the connection to the database
+
+# ExecuteCommand()
+- Execute a command to the database (no return OR rows affected)
+
+# ExecureReader()
+- Executes a command to the database and returns the result
+</rich_text>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="IndexController" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589121650.61" ts_lastsave="1589147660.04" unique_id="5">
+			<rich_text># Controller for the main page of the application
+- Provides the main page of the application
+- Redirects to the pages nessessary
+- Contains the current logged user(optional/unknown can it be done)
+- </rich_text>
+		</node>
+	</node>
+</cherrytree>
