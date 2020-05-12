@@ -1,0 +1,35 @@
+/home/viko/Documents/Programming/Projects/C#/ITCareer Project/ITCareer Project/bin/Debug/netcoreapp3.1/appsettings.Development.json
+/home/viko/Documents/Programming/Projects/C#/ITCareer Project/ITCareer Project/bin/Debug/netcoreapp3.1/appsettings.json
+/home/viko/Documents/Programming/Projects/C#/ITCareer Project/ITCareer Project/bin/Debug/netcoreapp3.1/Properties/launchSettings.json
+/home/viko/Documents/Programming/Projects/C#/ITCareer Project/ITCareer Project/bin/Debug/netcoreapp3.1/ITCareer Project
+/home/viko/Documents/Programming/Projects/C#/ITCareer Project/ITCareer Project/bin/Debug/netcoreapp3.1/ITCareer Project.deps.json
+/home/viko/Documents/Programming/Projects/C#/ITCareer Project/ITCareer Project/bin/Debug/netcoreapp3.1/ITCareer Project.runtimeconfig.json
+/home/viko/Documents/Programming/Projects/C#/ITCareer Project/ITCareer Project/bin/Debug/netcoreapp3.1/ITCareer Project.runtimeconfig.dev.json
+/home/viko/Documents/Programming/Projects/C#/ITCareer Project/ITCareer Project/bin/Debug/netcoreapp3.1/ITCareer Project.dll
+/home/viko/Documents/Programming/Projects/C#/ITCareer Project/ITCareer Project/bin/Debug/netcoreapp3.1/ITCareer Project.pdb
+/home/viko/Documents/Programming/Projects/C#/ITCareer Project/ITCareer Project/bin/Debug/netcoreapp3.1/ITCareer Project.Views.dll
+/home/viko/Documents/Programming/Projects/C#/ITCareer Project/ITCareer Project/bin/Debug/netcoreapp3.1/ITCareer Project.Views.pdb
+/home/viko/Documents/Programming/Projects/C#/ITCareer Project/ITCareer Project/obj/Debug/netcoreapp3.1/ITCareer Project.csprojAssemblyReference.cache
+/home/viko/Documents/Programming/Projects/C#/ITCareer Project/ITCareer Project/obj/Debug/netcoreapp3.1/ITCareer Project.MvcApplicationPartsAssemblyInfo.cache
+/home/viko/Documents/Programming/Projects/C#/ITCareer Project/ITCareer Project/obj/Debug/netcoreapp3.1/ITCareer Project.RazorAssemblyInfo.cache
+/home/viko/Documents/Programming/Projects/C#/ITCareer Project/ITCareer Project/obj/Debug/netcoreapp3.1/ITCareer Project.RazorAssemblyInfo.cs
+/home/viko/Documents/Programming/Projects/C#/ITCareer Project/ITCareer Project/obj/Debug/netcoreapp3.1/ITCareer Project.AssemblyInfoInputs.cache
+/home/viko/Documents/Programming/Projects/C#/ITCareer Project/ITCareer Project/obj/Debug/netcoreapp3.1/ITCareer Project.AssemblyInfo.cs
+/home/viko/Documents/Programming/Projects/C#/ITCareer Project/ITCareer Project/obj/Debug/netcoreapp3.1/ITCareer Project.TagHelpers.input.cache
+/home/viko/Documents/Programming/Projects/C#/ITCareer Project/ITCareer Project/obj/Debug/netcoreapp3.1/ITCareer Project.TagHelpers.output.cache
+/home/viko/Documents/Programming/Projects/C#/ITCareer Project/ITCareer Project/obj/Debug/netcoreapp3.1/ITCareer Project.RazorCoreGenerate.cache
+/home/viko/Documents/Programming/Projects/C#/ITCareer Project/ITCareer Project/obj/Debug/netcoreapp3.1/Razor/Views/Home/Index.cshtml.g.cs
+/home/viko/Documents/Programming/Projects/C#/ITCareer Project/ITCareer Project/obj/Debug/netcoreapp3.1/Razor/Views/Home/Privacy.cshtml.g.cs
+/home/viko/Documents/Programming/Projects/C#/ITCareer Project/ITCareer Project/obj/Debug/netcoreapp3.1/Razor/Views/Shared/Error.cshtml.g.cs
+/home/viko/Documents/Programming/Projects/C#/ITCareer Project/ITCareer Project/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_Layout.cshtml.g.cs
+/home/viko/Documents/Programming/Projects/C#/ITCareer Project/ITCareer Project/obj/Debug/netcoreapp3.1/Razor/Views/Shared/_ValidationScriptsPartial.cshtml.g.cs
+/home/viko/Documents/Programming/Projects/C#/ITCareer Project/ITCareer Project/obj/Debug/netcoreapp3.1/Razor/Views/_ViewImports.cshtml.g.cs
+/home/viko/Documents/Programming/Projects/C#/ITCareer Project/ITCareer Project/obj/Debug/netcoreapp3.1/Razor/Views/_ViewStart.cshtml.g.cs
+/home/viko/Documents/Programming/Projects/C#/ITCareer Project/ITCareer Project/obj/Debug/netcoreapp3.1/ITCareer Project.RazorTargetAssemblyInfo.cache
+/home/viko/Documents/Programming/Projects/C#/ITCareer Project/ITCareer Project/obj/Debug/netcoreapp3.1/ITCareer Project.RazorTargetAssemblyInfo.cs
+/home/viko/Documents/Programming/Projects/C#/ITCareer Project/ITCareer Project/obj/Debug/netcoreapp3.1/ITCareer Project.Views.pdb
+/home/viko/Documents/Programming/Projects/C#/ITCareer Project/ITCareer Project/obj/Debug/netcoreapp3.1/staticwebassets/ITCareer Project.StaticWebAssets.Manifest.cache
+/home/viko/Documents/Programming/Projects/C#/ITCareer Project/ITCareer Project/obj/Debug/netcoreapp3.1/staticwebassets/ITCareer Project.StaticWebAssets.xml
+/home/viko/Documents/Programming/Projects/C#/ITCareer Project/ITCareer Project/obj/Debug/netcoreapp3.1/ITCareer Project.dll
+/home/viko/Documents/Programming/Projects/C#/ITCareer Project/ITCareer Project/obj/Debug/netcoreapp3.1/ITCareer Project.pdb
+/home/viko/Documents/Programming/Projects/C#/ITCareer Project/ITCareer Project/obj/Debug/netcoreapp3.1/ITCareer Project.csproj.CopyComplete
