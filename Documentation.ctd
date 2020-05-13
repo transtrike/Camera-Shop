@@ -17,7 +17,7 @@
 --- Section 3: Reviews (users made reviews about the product)
 </rich_text>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Controllers" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589112674.68" ts_lastsave="1589121814.36" unique_id="1">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Controllers" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589112674.68" ts_lastsave="1589407360.47" unique_id="1">
 		<rich_text># Controller list
 - DBController
 - </rich_text>
@@ -28,11 +28,12 @@
 - Every controller will contain a main header and footer
 
 </rich_text>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="DBController" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589112712.26" ts_lastsave="1589147704.33" unique_id="2">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="DBController(Scrapped)" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589112712.26" ts_lastsave="1589403350.36" unique_id="2">
 			<rich_text># Controller for the database
 - Makes the connection to and from the database
 - All requests go though the controller 
 - Includes validation of the given data to prevent SQL injections
+- Prefered method - trough LINQ
 
 # Constructor
 - Establishes the connection to the database and stores it localy
@@ -50,12 +51,27 @@
 - Executes a command to the database and returns the result
 </rich_text>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="IndexController" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589121650.61" ts_lastsave="1589147660.04" unique_id="5">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="HomeController" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589121650.61" ts_lastsave="1589407345.47" unique_id="5">
 			<rich_text># Controller for the main page of the application
 - Provides the main page of the application
 - Redirects to the pages nessessary
 - Contains the current logged user(optional/unknown can it be done)
 - </rich_text>
+		</node>
+	</node>
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Database" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589407360.47" ts_lastsave="1589407423.6" unique_id="7">
+		<rich_text></rich_text>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Connection" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589407386.3" ts_lastsave="1589407386.3" unique_id="8">
+			<rich_text></rich_text>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="DbSet" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589407395.66" ts_lastsave="1589407395.66" unique_id="9">
+			<rich_text></rich_text>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="DbContext" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589407406.31" ts_lastsave="1589407406.31" unique_id="10">
+			<rich_text></rich_text>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="ChangeTracker" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589407423.6" ts_lastsave="1589407423.6" unique_id="11">
+			<rich_text></rich_text>
 		</node>
 	</node>
 </cherrytree>

@@ -19,6 +19,12 @@ namespace ITCareer_Project
                     .Build();
             
                host.Run();
+               
+               /*
+                * View - UI Elements
+                * Model - Business logic, validation layer
+                * Controller - User input parsing and interaction
+                */
 #endif
           }
 
