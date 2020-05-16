@@ -1,18 +1,14 @@
-using System.Linq;
-using ITCareer_Project.Database;
+using Camera_Shop.Database;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
-using MySQL.Data.EntityFrameworkCore;
 
-namespace ITCareer_Project.Controllers
+namespace Camera_Shop.Controllers
 {
-     public class DBController
+     public class DbController : Controller
      {
           private SqlConnection _connection;
          
-          public DBController()
-          {
-               this._connection = Connection.GetConnection();
-          }
+          public DbController() => this._connection = Connection.GetConnection();
 
           //Scrapped
           public int ExecuteCommand(string query)
@@ -25,7 +21,7 @@ namespace ITCareer_Project.Controllers
           //CRUD Commands (currently not what I wanted)
           public void SelectFromDb() {}
           public void ReadFromDb() {}
-          public void UpdateDb() {}
+          public void UpdateToDb() {}
           public void DeleteFromDb() {}
      }
 }

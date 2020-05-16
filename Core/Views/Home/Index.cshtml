@@ -1,6 +1,9 @@
-﻿@{
+﻿@model Camera_Shop.Controllers.HomeController;
+@{
     ViewData["Title"] = "Camera Catalog";
+    Layout = "_Layout";
 }
-<body>
-    <h1>Hello, fellow citizen. Welcome to my Camera Shop</h1>
-</body>
+<h1>Hello, fellow citizen. Welcome to my Camera Shop</h1>
+
+<!-- Bullshit, doesnt work, idk how lmaooo-->
+<button class="btn btn-primary" asp-route-cameraName="@Model.SendEntityToDb("idk", 12)">Button</button>

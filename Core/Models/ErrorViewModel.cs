@@ -1,6 +1,6 @@
 using System;
 
-namespace ITCareer_Project.Models
+namespace Camera_Shop.Models
 {
      public class ErrorViewModel
      {

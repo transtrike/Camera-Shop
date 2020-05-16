@@ -1,10 +1,10 @@
 using Microsoft.Data.SqlClient;
 
-namespace ITCareer_Project.Database
+namespace Camera_Shop.Database
 {
      public class Connection
      {
-          private const string ConnectionString = "Server=localhost; Port=3306; Uid=root; Password={password}; UseAffectedRows=True";
+          private const string ConnectionString = "Server=localhost;Database=CameraShop;User Id=root;";
 
           public static SqlConnection GetConnection() => new SqlConnection(ConnectionString);
      }

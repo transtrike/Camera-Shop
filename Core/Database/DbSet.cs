@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace ITCareer_Project.Database
+namespace Camera_Shop.Database
 {
      public class DbSet<TCamera> : ICollection<TCamera>
           where TCamera : class, new()

@@ -2,7 +2,7 @@ using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace ITCareer_Project
+namespace Camera_Shop
 {
      public class Program
      {

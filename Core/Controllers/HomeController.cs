@@ -1,31 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using ITCareer_Project.Database;
+﻿using System.Diagnostics;
+using Camera_Shop.Database;
+using Camera_Shop.Enitites;
+using Camera_Shop.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using ITCareer_Project.Models;
 using Microsoft.Data.SqlClient;
 
-namespace ITCareer_Project.Controllers
+namespace Camera_Shop.Controllers
 {
      public class HomeController : Controller
      {
           private readonly SqlConnection _connection;
           public HomeController() => this._connection = Connection.GetConnection();
 
-          public IActionResult Index()
+          public string SendEntityToDb(string name, int age)
           {
-               return View();
+               return $"Hello Camera {name}, {age}";
           }
-
-          public IActionResult Privacy()
-          {
-               return View();
-          }
-
+          
+          public IActionResult Index() => View();
+  
           [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
           public IActionResult Error()
           {
