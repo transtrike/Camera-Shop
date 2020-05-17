@@ -1,14 +1,11 @@
-using Camera_Shop.Database;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
-
 namespace Camera_Shop.Controllers
 {
-     public class DbController : Controller
+     public class DBController
      {
-          private SqlConnection _connection;
          
-          public DbController() => this._connection = Connection.GetConnection();
+          public DBController()
+          {
+          }
 
           //Scrapped
           public int ExecuteCommand(string query)
@@ -21,7 +18,7 @@ namespace Camera_Shop.Controllers
           //CRUD Commands (currently not what I wanted)
           public void SelectFromDb() {}
           public void ReadFromDb() {}
-          public void UpdateToDb() {}
+          public void UpdateDb() {}
           public void DeleteFromDb() {}
      }
 }

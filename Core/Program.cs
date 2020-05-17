@@ -19,12 +19,6 @@ namespace Camera_Shop
                     .Build();
             
                host.Run();
-               
-               /*
-                * View - UI Elements
-                * Model - Business logic, validation layer
-                * Controller - User input parsing and interaction
-                */
 #endif
           }
 

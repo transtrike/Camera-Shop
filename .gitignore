@@ -1,4 +1,7 @@
-bin/
-obj/
+Core/bin/
+Core/obj/
 .idea/
 *.blob
+.idea/
+Core/appsettings.json
+Core/appsettings.Development.json

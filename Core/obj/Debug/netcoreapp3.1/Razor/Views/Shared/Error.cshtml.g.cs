@@ -14,20 +14,20 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
 #nullable restore
 #line 1 "/home/viko/Documents/Programming/Projects/C#/Camera-Shop/Core/Views/_ViewImports.cshtml"
-using Camera_Shop;
+using ITCareer_Project;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 2 "/home/viko/Documents/Programming/Projects/C#/Camera-Shop/Core/Views/_ViewImports.cshtml"
-using Camera_Shop.Models;
+using ITCareer_Project.Models;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"4ecc4d2bcad30a6aee551879bc7e7094ebb4184d", @"/Views/Shared/Error.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"dd144372884076fed015e7277cdb68e60aa2a6f7", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"436674b9d9d343c7c4a8a2fef755a0cb173dadde", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared_Error : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<ErrorViewModel>
     {
         #pragma warning disable 1998
