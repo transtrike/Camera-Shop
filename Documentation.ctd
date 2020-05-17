@@ -20,9 +20,9 @@
 	<node custom_icon_id="0" foreground="" is_bold="True" name="MyNotes" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589672522.23" ts_lastsave="1589672522.23" unique_id="17">
 		<rich_text></rich_text>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="True" name="TODO" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589672023.18" ts_lastsave="1589674975.12" unique_id="16">
-		<rich_text># Camera class - setting new id to the next int from the database
-#(DONE) Camera Specs class </rich_text>
+	<node custom_icon_id="0" foreground="" is_bold="True" name="TODO" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589672023.18" ts_lastsave="1589680723.96" unique_id="16">
+		<rich_text>#(DONE) Camera Specs class 
+# Fix CloneEntites in ChangeTracker</rich_text>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="True" name="Controllers" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589112674.68" ts_lastsave="1589671600.49" unique_id="1">
 		<rich_text># Controller list
@@ -68,12 +68,14 @@
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="True" name="Database" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589407360.47" ts_lastsave="1589675999.41" unique_id="7">
 		<rich_text></rich_text>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="ChangeTracker" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589407423.6" ts_lastsave="1589675897.43" unique_id="11">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="ChangeTracker" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589407423.6" ts_lastsave="1589679104.87" unique_id="11">
 			<rich_text># Functions
 - Store Modified Entites(List&lt;Camera&gt; all)
 - Store Added Entites(List&lt;Camera&gt; added)
 - Store Removed Entites(List&lt;Camera&gt; removee)
-- Everytime an update is made, make changes accordingly </rich_text>
+- Constructor(IEnumerable&lt;T&gt; entities)
+- Everytime an update is made, make changes accordingly 
+- AllEntities is a clone of the given to the ctor entities</rich_text>
 		</node>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="CameraContext(DbContext)" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589675470.07" ts_lastsave="1589676010.68" unique_id="18">
 			<rich_text># Wrapper for the Database and connection to it to pull and push data</rich_text>

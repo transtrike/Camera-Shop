@@ -31,10 +31,10 @@ namespace Camera_Shop.Models
           private bool _bluetooth;
           private decimal _shutterLag;
 
-          public CameraSpecifications() { }
+          public CameraSpecifications(int id) => this.Id = id;
 
           [Required]
-          public int Id
+          private int Id
           {
                get => this._id;
                set => this._id = value;

@@ -9,13 +9,14 @@ namespace Camera_Shop.Models
           private string _model;
           private Specs _specs;
 
-          public Camera(string model, Specs specs)
+          public Camera(int id, string model, Specs specs)
           {
-               this._id = 0;
+               this._id = id;
                this._model = model;
                this._specs = specs;
           }
 
+          // For Reflection purposes
           public Camera() { }
 
           //TODO: set int from database
