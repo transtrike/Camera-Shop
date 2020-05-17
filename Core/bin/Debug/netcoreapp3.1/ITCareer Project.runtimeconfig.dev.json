@@ -1,8 +1,0 @@
-{
-  "runtimeOptions": {
-    "additionalProbingPaths": [
-      "/home/viko/.dotnet/store/|arch|/|tfm|",
-      "/home/viko/.nuget/packages"
-    ]
-  }
-}
