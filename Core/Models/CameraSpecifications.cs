@@ -34,6 +34,7 @@ namespace Camera_Shop.Models
           public CameraSpecifications(int id) => this.Id = id;
 
           [Required]
+          [Key]
           private int Id
           {
                get => this._id;

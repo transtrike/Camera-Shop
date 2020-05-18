@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using Specs = Camera_Shop.Models.CameraSpecifications;
 
 namespace Camera_Shop.Models
@@ -20,6 +21,7 @@ namespace Camera_Shop.Models
           public Camera() { }
 
           //TODO: set int from database
+          [Key]
           private int Id
           {
                get => this._id;

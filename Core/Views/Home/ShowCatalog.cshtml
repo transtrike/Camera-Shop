@@ -1,0 +1,17 @@
+@model IEnumerable<Camera_Shop.Models.Camera>
+@{
+    ViewData["Title"] = "Camera Catalog";
+    Layout = "_Layout";
+}
+
+<div>
+    @foreach(var camera in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayName("Camera Model");
+                @Html.DisplayFor(model => camera.Model);
+            </td>
+        </tr>
+    }
+</div>

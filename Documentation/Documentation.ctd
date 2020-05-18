@@ -20,9 +20,13 @@
 	<node custom_icon_id="0" foreground="" is_bold="True" name="MyNotes" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589672522.23" ts_lastsave="1589672522.23" unique_id="17">
 		<rich_text></rich_text>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="True" name="TODO" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589672023.18" ts_lastsave="1589680723.96" unique_id="16">
+	<node custom_icon_id="0" foreground="" is_bold="True" name="TODO" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589672023.18" ts_lastsave="1589725735.47" unique_id="16">
 		<rich_text>#(DONE) Camera Specs class 
-# Fix CloneEntites in ChangeTracker</rich_text>
+# Fix CloneEntites in </rich_text>
+		<rich_text link="node 11">ChangeTracker</rich_text>
+		<rich_text>
+# Ask Danail Dimitrov from where does he gather so much info about the project
+# Watch the videos Galio gave to become ASP.NET CORE Master</rich_text>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="True" name="Controllers" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589112674.68" ts_lastsave="1589671600.49" unique_id="1">
 		<rich_text># Controller list
