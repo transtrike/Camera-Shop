@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
@@ -10,12 +12,14 @@ namespace Camera_Shop.Models
      public class Camera
      {
           private int _id;
+          private string _brand;
           private string _model;
           private Specs _specs;
 
-          public Camera(int id, string model, Specs specs)
+          public Camera(int id, string brand, string model, Specs specs)
           {
                this.Id = id;
+               this.Brand = brand;
                this.Model = model;
                this.Specifications = specs;
                
@@ -31,6 +35,19 @@ namespace Camera_Shop.Models
           {
                get => this._id;
                private set => this._id = value;
+          }
+
+          [NotNull]
+          public string Brand
+          {
+               get => this._brand;
+               private set
+               {
+                    if(value == null)
+                         throw new ArgumentException("Brand can't be null!");
+                    
+                    this._brand = value;
+               }
           }
 
           [NotNull]
@@ -52,5 +69,6 @@ namespace Camera_Shop.Models
                get => this._specs;
                set => this._specs = value;
           }
+          
      }
 }

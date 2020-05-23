@@ -20,16 +20,15 @@
 	<node custom_icon_id="0" foreground="" is_bold="True" name="MyNotes" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589672522.23" ts_lastsave="1589672522.23" unique_id="17">
 		<rich_text></rich_text>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="True" name="TODO" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589672023.18" ts_lastsave="1590211471.85" unique_id="16">
+	<node custom_icon_id="0" foreground="" is_bold="True" name="TODO" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589672023.18" ts_lastsave="1590239664.54" unique_id="16">
 		<rich_text>#(DONE) Implement Camera Specs class 
-# Implement </rich_text>
-		<rich_text link="node 11">ChangeTracker</rich_text>
-		<rich_text>
 # Implement IEnumerable&lt;CameraSpecs&gt; in the CameraSpecs class
 # Implement a button in Home/Index that redirects to Catalog/ShowCatalog
 # Fix Database problems
 # Implement query that gets from database all the cameras and passes it to Catalog/ShowCatalog View
-
+# Implement </rich_text>
+		<rich_text link="node 11">ChangeTracker</rich_text>
+		<rich_text>
 # Implement Unit Tests
 </rich_text>
 	</node>
@@ -81,8 +80,10 @@
 - </rich_text>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="True" name="Database" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589407360.47" ts_lastsave="1589675999.41" unique_id="7">
-		<rich_text></rich_text>
+	<node custom_icon_id="0" foreground="" is_bold="True" name="Database" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589407360.47" ts_lastsave="1590239826.05" unique_id="7">
+		<rich_text># PostrgreSQL
+- systemctl status postgresql
+- psql -d CameraShop</rich_text>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="ChangeTracker" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589407423.6" ts_lastsave="1589679104.87" unique_id="11">
 			<rich_text># Functions
 - Store Modified Entites(List&lt;Camera&gt; all)

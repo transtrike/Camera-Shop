@@ -1,38 +1,55 @@
-@using System.Reflection
 @model IEnumerable<Camera_Shop.Models.Camera>
 
 @{
     ViewData["Title"] = "Camera Catalog";
     Layout = "_Layout";
+
+    CameraSpecifications spec = new CameraSpecifications(1)
+    {
+        BaseISO = 100,
+        MaxISO = 25600,
+        MegapixelCountX = 6000,
+        MegapixelCountY = 4000,
+        Mount = "EF",
+        SingleFPS = 7
+    };
+
+
+    List<Camera> cameras = new List<Camera>
+    {
+        new Camera(1, "Canon", "5D Mark IV", spec),
+        new Camera(2, "Canon", "T5i", null),
+        new Camera(3, "Canon", "T6", null),
+        new Camera(4, "Canon", "T6i", null),
+        new Camera(5, "Canon", "T7", null),
+        new Camera(6, "Canon", "T7i", null)
+    };
 }
 
 <div>
-    @foreach(var camera in Model)
+    @foreach(var camera in cameras) //var camera in Model
     {
         <tr>
             <td>
-                @Html.DisplayName("Camera Id:")
-                @Html.DisplayFor(model => camera.Id)
+                <h5><b>Camera Brand:</b> @camera.Brand</h5>
+                <h5><b>Camera Model:</b> @camera.Model</h5>
                 
-                @Html.DisplayName("Camera Model:")
-                @Html.DisplayFor(model => camera.Model)
                 @if(camera.Specifications == null)
                 {
-                    @Html.Display("No Camera Specifications available")
+                    <h5><b>Camera Specifications:</b> <strong class="alert-danger">Not available!</strong></h5>
                 }
                 else
                 {
-                    @Html.DisplayName("Camera Specifications:")
-                    @foreach(PropertyInfo propertyInfo in camera.GetType().GetProperties())
+                    <h5><b>Available Camera Specifications:</b></h5>
+                    @foreach(var property in 
+                        camera.GetType()
+                        .GetProperties())
                     {
-                        @Html.DisplayName(propertyInfo.Name)
-                        @Html.DisplayFor(prop => prop
-                            .Select(p => p.Specifications
-                                .Where(x => x
-                                    .GetType() == prop.GetType())))
+                        <h5>@property.Name</h5>
                     }
                 }
             </td>
         </tr>
+        <hr/>
     }
 </div>
