@@ -1,9 +1,12 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 using Specs = Camera_Shop.Models.CameraSpecifications;
 
 namespace Camera_Shop.Models
 {
+     [Table("Cameras")]
      public class Camera
      {
           private int _id;
@@ -12,26 +15,29 @@ namespace Camera_Shop.Models
 
           public Camera(int id, string model, Specs specs)
           {
-               this._id = id;
-               this._model = model;
-               this._specs = specs;
+               this.Id = id;
+               this.Model = model;
+               this.Specifications = specs;
+               
+               if (specs != null)
+                    this._specs.Id = this._id;
           }
 
           // For Reflection purposes
           public Camera() { }
 
-          //TODO: set int from database
           [Key]
-          private int Id
+          public int Id
           {
                get => this._id;
-               set => this._id = value;
+               private set => this._id = value;
           }
 
+          [NotNull]
           public string Model
           {
                get => this._model;
-               set
+               private set
                {
                     if(value == null)
                          throw new ArgumentException("Model can't be null!");
@@ -40,6 +46,7 @@ namespace Camera_Shop.Models
                }
           }
 
+          [AllowNull]
           public Specs Specifications
           {
                get => this._specs;

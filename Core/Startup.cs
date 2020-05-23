@@ -1,4 +1,5 @@
 using Camera_Shop.Database;
+using System.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,7 @@ namespace Camera_Shop
 
                services.AddDbContext<CameraContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("DEV")));
+               
           }
 
           // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

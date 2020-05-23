@@ -1,0 +1,38 @@
+@using System.Reflection
+@model IEnumerable<Camera_Shop.Models.Camera>
+
+@{
+    ViewData["Title"] = "Camera Catalog";
+    Layout = "_Layout";
+}
+
+<div>
+    @foreach(var camera in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayName("Camera Id:")
+                @Html.DisplayFor(model => camera.Id)
+                
+                @Html.DisplayName("Camera Model:")
+                @Html.DisplayFor(model => camera.Model)
+                @if(camera.Specifications == null)
+                {
+                    @Html.Display("No Camera Specifications available")
+                }
+                else
+                {
+                    @Html.DisplayName("Camera Specifications:")
+                    @foreach(PropertyInfo propertyInfo in camera.GetType().GetProperties())
+                    {
+                        @Html.DisplayName(propertyInfo.Name)
+                        @Html.DisplayFor(prop => prop
+                            .Select(p => p.Specifications
+                                .Where(x => x
+                                    .GetType() == prop.GetType())))
+                    }
+                }
+            </td>
+        </tr>
+    }
+</div>

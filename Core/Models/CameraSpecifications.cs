@@ -1,13 +1,18 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Camera_Shop.Models
 {
-     public class CameraSpecifications
+     [Table("CameraSpecifications")]
+     public class CameraSpecifications : IEnumerable<CameraSpecifications>
      {
-          // Required
+          // Required properties
           private int _id;
-          private int[] _megapixelCount;
+          private int _megapixelCountX;
+          private int _megapixelCountY;
           private int _megapixels;
           private int _baseISO;
           private int _maxISO;
@@ -20,12 +25,14 @@ namespace Camera_Shop.Models
           private string _sensorSize;
           private string _sensorTechnology;
           private string _mount;
-          private decimal[] _size;
+          private decimal _sizeX;
+          private decimal _sizeY;
+          private decimal _sizeZ;
           private decimal _weight;
           
-          // Not Required
+          // Not Required properties
           private int _extendedISO;
-          private TimeSpan _ratedBattryLife;
+          private TimeSpan _ratedBatteryLife;
           private bool _wifi;
           private decimal _wifiBand;
           private bool _bluetooth;
@@ -35,29 +42,42 @@ namespace Camera_Shop.Models
 
           [Required]
           [Key]
-          private int Id
+          public int Id
           {
                get => this._id;
                set => this._id = value;
           }
 
           [Required]
-          public int[] MegapixelCount
+          public int MegapixelCountX
           {
-               get => this._megapixelCount;
+               get => this._megapixelCountX;
                set
                {
-                    if(value[0] <= 100 && value[1] <= 100)
-                         throw new ArgumentException("Megapixel count can't be less then or equal to 100!");
+                    if(value <= 100)
+                         throw new ArgumentException("MegapixelsX count can't be less then or equal to 100!");
                     
-                    this._megapixelCount = value;
+                    this._megapixelCountX = value;
+               }
+          }
+          
+          [Required]
+          public int MegapixelCountY
+          {
+               get => this._megapixelCountY;
+               set
+               {
+                    if(value <= 100)
+                         throw new ArgumentException("MegapixelsY count can't be less then or equal to 100!");
+                    
+                    this._megapixelCountY = value;
                }
           }
 
           public int Megapixels
           {
                get => this._megapixels;
-               private set => this._megapixels = this._megapixelCount[0] / this._megapixelCount[1];
+               private set => this._megapixels = this._megapixelCountX / this._megapixelCountY;
           }
 
           [Required]
@@ -167,15 +187,15 @@ namespace Camera_Shop.Models
           }
 
           [Required]
-          public TimeSpan RatedBattryLife
+          public TimeSpan RatedBatteryLife
           {
-               get => this._ratedBattryLife;
+               get => this._ratedBatteryLife;
                set
                {
                     if(value <= TimeSpan.Zero)
                          throw new ArgumentException("Rated battery life can't be less than or equal to 0!");
                     
-                    this._ratedBattryLife = value;
+                    this._ratedBatteryLife = value;
                }
           }
 
@@ -200,15 +220,41 @@ namespace Camera_Shop.Models
           }
 
           [Required]
-          public decimal[] Size
+          public decimal SizeX
           {
-               get => this._size;
+               get => this._sizeX;
                set
                {
-                    if(value[0] <= 0 || value[1] <= 0 || value[2] <= 0)
-                         throw new ArgumentException("Size can't be less than or equal to 0!");
+                    if(value <= 0)
+                         throw new ArgumentException("SizeX can't be less than or equal to 0!");
                     
-                    this._size = value;
+                    this._sizeX = value;
+               }
+          }
+          
+          [Required]
+          public decimal SizeY
+          {
+               get => this._sizeY;
+               set
+               {
+                    if(value <= 0)
+                         throw new ArgumentException("SizeY can't be less than or equal to 0!");
+                    
+                    this._sizeY = value;
+               }
+          }
+          
+          [Required]
+          public decimal SizeZ
+          {
+               get => this._sizeZ;
+               set
+               {
+                    if(value <= 0)
+                         throw new ArgumentException("SizeZ can't be less than or equal to 0!");
+                    
+                    this._sizeZ = value;
                }
           }
 
@@ -253,6 +299,18 @@ namespace Camera_Shop.Models
                     
                     this._shutterLag = value;
                }
+          }
+
+          
+          //Inherited Methods
+          public IEnumerator<CameraSpecifications> GetEnumerator()
+          {
+               throw new NotImplementedException();
+          }
+
+          IEnumerator IEnumerable.GetEnumerator()
+          {
+               return GetEnumerator();
           }
      }
 }
