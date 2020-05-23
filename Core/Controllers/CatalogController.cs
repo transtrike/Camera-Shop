@@ -16,5 +16,22 @@ namespace Camera_Shop.Controllers
                //return View(cameraCollection);
                return View();
           }
+
+          public IActionResult CreateCamera()
+          {
+               return View();
+          }
+          
+          public IActionResult EditCamera()
+          {
+               return View();
+          }
+
+          public IActionResult DeleteCamera()
+          {
+               return View();
+          }
+
+          
      }
 }
