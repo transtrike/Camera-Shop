@@ -1,0 +1,143 @@
+<?xml version="1.0" ?>
+<cherrytree>
+	<node custom_icon_id="0" foreground="" is_bold="True" name="Application Info" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589112848.53" ts_lastsave="1589676123.31" unique_id="4">
+		<rich_text># ASP.NET Application
+- Has to include CRUD operations(preferably with LINQ)
+- Database: MySQL or MariaDB
+- Name: Camera Shop
+- One common header and footer
+- MVC type application
+
+# Main Idea
+- Camera Shop 
+- You can choose a camera from the menu at index page
+- Every camera will have a big image of it and sectons(bars/buttons)
+--- Section 1: Specifications (view the camera's specifications)
+--- Section 2: Photos (photos, made by the camera/can be submitted by the users)
+--- Section 3: Reviews (users made reviews about the product)
+</rich_text>
+	</node>
+	<node custom_icon_id="0" foreground="" is_bold="True" name="MyNotes" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589672522.23" ts_lastsave="1589672522.23" unique_id="17">
+		<rich_text></rich_text>
+	</node>
+	<node custom_icon_id="0" foreground="" is_bold="True" name="TODO" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589672023.18" ts_lastsave="1590211471.85" unique_id="16">
+		<rich_text>#(DONE) Implement Camera Specs class 
+# Implement </rich_text>
+		<rich_text link="node 11">ChangeTracker</rich_text>
+		<rich_text>
+# Implement IEnumerable&lt;CameraSpecs&gt; in the CameraSpecs class
+# Implement a button in Home/Index that redirects to Catalog/ShowCatalog
+# Fix Database problems
+# Implement query that gets from database all the cameras and passes it to Catalog/ShowCatalog View
+
+# Implement Unit Tests
+</rich_text>
+	</node>
+	<node custom_icon_id="0" foreground="" is_bold="True" name="Controllers" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589112674.68" ts_lastsave="1590211298.8" unique_id="1">
+		<rich_text># Controller list
+- </rich_text>
+		<rich_text link="node 5">IndexController</rich_text>
+		<rich_text>
+- DbController(scrapped)
+- CatalogController
+
+# Properties
+- Every controller will contain a main header and footer
+- Every controller should do one job and one job only
+
+</rich_text>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="DBController(Scrapped)" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589112712.26" ts_lastsave="1589403350.36" unique_id="2">
+			<rich_text># Controller for the database
+- Makes the connection to and from the database
+- All requests go though the controller 
+- Includes validation of the given data to prevent SQL injections
+- Prefered method - trough LINQ
+
+# Constructor
+- Establishes the connection to the database and stores it localy
+
+# Destructor
+- Closes the connection and clears the data
+
+# Connection()
+- Returns the connection to the database
+
+# ExecuteCommand()
+- Execute a command to the database (no return OR rows affected)
+
+# ExecureReader()
+- Executes a command to the database and returns the result
+</rich_text>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="HomeController" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589121650.61" ts_lastsave="1590211279.8" unique_id="5">
+			<rich_text># Controller for the main page of the application
+- Provides the main page of the application
+- Redirects to the pages nessessary
+- Contains the current logged user(optional/unknown can it be done)</rich_text>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="CatalogController" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1590211212.83" ts_lastsave="1590211251.26" unique_id="21">
+			<rich_text># Controller that implements fuctions for the Catalog and the Catalog only
+- Method that gets all cameras from database (first 100) and displays them to the user
+- </rich_text>
+		</node>
+	</node>
+	<node custom_icon_id="0" foreground="" is_bold="True" name="Database" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589407360.47" ts_lastsave="1589675999.41" unique_id="7">
+		<rich_text></rich_text>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="ChangeTracker" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589407423.6" ts_lastsave="1589679104.87" unique_id="11">
+			<rich_text># Functions
+- Store Modified Entites(List&lt;Camera&gt; all)
+- Store Added Entites(List&lt;Camera&gt; added)
+- Store Removed Entites(List&lt;Camera&gt; removee)
+- Constructor(IEnumerable&lt;T&gt; entities)
+- Everytime an update is made, make changes accordingly 
+- AllEntities is a clone of the given to the ctor entities</rich_text>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="CameraContext" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589675470.07" ts_lastsave="1590211401.35" unique_id="18">
+			<rich_text># Wrapper for the Database and connection to it to pull and push data
+- Contain OnModelCreate that bind the key(database Id bind)
+- Contains DbSet&lt;Camera&gt;, so it can display and use the camera class</rich_text>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="CameraSet(Scrapped)" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589675999.41" ts_lastsave="1590211345.06" unique_id="19">
+			<rich_text></rich_text>
+		</node>
+	</node>
+	<node custom_icon_id="0" foreground="" is_bold="True" name="Models" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589671584.35" ts_lastsave="1589671784.08" unique_id="13">
+		<rich_text></rich_text>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Camera" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589671784.08" ts_lastsave="1589675765.9" unique_id="14">
+			<rich_text># Class for the Camera entity
+- Id
+- Model
+- Specs class instance</rich_text>
+			<node custom_icon_id="0" foreground="" is_bold="False" name="Specifications" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589671887.52" ts_lastsave="1589674871.06" unique_id="15">
+				<rich_text># Requered
+☐ Id
+☑ Megapixels
+☑ Megapixel Count
+☑ Base ISO
+☑ MaxISO
+☑ Fastest Shutter Speed
+☑ Continues AF FPS
+☑ Single AF FPS
+☑ Video Quality (4k)
+☑ Video Max FPS (60FPS)
+☑ Battery Type
+☑ Sensor Size (Full-Frame)
+☑ Sensor Tehnology (CMOS)
+☑ Mount Type
+☑ Size
+☑ Weight
+
+# Not requred 
+☑ ExtendedISO
+☑ Rated Battery Life
+☑ WiFi
+☑ ---WiFi Band
+☑ Bluetooth
+☑ Shutter lag</rich_text>
+			</node>
+		</node>
+	</node>
+	<node custom_icon_id="0" foreground="" is_bold="True" name="Unit Testing" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589676123.31" ts_lastsave="1589676129.01" unique_id="20">
+		<rich_text></rich_text>
+	</node>
+</cherrytree>
