@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 
 namespace Camera_Shop
 {
@@ -22,7 +23,7 @@ namespace Camera_Shop
                services.AddMvc();
 
                services.AddDbContext<CameraContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("DEV")));
+                    options.UseNpgsql(Configuration.GetConnectionString("DEV")));
                
           }
 
