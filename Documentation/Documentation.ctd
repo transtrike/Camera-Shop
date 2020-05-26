@@ -20,7 +20,7 @@
 	<node custom_icon_id="0" foreground="" is_bold="True" name="MyNotes" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589672522.23" ts_lastsave="1589672522.23" unique_id="17">
 		<rich_text></rich_text>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="True" name="TODO" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589672023.18" ts_lastsave="1590483392.52" unique_id="16">
+	<node custom_icon_id="0" foreground="" is_bold="True" name="TODO" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589672023.18" ts_lastsave="1590507479.38" unique_id="16">
 		<rich_text>#(</rich_text>
 		<rich_text weight="heavy">DONE</rich_text>
 		<rich_text>) Implement Camera Specs class 
@@ -36,8 +36,20 @@
 #(</rich_text>
 		<rich_text weight="heavy">DONE</rich_text>
 		<rich_text>) Implement query that gets from database all the cameras and passes it to Catalog/ShowCatalog View
+# Add a bool question that ask are there available camera specs and if yes, make a foreach that makes an input field for every property in CameraSpecification
+#(</rich_text>
+		<rich_text weight="heavy">DONE</rich_text>
+		<rich_text>) Add a created Camera into database
+# Add Camera's specs to database when adding camera
+#(</rich_text>
+		<rich_text weight="heavy">DONE</rich_text>
+		<rich_text>) Check to see if a camera exists in a database
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
 # Implement Unit Tests
-# Add try/catch blocks where needed</rich_text>
+# Add try/catch blocks where needed
+</rich_text>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="True" name="Controllers" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589112674.68" ts_lastsave="1590211298.8" unique_id="1">
 		<rich_text># Controller list
@@ -116,11 +128,12 @@
 - Id
 - Model
 - Specs class instance</rich_text>
-			<node custom_icon_id="0" foreground="" is_bold="False" name="Specifications" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589671887.52" ts_lastsave="1589674871.06" unique_id="15">
+			<node custom_icon_id="0" foreground="" is_bold="False" name="Specifications" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589671887.52" ts_lastsave="1590509111.14" unique_id="15">
 				<rich_text># Requered
-☐ Id
+☑ Id
+☑ MegapixelCountX
+☑ MegapixelCountY
 ☑ Megapixels
-☑ Megapixel Count
 ☑ Base ISO
 ☑ MaxISO
 ☑ Fastest Shutter Speed
@@ -132,7 +145,9 @@
 ☑ Sensor Size (Full-Frame)
 ☑ Sensor Tehnology (CMOS)
 ☑ Mount Type
-☑ Size
+☑ SizeX
+☑ SizeY
+☑ SizeZ
 ☑ Weight
 
 # Not requred 
