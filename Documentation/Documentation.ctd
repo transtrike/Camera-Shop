@@ -20,17 +20,24 @@
 	<node custom_icon_id="0" foreground="" is_bold="True" name="MyNotes" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589672522.23" ts_lastsave="1589672522.23" unique_id="17">
 		<rich_text></rich_text>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="True" name="TODO" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589672023.18" ts_lastsave="1590239664.54" unique_id="16">
-		<rich_text>#(DONE) Implement Camera Specs class 
-# Implement IEnumerable&lt;CameraSpecs&gt; in the CameraSpecs class
-# Implement a button in Home/Index that redirects to Catalog/ShowCatalog
-# Fix Database problems
-# Implement query that gets from database all the cameras and passes it to Catalog/ShowCatalog View
-# Implement </rich_text>
-		<rich_text link="node 11">ChangeTracker</rich_text>
-		<rich_text>
+	<node custom_icon_id="0" foreground="" is_bold="True" name="TODO" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589672023.18" ts_lastsave="1590483392.52" unique_id="16">
+		<rich_text>#(</rich_text>
+		<rich_text weight="heavy">DONE</rich_text>
+		<rich_text>) Implement Camera Specs class 
+#(</rich_text>
+		<rich_text weight="heavy">SCRAPPED</rich_text>
+		<rich_text>)Implement IEnumerable&lt;CameraSpecs&gt; in the CameraSpecs class
+#(</rich_text>
+		<rich_text weight="heavy">DONE</rich_text>
+		<rich_text>) Implement a button in Home/Index that redirects to Catalog/ShowCatalog
+#(</rich_text>
+		<rich_text weight="heavy">DONE</rich_text>
+		<rich_text>) Fix Database problems
+#(</rich_text>
+		<rich_text weight="heavy">DONE</rich_text>
+		<rich_text>) Implement query that gets from database all the cameras and passes it to Catalog/ShowCatalog View
 # Implement Unit Tests
-</rich_text>
+# Add try/catch blocks where needed</rich_text>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="True" name="Controllers" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589112674.68" ts_lastsave="1590211298.8" unique_id="1">
 		<rich_text># Controller list

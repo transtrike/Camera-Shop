@@ -5,6 +5,11 @@
     Layout = "_Layout";
 }
 
-<h2>Create a new Camera or add existing one!</h2>
-
-<h5>Enter model Brand:</h5> 
+<h2>Create a new Camera or add an existing one!</h2>
+<div>
+    <form>
+        <h5>Enter model Brand:</h5>
+            <input asp-for="Brand" class="form-control"/>
+            <span asp-validation-for="Brand" class="alert-danger"></span>
+    </form>
+</div>

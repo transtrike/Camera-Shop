@@ -1,0 +1,29 @@
+@using System.Reflection
+@model Camera_Shop.Models.CameraSpecifications
+
+@{
+    ViewData["Title"] = "Camera Specification";
+    Layout = "_Layout";
+    
+    PropertyInfo[] properties = Model.GetType().GetProperties();
+}
+
+<div>
+    <b>Specifications:</b><br/> 
+</div>
+<div>
+    @if(Model == null)
+    {
+        <h5><important>Specifications unavailable!</important></h5>
+    }
+    else
+    {
+        //TODO: High change it doesn't work
+        for(int i = 0; i < properties.Length; i++)
+        {
+            <h5>@properties[i].Name: @properties[i].GetValue(Model, null).ToString()</h5><br/>
+        }
+        }    
+    }
+    
+</div>

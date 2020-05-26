@@ -1,12 +1,11 @@
 using Camera_Shop.Database;
-using System.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Npgsql.EntityFrameworkCore.PostgreSQL;
+using Npgsql;
 
 namespace Camera_Shop
 {
@@ -30,7 +29,7 @@ namespace Camera_Shop
           // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
           public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
           {
-               if (env.IsDevelopment())
+               if(env.IsDevelopment())
                     app.UseDeveloperExceptionPage();
                else
                {
@@ -46,8 +45,8 @@ namespace Camera_Shop
 
                app.UseAuthorization();
 
-               app.UseEndpoints(endpoints => 
-               { 
+               app.UseEndpoints(endpoints =>
+               {
                     endpoints.MapRazorPages();
                     endpoints.MapDefaultControllerRoute();
                });

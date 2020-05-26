@@ -3,31 +3,11 @@
 @{
     ViewData["Title"] = "Camera Catalog";
     Layout = "_Layout";
-
-    CameraSpecifications spec = new CameraSpecifications(1)
-    {
-        BaseISO = 100,
-        MaxISO = 25600,
-        MegapixelCountX = 6000,
-        MegapixelCountY = 4000,
-        Mount = "EF",
-        SingleFPS = 7
-    };
-
-
-    List<Camera> cameras = new List<Camera>
-    {
-        new Camera(1, "Canon", "5D Mark IV", spec),
-        new Camera(2, "Canon", "T5i", null),
-        new Camera(3, "Canon", "T6", null),
-        new Camera(4, "Canon", "T6i", null),
-        new Camera(5, "Canon", "T7", null),
-        new Camera(6, "Canon", "T7i", null)
-    };
 }
 
+<!-- Show all cameras-->
 <div>
-    @foreach(var camera in cameras) //var camera in Model
+    @foreach(var camera in Model) //var camera in Model
     {
         <tr>
             <td>
@@ -40,16 +20,15 @@
                 }
                 else
                 {
-                    <h5><b>Available Camera Specifications:</b></h5>
-                    @foreach(var property in 
-                        camera.GetType()
-                        .GetProperties())
-                    {
-                        <h5>@property.Name</h5>
-                    }
+                    <h5><b>Available Camera Specifications:</b> <a asp-action="ShowSpecification" asp-route-specsId="@camera.Specifications.Id" asp-controller="Catalog">Click here</a></h5>
                 }
             </td>
         </tr>
         <hr/>
     }
+</div>
+
+<!-- Create a Camera-->
+<div>
+    <a class="btn btn-primary btn-outline-primary" asp-action="CreateCamera">Create a Camera!</a>
 </div>

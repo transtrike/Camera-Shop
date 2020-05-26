@@ -34,14 +34,14 @@ namespace Camera_Shop.Models
           public int Id
           {
                get => this._id;
-               private set => this._id = value;
+               set => this._id = value;
           }
 
           [NotNull]
           public string Brand
           {
                get => this._brand;
-               private set
+               set
                {
                     if(value == null)
                          throw new ArgumentException("Brand can't be null!");
@@ -54,7 +54,7 @@ namespace Camera_Shop.Models
           public string Model
           {
                get => this._model;
-               private set
+               set
                {
                     if(value == null)
                          throw new ArgumentException("Model can't be null!");

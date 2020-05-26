@@ -3,11 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Reflection;
 
 namespace Camera_Shop.Models
 {
      [Table("CameraSpecifications")]
-     public class CameraSpecifications : IEnumerable<CameraSpecifications>
+     public class CameraSpecifications
      {
           // Required properties
           private int _id;
@@ -39,6 +41,9 @@ namespace Camera_Shop.Models
           private decimal _shutterLag;
 
           public CameraSpecifications(int id) => this.Id = id;
+          
+          //For Reflection purposes
+          public CameraSpecifications() {}
 
           [Required]
           [Key]
@@ -299,18 +304,6 @@ namespace Camera_Shop.Models
                     
                     this._shutterLag = value;
                }
-          }
-
-          
-          //Inherited Methods
-          public IEnumerator<CameraSpecifications> GetEnumerator()
-          {
-               throw new NotImplementedException();
-          }
-
-          IEnumerator IEnumerable.GetEnumerator()
-          {
-               return GetEnumerator();
           }
      }
 }
