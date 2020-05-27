@@ -18,7 +18,6 @@
     {
         PropertyInfo[] properties = Model.GetType().GetProperties();
         
-        //TODO: High chance it doesn't work
         for(int i = 0; i < properties.Length; i++)
         {
             <h5>@properties[i].Name: @properties[i].GetValue(Model, null).ToString()</h5>

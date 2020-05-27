@@ -22,6 +22,7 @@
                 {
                     <h5><b>Available Camera Specifications:</b> <a asp-action="ShowSpecification" asp-route-specsId="@camera.Specifications.Id" asp-controller="Catalog">Click here</a></h5>
                 }
+                <a class="btn btn-outline-primary" asp-action="EditCamera" asp-route-cameraId="@camera.Id">Edit</a>
             </td>
         </tr>
         <hr/>
@@ -30,5 +31,5 @@
 
 <!-- Create a Camera-->
 <div>
-    <a class="btn btn-outline-primary" asp-action="CreateCamera">Create a Camera!</a>
+    <a class="btn btn-outline-primary" asp-action="CreateCamera">Create a Camera</a>
 </div>

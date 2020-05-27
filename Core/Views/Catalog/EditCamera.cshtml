@@ -4,3 +4,25 @@
     ViewData["Title"] = "Edit a Camera";
     Layout = "_Layout";
 }
+
+<h1>Here you can edit an existing camera. Maybe there was an error when someone submited it.</h1>
+<h4>Come on, buddy. Help me fix the errors if any.</h4>
+<br/>
+
+<div>
+    <form method="post" asp-action="EditACamera">
+        <tr><h5><b>Camera Brand:</b> <input type="text" asp-for="@Model.Brand"/></h5></tr>
+        <tr><h5><b>Camera Model:</b> <input type="text" asp-for="@Model.Model"/></h5></tr>
+        <tr><h5><b>Megapixels:</b> <input type="text" asp-for="@Model.Specifications.Megapixels"/></h5></tr>
+        <tr><h5><b>Base ISO:</b> <input type="text" asp-for="@Model.Specifications.BaseISO"/></h5></tr>
+        <tr><h5><b>Max ISO:</b> <input type="text" asp-for="@Model.Specifications.MaxISO"/></h5></tr>
+        
+        <input type="submit" value="Edit" class="btn btn-outline-primary"/>
+    </form>
+</div>
+
+<br/>
+
+<div>
+    <a asp-action="ShowCatalog" class="btn btn-outline-primary">Back to the catalog</a>
+</div>

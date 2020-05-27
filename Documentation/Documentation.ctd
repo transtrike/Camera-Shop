@@ -20,7 +20,7 @@
 	<node custom_icon_id="0" foreground="" is_bold="True" name="MyNotes" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589672522.23" ts_lastsave="1589672522.23" unique_id="17">
 		<rich_text></rich_text>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="True" name="TODO" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589672023.18" ts_lastsave="1590600894.62" unique_id="16">
+	<node custom_icon_id="0" foreground="" is_bold="True" name="TODO" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589672023.18" ts_lastsave="1590615207.26" unique_id="16">
 		<rich_text>#(</rich_text>
 		<rich_text weight="heavy">DONE</rich_text>
 		<rich_text>) Implement Camera Specs class 
@@ -51,11 +51,12 @@
 # Add an Edit Button below each camera to edit (U from CRUD)
 # Add an DELETE button in red to delete a camera
 
+#Fix error when creating a camera and inserting into database
+
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 # Implement Unit Tests
-# Add try/catch blocks where needed
-</rich_text>
+# Add try/catch blocks where needed</rich_text>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="True" name="Controllers" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589112674.68" ts_lastsave="1590211298.8" unique_id="1">
 		<rich_text># Controller list

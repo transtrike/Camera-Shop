@@ -29,7 +29,15 @@ namespace Camera_Shop.Controllers
 
           //Update
           [HttpGet]
-          public IActionResult EditCamera(Camera camera) => View(camera);
+          public IActionResult EditCamera(int cameraId) => View(GetCamera(cameraId));
+
+          [HttpPost]
+          public IActionResult EditACamera(Camera camera)
+          {
+               UpdateCameraInDatabase(camera);
+               
+               return RedirectToAction("ShowCatalog");
+          }
           
           [HttpPost]
           public IActionResult InsertIntoDatabase(CameraDto cameraDto)
@@ -46,8 +54,7 @@ namespace Camera_Shop.Controllers
 
                return RedirectToAction("ShowCatalog");
           }
-
-
+          
           //Delete
           [HttpGet]
           public IActionResult DeleteCamera() => View();
@@ -102,12 +109,9 @@ namespace Camera_Shop.Controllers
                     var commandForCameraInsert = new NpgsqlCommand(queryForCameraInsert, connection);
 
                     commandForCameraInsert.Parameters.AddWithValue("@id", $"{cameraDto.CameraSpecifications.Id}");
-                    commandForCameraInsert.Parameters.AddWithValue("@megapixels",
-                         $"{cameraDto.CameraSpecifications.Megapixels}");
-                    commandForCameraInsert.Parameters.AddWithValue("@baseISO",
-                         $"{cameraDto.CameraSpecifications.BaseISO}");
-                    commandForCameraInsert.Parameters.AddWithValue("@maxISO",
-                         $"{cameraDto.CameraSpecifications.MaxISO}");
+                    commandForCameraInsert.Parameters.AddWithValue("@megapixels", $"{cameraDto.CameraSpecifications.Megapixels}");
+                    commandForCameraInsert.Parameters.AddWithValue("@baseISO", $"{cameraDto.CameraSpecifications.BaseISO}");
+                    commandForCameraInsert.Parameters.AddWithValue("@maxISO", $"{cameraDto.CameraSpecifications.MaxISO}");
 
                     commandForCameraInsert.ExecuteNonQuery();
                }
@@ -182,6 +186,56 @@ namespace Camera_Shop.Controllers
                return cameras.AsEnumerable();
           }
 
+          private Camera GetCamera(int id)
+          {
+               var connection = Connection.GetConnection;
+               Camera camera = new Camera();
+               connection.Open();
+
+               var query = $"SELECT * FROM \"Cameras\" " +
+                              $"WHERE \"Id\" = '{id}';";
+               var command = new NpgsqlCommand(query, connection);
+               
+               var reader = command.ExecuteReader();
+               
+               reader.Read();
+
+               camera.Id = reader.GetInt32("Id");
+               camera.Brand = reader.GetString("Brand");
+               camera.Model = reader.GetString("Model");
+
+               CameraSpecifications specifications = null;
+               var specsFromDb = reader.GetValue("SpecificationsId");
+               
+               if(specsFromDb == DBNull.Value)
+                    camera.Specifications = specifications;
+               else
+               {
+                    specifications = new CameraSpecifications((int)specsFromDb);
+                    
+                    connection.Close();
+                    //Reopen connection
+                    connection.Open();
+
+                    query = $"SELECT * FROM \"CameraSpecifications\" " +
+                              $"WHERE \"Id\" = '{specifications.Id}';";
+                    command = new NpgsqlCommand(query, connection);
+                    
+                    reader = command.ExecuteReader();
+                    
+                    reader.Read();
+
+                    specifications.Megapixels = reader.GetInt32("Megapixels");
+                    specifications.BaseISO = reader.GetInt32("BaseISO");
+                    specifications.MaxISO = reader.GetInt32("MaxISO");
+
+                    camera.Specifications = specifications;
+               }
+
+               connection.Close();
+               return camera;
+          }
+
           //TODO: Can be optimized
           private CameraSpecifications GetSpecs(int id)
           {
@@ -211,6 +265,44 @@ namespace Camera_Shop.Controllers
           }
           
           //Update
+          private void UpdateCameraInDatabase(Camera camera)
+          {
+               var connection = Connection.GetConnection;
+               connection.Open();
+
+               var query = "UPDATE \"Cameras\" " +
+                                   "SET " +
+                                        $"\"Brand\" = '{camera.Brand}', " +
+                                        $"\"Model\" = '{camera.Model}' " +
+                                   $"WHERE \"Id\" = '{camera.Id}';"; 
+               
+               var command = new NpgsqlCommand(query, connection);
+
+               //command.Parameters.AddWithValue("brand", camera.Brand);
+               //command.Parameters.AddWithValue("model", camera.Model);
+
+               command.ExecuteNonQuery();
+               connection.Close();
+               
+               if(camera.Specifications == null)
+                    return;
+
+               //Reopen connection
+               connection.Open();
+
+               query = "UPDATE \"CameraSpecifications\" " +
+                       "SET " + 
+                         $"\"Megapixel\" = '{camera.Specifications.Megapixels}', " +
+                         $"\"BaseISO\" = '{camera.Specifications.BaseISO}', " +
+                         $"\"MaxISO\" = '{camera.Specifications.MaxISO}' " +
+                       $"WHERE \"Id\" = '{camera.Specifications.Id}';";
+               
+               //command.Parameters.AddWithValue("@megapixel", $"{camera.Specifications.Megapixels}");
+               //command.Parameters.AddWithValue("@baseISO", $"{camera.Specifications.BaseISO}");
+               //command.Parameters.AddWithValue("@maxISO", $"{camera.Specifications.MaxISO}");
+               
+               connection.Close();
+          }
           
           //Delete
 
