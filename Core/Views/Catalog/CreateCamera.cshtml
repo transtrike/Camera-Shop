@@ -1,4 +1,4 @@
-@model Camera_Shop.Models.Camera
+@model Camera_Shop.Models.CameraDto
 
 @{
     ViewData["Title"] = "Create a Camera";
@@ -11,74 +11,25 @@
 <div>
     <form method="post" asp-action="InsertIntoDatabase">
         <h4>Enter brand name:</h4>
-        <input type="text" asp-for="Brand" class="form-control"/>
+        <input type="text" asp-for="Camera.Brand" class="form-control"/>
         <br>
 
         <h4>Enter model:</h4>
-        <input type="text" asp-for="Model" class="form-control"/>
+        <input type="text" asp-for="Camera.Model" class="form-control"/>
         <br>
 
-        <h4>If the camera has specifications info, please fill them below(<i class="alert-info">Not required</i>):</h4>
-        <br/>
-
-        <h5 class="alert-info">Required fields:</h5>
-        <br/>
-
-        <h6>Megapixels on X axis(in pixels):</h6>
-        <input type="text" asp-for="Specifications.MegapixelCountX" class="form-control"/>
-
-        <h6>Megapixels on Y axis(in pixels):</h6>
-        <input type="text" asp-for="Specifications.MegapixelCountY" class="form-control"/>
-
-        <h6>Base ISO:</h6>
-        <input type="text" asp-for="Specifications.BaseISO" class="form-control"/>
-
-        <h6>Max ISO:</h6>
-        <input type="text" asp-for="Specifications.MaxISO" class="form-control"/>
-
-        <h6>Fastest Shutter Speed:</h6>
-        <input type="text" asp-for="Specifications.FastestShutterSpeed" class="form-control"/>
-        
-        <h6>Continues Autofocus Speed:</h6>
-        <input type="text" asp-for="Specifications.ContinuesFPS" class="form-control"/>
-        
-        <h6>Single Autofocus Speed:</h6>
-        <input type="text" asp-for="Specifications.SingleFPS" class="form-control"/>
-        
-        <h6>Best Video Quality:</h6>
-        <input type="text" asp-for="Specifications.VideoQuality" class="form-control"/>
-        
-        <h6>Max Video Frame Rate:</h6>
-        <input type="text" asp-for="Specifications.VideoMaxFps" class="form-control"/>
-        
-        <h6>Battery Type:</h6>
-        <input type="text" asp-for="Specifications.BatteryType" class="form-control"/>
-        
-        <h6>Sensor Size:</h6>
-        <input type="text" asp-for="Specifications.SensorSize" class="form-control"/>
-        
-        <h6>Sensor Technology:</h6>
-        <input type="text" asp-for="Specifications.SensorTechnology" class="form-control"/>
-        
-        <h6>Mount Type:</h6>
-        <input type="text" asp-for="Specifications.Mount" class="form-control"/>
-        
-        <h6>Size on X axis:</h6>
-        <input type="text" asp-for="Specifications.SizeX" class="form-control"/>
-        
-        <h6>Size on Y axis:</h6>
-        <input type="text" asp-for="Specifications.SizeY" class="form-control"/>
-        
-        <h6>Size on Z axis:</h6>
-        <input type="text" asp-for="Specifications.SizeZ" class="form-control"/>
-        
-        <h6>Weight:</h6>
-        <input type="text" asp-for="Specifications.Weight" class="form-control"/>
-        
-        <br/>
-        <h5 class="alert-info">Not Required fields:</h5>
+        <h4>Enter megapixels:</h4>
+        <input type="text" asp-for="CameraSpecifications.Megapixels" class="form-control"/>
         <br>
 
+        <h4>Enter base ISO:</h4>
+        <input type="text" asp-for="CameraSpecifications.BaseISO" class="form-control"/>
+        <br>
+
+        <h4>Enter max ISO:</h4>
+        <input type="text" asp-for="CameraSpecifications.MaxISO" class="form-control"/>
+        <br>
+        
         <input type="submit" value="Create" class="btn btn-outline-primary"/>
     </form>
 </div>

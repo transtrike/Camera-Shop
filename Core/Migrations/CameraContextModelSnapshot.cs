@@ -27,9 +27,11 @@ namespace Camera_Shop.Migrations
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Brand")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Model")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int?>("SpecificationsId")
@@ -52,77 +54,10 @@ namespace Camera_Shop.Migrations
                     b.Property<int>("BaseISO")
                         .HasColumnType("integer");
 
-                    b.Property<string>("BatteryType")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<bool>("Bluetooth")
-                        .HasColumnType("boolean");
-
-                    b.Property<decimal>("ContinuesFPS")
-                        .HasColumnType("numeric");
-
-                    b.Property<int>("ExtendedIso")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("FastestShutterSpeed")
-                        .HasColumnType("integer");
-
                     b.Property<int>("MaxISO")
                         .HasColumnType("integer");
 
-                    b.Property<int>("MegapixelCountX")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("MegapixelCountY")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Megapixels")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Mount")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<TimeSpan>("RatedBatteryLife")
-                        .HasColumnType("interval");
-
-                    b.Property<string>("SensorSize")
-                        .HasColumnType("text");
-
-                    b.Property<string>("SensorTechnology")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<decimal>("ShutterLag")
-                        .HasColumnType("numeric");
-
-                    b.Property<decimal>("SingleFPS")
-                        .HasColumnType("numeric");
-
-                    b.Property<decimal>("SizeX")
-                        .HasColumnType("numeric");
-
-                    b.Property<decimal>("SizeY")
-                        .HasColumnType("numeric");
-
-                    b.Property<decimal>("SizeZ")
-                        .HasColumnType("numeric");
-
-                    b.Property<int>("VideoMaxFps")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("VideoQuality")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<decimal>("Weight")
-                        .HasColumnType("numeric");
-
-                    b.Property<bool>("Wifi")
-                        .HasColumnType("boolean");
-
-                    b.Property<decimal>("WifiBand")
+                    b.Property<decimal>("Megapixels")
                         .HasColumnType("numeric");
 
                     b.HasKey("Id");

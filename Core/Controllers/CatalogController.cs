@@ -12,98 +12,127 @@ namespace Camera_Shop.Controllers
 {
      public class CatalogController : Controller
      {
-          public CatalogController() { }
-
-          [HttpGet]
-          public IActionResult ShowCatalog()
+          public CatalogController()
           {
-               return View(GetCatalog());
           }
 
+          //Create
           [HttpGet]
-          public IActionResult CreateCamera()
-          {
-               return View();
-          }
+          public IActionResult CreateCamera() => View();
+          
+          //Read
+          [HttpGet]
+          public IActionResult ShowCatalog() => View(GetCatalog());
+          
+          [HttpGet]
+          public IActionResult ShowSpecification(int specsId) => View(GetSpecs(specsId));
+
+          //Update
+          [HttpGet]
+          public IActionResult EditCamera(Camera camera) => View(camera);
           
           [HttpPost]
-          public IActionResult InsertIntoDatabase(Camera camera)
+          public IActionResult InsertIntoDatabase(CameraDto cameraDto)
           {
-               if(DoesCameraExist(camera))
-                    return RedirectToAction("CameraExists", camera);
-               else
-                    InsertCameraIntoDatabase(camera);
-               
+               //Both come without ID
+               Camera camera = cameraDto.Camera;
+               CameraSpecifications specs = cameraDto.CameraSpecifications;
+
+               if(DoesCameraExist(camera) || DoesCameraSpecsExist(specs))
+                    return RedirectToAction("CameraExists", cameraDto.Camera);
+
+               InsertIdIntoClasses(cameraDto);
+               InsertCameraIntoDatabase(cameraDto);
+
                return RedirectToAction("ShowCatalog");
           }
 
-          [HttpGet]
-          public IActionResult CameraExists(Camera camera)
-          {
-               return View(camera);
-          }
 
+          //Delete
           [HttpGet]
-          public IActionResult EditCamera()
-          {
-               return View();
-          }
+          public IActionResult DeleteCamera() => View();
 
+          //Validations
           [HttpGet]
-          public IActionResult DeleteCamera()
-          {
-               return View();
-          }
-
-          [HttpGet]
-          public IActionResult ShowSpecification(int specsId)
-          {
-               return View(GetSpecs(specsId));
-          }
+          public IActionResult CameraExists(Camera camera) => View(camera);
 
           /* =-=-=-=-=-=-=-=-=-=-=-=-= */
           /* =-=- Private methods -=-= */
           /* =-=-=-=-=-=-=-=-=-=-=-=-= */
-          
+
           //Create
-          //TODO: Add Specs add to Database too
-          private void InsertCameraIntoDatabase(Camera camera)
+          private void InsertCameraIntoDatabase(CameraDto cameraDto)
           {
                var connection = Connection.GetConnection;
                connection.Open();
-               
+
+               //Insert Camera
+               {
+                    var queryForCameraInsert =
+                         $"INSERT INTO \"Cameras\"(\"Id\", \"Brand\", \"Model\", \"SpecificationsId\") " +
+                         "VALUES (@id, @brand, @model, @specsId);";
+                    var commandForCameraInsert = new NpgsqlCommand(queryForCameraInsert, connection);
+
+                    commandForCameraInsert.Parameters.AddWithValue("@id", cameraDto.Camera.Id);
+                    commandForCameraInsert.Parameters.AddWithValue("@brand", $"{cameraDto.Camera.Brand}");
+                    commandForCameraInsert.Parameters.AddWithValue("@model", $"{cameraDto.Camera.Model}");
+                    if(cameraDto.Camera.Specifications == null)
+                         commandForCameraInsert.Parameters.AddWithValue("@specsId", DBNull.Value);
+                    else
+                         commandForCameraInsert.Parameters.AddWithValue("@specsId",
+                              $"{cameraDto.Camera.Specifications.Id}");
+
+                    commandForCameraInsert.ExecuteNonQuery();
+               }
+
+               connection.Close();
+
+               if(cameraDto.CameraSpecifications == null)
+                    return;
+
+               //Reopen connection
+
+               connection.Open();
+
+               //Insert CameraSpecifications
+               {
+                    var queryForCameraInsert =
+                         $"INSERT INTO \"CameraSpecifications\"(\"Id\", \"Megapixels\", \"BaseISO\", \"MaxISO\") " +
+                         "VALUES (@id, @megapixels, @baseISO, @maxISO);";
+                    var commandForCameraInsert = new NpgsqlCommand(queryForCameraInsert, connection);
+
+                    commandForCameraInsert.Parameters.AddWithValue("@id", $"{cameraDto.CameraSpecifications.Id}");
+                    commandForCameraInsert.Parameters.AddWithValue("@megapixels",
+                         $"{cameraDto.CameraSpecifications.Megapixels}");
+                    commandForCameraInsert.Parameters.AddWithValue("@baseISO",
+                         $"{cameraDto.CameraSpecifications.BaseISO}");
+                    commandForCameraInsert.Parameters.AddWithValue("@maxISO",
+                         $"{cameraDto.CameraSpecifications.MaxISO}");
+
+                    commandForCameraInsert.ExecuteNonQuery();
+               }
+
+               connection.Close();
+          }
+
+          private void InsertIdIntoClasses(CameraDto cameraDto)
+          {
+               var connection = Connection.GetConnection;
+               connection.Open();
                var queryForId = $"SELECT MAX(\"Cameras\".\"Id\") FROM \"Cameras\";";
                var commandForId = new NpgsqlCommand(queryForId, connection);
                var reader = commandForId.ExecuteReader();
-               
+
                reader.Read();
                var maxNumber = reader.GetInt32("max");
-               camera.Id = maxNumber + 1;
+               cameraDto.Camera.Id = maxNumber + 1;
+
+               if(cameraDto.Camera.Specifications != null)
+                    cameraDto.Camera.Specifications.Id = maxNumber + 1;
 
                connection.Close();
-               
-               //Reopen connection
-               
-               connection.Open();
-               
-               var queryForCameraInsert = $"INSERT INTO \"Cameras\"(\"Id\", \"Brand\", \"Model\", \"SpecificationsId\") " +
-                       "VALUES (@id, @brand, @model, @specsId);";
-               var commandForCameraInsert = new NpgsqlCommand(queryForCameraInsert, connection);
-               
-               commandForCameraInsert.Parameters.AddWithValue("@id", camera.Id);
-               commandForCameraInsert.Parameters.AddWithValue("@brand", $"{camera.Brand}");
-               commandForCameraInsert.Parameters.AddWithValue("@model", $"{camera.Model}");
-               if(camera.Specifications == null)
-                    commandForCameraInsert.Parameters.AddWithValue("@specsId", DBNull.Value);
-               else
-                    commandForCameraInsert.Parameters.AddWithValue("@specsId", $"{camera.Specifications.Id}");
-               
-               commandForCameraInsert.ExecuteNonQuery();
-               
-               //Add Specs to the database too
-               connection.Close();
           }
-          
+
           //Read
           private IEnumerable<Camera> GetCatalog()
           {
@@ -122,20 +151,38 @@ namespace Camera_Shop.Controllers
                     camera.Id = reader.GetInt32("Id");
                     camera.Brand = reader.GetString("Brand");
                     camera.Model = reader.GetString("Model");
+                    
                     if(reader.GetValue("SpecificationsId") == DBNull.Value)
                          camera.Specifications = null;
                     else
+                    {
                          camera.Specifications = new CameraSpecifications(reader.GetInt32("SpecificationsId"));
+
+                         connection.Close();
+                         //Reopen connection
+                         connection.Open();
+                         
+                         query = $"SELECT * FROM \"CameraSpecifications\" " +
+                                 $"WHERE \"Id\" = '{camera.Specifications.Id}';";
+                         command = new NpgsqlCommand(query, connection);
+                         reader = command.ExecuteReader();
+
+                         while(reader.Read())
+                         {
+                              camera.Specifications.Megapixels = reader.GetInt32("Megapixels");
+                              camera.Specifications.BaseISO = reader.GetInt32("BaseISO");
+                              camera.Specifications.MaxISO = reader.GetInt32("MaxISO");
+                         }
+                    }
 
                     cameras.Add(camera);
                }
-               
+
                connection.Close();
                return cameras.AsEnumerable();
           }
 
           //TODO: Can be optimized
-          //TODO: Test to see if works, after implementing the CREATE from CRUD
           private CameraSpecifications GetSpecs(int id)
           {
                var connection = Connection.GetConnection;
@@ -162,19 +209,51 @@ namespace Camera_Shop.Controllers
                connection.Close();
                return specs;
           }
+          
+          //Update
+          
+          //Delete
 
+          //Validations
           private bool DoesCameraExist(Camera camera)
           {
                var connection = Connection.GetConnection;
                connection.Open();
 
                var query = $"SELECT \"Id\" FROM \"Cameras\" " +
-                              $"WHERE \"Brand\" = '{camera.Brand}' AND \"Model\" = '{camera.Model}';";
+                           $"WHERE \"Brand\" = '@brand' AND \"Model\" = '@model';";
                var command = new NpgsqlCommand(query, connection);
+
+               command.Parameters.AddWithValue("@brand", $"{camera.Brand}");
+               command.Parameters.AddWithValue("@model", $"{camera.Model}");
+
                var reader = command.ExecuteReader();
 
                bool exists = reader.HasRows;
-               
+
+               connection.Close();
+               return exists;
+          }
+
+          private bool DoesCameraSpecsExist(CameraSpecifications specs)
+          {
+               var connection = Connection.GetConnection;
+               connection.Open();
+
+               var query = $"SELECT \"Id\" FROM \"Cameras\" " +
+                           $"WHERE \"Megapixels\" = '@megapixels' " +
+                           $"AND \"BaseISO\" = '@baseISO' " +
+                           $"AND \"MaxISO\" = '@maxISO';";
+               var command = new NpgsqlCommand(query, connection);
+
+               command.Parameters.AddWithValue("@megapixels", $"{specs.Megapixels}");
+               command.Parameters.AddWithValue("@baseISO", $"{specs.BaseISO}");
+               command.Parameters.AddWithValue("@maxISO", $"{specs.MaxISO}");
+
+               var reader = command.ExecuteReader();
+
+               bool exists = reader.HasRows;
+
                connection.Close();
                return exists;
           }

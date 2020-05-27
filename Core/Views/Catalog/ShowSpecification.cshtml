@@ -4,8 +4,6 @@
 @{
     ViewData["Title"] = "Camera Specification";
     Layout = "_Layout";
-    
-    PropertyInfo[] properties = Model.GetType().GetProperties();
 }
 
 <div>
@@ -18,12 +16,13 @@
     }
     else
     {
-        //TODO: High change it doesn't work
+        PropertyInfo[] properties = Model.GetType().GetProperties();
+        
+        //TODO: High chance it doesn't work
         for(int i = 0; i < properties.Length; i++)
         {
-            <h5>@properties[i].Name: @properties[i].GetValue(Model, null).ToString()</h5><br/>
+            <h5>@properties[i].Name: @properties[i].GetValue(Model, null).ToString()</h5>
         }
-        }    
     }
     
 </div>

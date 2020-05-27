@@ -19,6 +19,12 @@
 
     <ItemGroup>
       <Compile Remove="Database\ChangeTracker.cs" />
+      <Compile Remove="Models\OldCameraSpecifications.cs" />
+      <Compile Remove="Models\OldCameraDto.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="Views\Catalog\OldCreateCamera.cshtml" />
     </ItemGroup>
 
 </Project>
