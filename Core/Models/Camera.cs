@@ -2,7 +2,6 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
-using Specs = Camera_Shop.Models.CameraSpecifications;
 
 namespace Camera_Shop.Models
 {
@@ -12,17 +11,18 @@ namespace Camera_Shop.Models
 		private int _id;
 		private string _brand;
 		private string _model;
-		private Specs _specs;
+		private decimal _megapixels;
+		private int _baseISO;
+		private int _maxISO;
 
-		public Camera(int id, string brand, string model, Specs specs)
+		public Camera(int id, string brand, string model, decimal megapixels, int baseIso, int maxIso)
 		{
 			this.Id = id;
 			this.Brand = brand;
 			this.Model = model;
-			this.Specifications = specs;
-
-			if(specs != null)
-				this._specs.Id = this._id;
+			this.Megapixels = megapixels;
+			this.BaseISO = baseIso;
+			this.MaxISO = maxIso;
 		}
 
 		// For Reflection purposes
@@ -67,10 +67,45 @@ namespace Camera_Shop.Models
 		}
 
 		[AllowNull]
-		public Specs Specifications
+		public decimal Megapixels
 		{
-			get => this._specs;
-			set => this._specs = value;
+			get => this._megapixels;
+			set
+			{
+				if(value <= 0)
+					throw new ArgumentException("Megapixels cannot be less than or equal to 0!");
+                    
+				this._megapixels = value;
+			}
+
+		}
+
+		[AllowNull]
+		public int BaseISO
+		{
+			get => this._baseISO;
+			set
+			{
+				if(value <= 0)
+					throw new ArgumentException("Base ISO cannot be less than or equal to 0!");
+                    
+				this._baseISO = value;
+			}
+		}
+
+		[AllowNull]
+		public int MaxISO
+		{
+			get => this._maxISO;
+			set
+			{
+				if(value <= 0)
+					throw new ArgumentException("Max ISO cannot be less than or equal to 0!");
+				if(value < this._baseISO)
+					throw new ArgumentException("Max ISO cannot be less than base ISO!");
+                    
+				this._maxISO = value;
+			}
 		}
 	}
 }

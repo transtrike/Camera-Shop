@@ -2,15 +2,17 @@
 using Camera_Shop.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Camera_Shop.Migrations
 {
     [DbContext(typeof(CameraContext))]
-    partial class CameraContextModelSnapshot : ModelSnapshot
+    [Migration("20200527232257_MajorRefactor")]
+    partial class MajorRefactor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -13,16 +13,12 @@
             <td>
                 <h5><b>Camera Brand:</b> @camera.Brand</h5>
                 <h5><b>Camera Model:</b> @camera.Model</h5>
+                <h5><b>Camera Megapixels:</b> @camera.Megapixels</h5>
+                <h5><b>Camera Base ISO:</b> @camera.BaseISO</h5>
+                <h5><b>Camera Max ISO:</b> @camera.MaxISO</h5>
                 
-                @if(camera.Specifications == null)
-                {
-                    <h5><b>Camera Specifications:</b> <strong class="alert-danger">Not available!</strong></h5>
-                }
-                else
-                {
-                    <h5><b>Available Camera Specifications:</b> <a asp-action="ShowSpecification" asp-route-specsId="@camera.Specifications.Id" asp-controller="Catalog">Click here</a></h5>
-                }
                 <a class="btn btn-outline-primary" asp-action="EditCamera" asp-route-cameraId="@camera.Id">Edit</a>
+                <a class="btn btn-outline-primary alert-danger" asp-action="DeleteCamera" asp-route-cameraId="@camera.Id">Delete</a>
             </td>
         </tr>
         <hr/>
