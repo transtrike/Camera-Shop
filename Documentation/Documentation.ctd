@@ -20,7 +20,7 @@
 	<node custom_icon_id="0" foreground="" is_bold="True" name="MyNotes" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589672522.23" ts_lastsave="1589672522.23" unique_id="17">
 		<rich_text></rich_text>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="True" name="TODO" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589672023.18" ts_lastsave="1590615207.26" unique_id="16">
+	<node custom_icon_id="0" foreground="" is_bold="True" name="TODO" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589672023.18" ts_lastsave="1590684385.86" unique_id="16">
 		<rich_text>#(</rich_text>
 		<rich_text weight="heavy">DONE</rich_text>
 		<rich_text>) Implement Camera Specs class 
@@ -48,15 +48,23 @@
 #(</rich_text>
 		<rich_text weight="heavy">DONE</rich_text>
 		<rich_text>) Add Camera's specs to database when adding camera
-# Add an Edit Button below each camera to edit (U from CRUD)
-# Add an DELETE button in red to delete a camera
+#(</rich_text>
+		<rich_text weight="heavy">DONE</rich_text>
+		<rich_text>) Add an Edit Button below each camera to edit (U from CRUD)
+#(</rich_text>
+		<rich_text weight="heavy">DONE</rich_text>
+		<rich_text>) Add an DELETE button in red to delete a camera
+#(</rich_text>
+		<rich_text weight="heavy">DONE</rich_text>
+		<rich_text>) Fix error when creating a camera and inserting into database
+#(</rich_text>
+		<rich_text weight="heavy">DONE</rich_text>
+		<rich_text>) Add try/catch blocks where needed
 
-#Fix error when creating a camera and inserting into database
-
-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 # Implement Unit Tests
-# Add try/catch blocks where needed</rich_text>
+# Test every single method from the Catalog controller</rich_text>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="True" name="Controllers" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589112674.68" ts_lastsave="1590211298.8" unique_id="1">
 		<rich_text># Controller list
@@ -100,17 +108,33 @@
 - Redirects to the pages nessessary
 - Contains the current logged user(optional/unknown can it be done)</rich_text>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="CatalogController" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1590211212.83" ts_lastsave="1590211251.26" unique_id="21">
-			<rich_text># Controller that implements fuctions for the Catalog and the Catalog only
-- Method that gets all cameras from database (first 100) and displays them to the user
-- </rich_text>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="CatalogController" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1590211212.83" ts_lastsave="1590654101.55" unique_id="21">
+			<rich_text># Controller that implements fuctions for the Catalog
+
+# Create
+- InsertIntoDatabase(Camera camera) - Method that inserts camera into database
+
+# Read
+- ShowCatalog() - Method that gets all cameras from database (first 100) and displays them to the user
+- CreateCamera() - Method that redirects to a page, where users can enter camera specifications
+- EditCamera(int cameraId) - Method that gets a camera by id and displays it for the user to edit/correct it
+- DeleteCamera(int cameraId) - MEthod that gets a camera by id, shows the specifications to the user and an option to delete it from the database
+
+# Update
+- EditACamera(Camera camera) - Method that alters the edited camera from the user into the database
+
+# Delete
+- DeleteACamera(Camera camera) - Method that matches a given camera with a camera from the database and erases it from the database
+
+# Misc
+- CameraExists(Camera camera) - Method that checks does a newly created camera exists already in the database</rich_text>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="True" name="Database" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589407360.47" ts_lastsave="1590239826.05" unique_id="7">
 		<rich_text># PostrgreSQL
 - systemctl status postgresql
 - psql -d CameraShop</rich_text>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="ChangeTracker" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589407423.6" ts_lastsave="1589679104.87" unique_id="11">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="ChangeTracker(Scrapped)" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589407423.6" ts_lastsave="1590651042.94" unique_id="11">
 			<rich_text># Functions
 - Store Modified Entites(List&lt;Camera&gt; all)
 - Store Added Entites(List&lt;Camera&gt; added)
@@ -130,12 +154,15 @@
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="True" name="Models" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589671584.35" ts_lastsave="1589671784.08" unique_id="13">
 		<rich_text></rich_text>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Camera" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589671784.08" ts_lastsave="1590588666.77" unique_id="14">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Camera" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589671784.08" ts_lastsave="1590651068.65" unique_id="14">
 			<rich_text># Class for the Camera entity
-- Id
-- Model
-- Specs class instance</rich_text>
-			<node custom_icon_id="0" foreground="" is_bold="False" name="OldSpecifications" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589671887.52" ts_lastsave="1590588647.37" unique_id="15">
+☑ Id
+☑ Brand
+☑ Model
+☑ Megapixels
+☑ BaseISO
+☑ MaxISO</rich_text>
+			<node custom_icon_id="0" foreground="" is_bold="False" name="OldSpecifications(Scrapped)" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589671887.52" ts_lastsave="1590651055.05" unique_id="15">
 				<rich_text># Requered
 ☑ Id
 ☑ MegapixelCountX
@@ -165,7 +192,7 @@
 ☑ Bluetooth
 ☑ Shutter lag</rich_text>
 			</node>
-			<node custom_icon_id="0" foreground="" is_bold="False" name="Specifications" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1590588666.77" ts_lastsave="1590588696.25" unique_id="22">
+			<node custom_icon_id="0" foreground="" is_bold="False" name="Specifications(Scrapped)" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1590588666.77" ts_lastsave="1590651063.28" unique_id="22">
 				<rich_text>☑ Id
 ☑ Megapixels
 ☑ BaseISO

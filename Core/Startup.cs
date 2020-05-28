@@ -23,7 +23,6 @@ namespace Camera_Shop
 
                services.AddDbContext<CameraContext>(options =>
                     options.UseNpgsql(Configuration.GetConnectionString("DEV")));
-               
           }
 
           // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

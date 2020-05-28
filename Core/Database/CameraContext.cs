@@ -9,7 +9,7 @@ namespace Camera_Shop.Database
 
           public CameraContext(DbContextOptions options)
                : base(options) { }
-
+          
           protected override void OnModelCreating(ModelBuilder modelBuilder)
           {
                modelBuilder.Entity<Camera>()

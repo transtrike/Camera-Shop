@@ -26,12 +26,10 @@ namespace Camera_Shop.Models
 		}
 
 		// For Reflection purposes
-		public Camera()
-		{
-		}
+		public Camera() { }
 
 		[Key]
-		[Required]
+		[Required(ErrorMessage = "Id is required")]
 		public int Id
 		{
 			get => this._id;
@@ -39,7 +37,8 @@ namespace Camera_Shop.Models
 		}
 
 		[NotNull]
-		[Required]
+		[Required(ErrorMessage = "Brand is required")]
+		[MinLength(3)]
 		public string Brand
 		{
 			get => this._brand;
@@ -53,7 +52,8 @@ namespace Camera_Shop.Models
 		}
 
 		[NotNull]
-		[Required]
+		[Required(ErrorMessage = "Model is required")]
+		[MinLength(3)]
 		public string Model
 		{
 			get => this._model;
@@ -67,6 +67,7 @@ namespace Camera_Shop.Models
 		}
 
 		[AllowNull]
+		[Range(0, Double.MaxValue, ErrorMessage = "Megapixels cannot be a 0 or negative number")]
 		public decimal Megapixels
 		{
 			get => this._megapixels;
@@ -81,12 +82,13 @@ namespace Camera_Shop.Models
 		}
 
 		[AllowNull]
+		[Range(32, Double.MaxValue, ErrorMessage = "Base ISO cannot be less than 32")]
 		public int BaseISO
 		{
 			get => this._baseISO;
 			set
 			{
-				if(value <= 0)
+				if(value <= 32)
 					throw new ArgumentException("Base ISO cannot be less than or equal to 0!");
                     
 				this._baseISO = value;
@@ -94,12 +96,13 @@ namespace Camera_Shop.Models
 		}
 
 		[AllowNull]
+		[Range(32, Double.MaxValue, ErrorMessage = "Max ISO cannot be less than 32")]
 		public int MaxISO
 		{
 			get => this._maxISO;
 			set
 			{
-				if(value <= 0)
+				if(value <= 32)
 					throw new ArgumentException("Max ISO cannot be less than or equal to 0!");
 				if(value < this._baseISO)
 					throw new ArgumentException("Max ISO cannot be less than base ISO!");
@@ -108,4 +111,4 @@ namespace Camera_Shop.Models
 			}
 		}
 	}
-}
+}	
