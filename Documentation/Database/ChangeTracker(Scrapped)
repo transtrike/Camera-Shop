@@ -1,0 +1,7 @@
+# Functions
+- Store Modified Entites(List<Camera> all)
+- Store Added Entites(List<Camera> added)
+- Store Removed Entites(List<Camera> removee)
+- Constructor(IEnumerable<T> entities)
+- Everytime an update is made, make changes accordingly 
+- AllEntities is a clone of the given to the ctor entities

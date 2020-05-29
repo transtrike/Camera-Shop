@@ -1,0 +1,20 @@
+# Controller for the database
+- Makes the connection to and from the database
+- All requests go though the controller 
+- Includes validation of the given data to prevent SQL injections
+- Prefered method - trough LINQ
+
+# Constructor
+- Establishes the connection to the database and stores it localy
+
+# Destructor
+- Closes the connection and clears the data
+
+# Connection()
+- Returns the connection to the database
+
+# ExecuteCommand()
+- Execute a command to the database (no return OR rows affected)
+
+# ExecureReader()
+- Executes a command to the database and returns the result

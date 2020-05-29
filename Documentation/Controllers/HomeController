@@ -1,0 +1,4 @@
+# Controller for the main page of the application
+- Provides the main page of the application
+- Redirects to the pages nessessary
+- Contains the current logged user(optional/unknown can it be done)

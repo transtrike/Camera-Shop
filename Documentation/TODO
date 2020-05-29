@@ -1,0 +1,19 @@
+#(DONE) Implement Camera Specs class 
+#(SCRAPPED)Implement IEnumerable<CameraSpecs> in the CameraSpecs class
+#(DONE) Implement a button in Home/Index that redirects to Catalog/ShowCatalog
+#(DONE) Fix Database problems
+#(DONE) Implement query that gets from database all the cameras and passes it to Catalog/ShowCatalog View
+#(DONE) Add a created Camera into database
+#(DONE) Check to see if a camera exists in a database
+#(DONE) Port all input specs to the controller and input into database
+#(DONE) Add Camera's specs to database when adding camera
+#(DONE) Add an Edit Button below each camera to edit (U from CRUD)
+#(DONE) Add an DELETE button in red to delete a camera
+#(DONE) Fix error when creating a camera and inserting into database
+#(DONE) Add try/catch blocks where needed
+#(DONE) Replace ADO.NET with EntiyFrameworkCore
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+# Implement Unit Tests
+# Test every single method from the Catalog controller

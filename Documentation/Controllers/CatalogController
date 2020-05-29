@@ -1,0 +1,46 @@
+# Controller that implements functions for the Catalog
+
+### Public ###
+
+
+# Create
+- InsertIntoDatabase(Camera camera) - Inserts camera into database
+
+# Read
+- ShowCatalog() - Gets all cameras from database (first 100) and displays them to the user
+- CreateCamera() - Redirects to a page, where users can enter camera specifications
+- EditCamera(int cameraId) - Gets a camera by id and displays it for the user to edit/correct it
+- DeleteCamera(int cameraId) - Gets a camera by id, shows the specifications to the user and an option to delete it from the database
+
+# Update
+- CreateACamera(Camera camera) - Creates the camera and sends it into the database
+- EditACamera(Camera camera) - Alters the edited camera from the user into the database
+
+# Delete
+- DeleteACamera(Camera camera) - Matches a given camera with a camera from the database and erases it from the database
+
+# Validations
+- CameraExists(Camera camera) - Redirects to a page and displays that the camera given already exists in the database
+
+
+### Private ###
+
+
+# Create
+- InsertCameraIntoDatabase(Camera cameraToInsert) - Validates and inserts camera into the database
+- InsertId(Camera camera) - Gets the max Id, adds one and gives it to the camera for insertion into the database later on
+
+# Read
+- GetCatalog() - Gets all the cameras in the database
+
+# Update
+- GetCamera(int id) - Gets a particular camera from the database 
+
+# Delete
+- UpdateCamera(Camera camera) - Updates/Alters a camera from the database with the new given one
+
+# Validations
+- CameraExists(Camera camera) - Method that checks does a newly created camera exists already in the database
+
+# Errors
+Error(string errorMessage) - Redirects to the 404 Page and displays the errors to the user from the exceptions

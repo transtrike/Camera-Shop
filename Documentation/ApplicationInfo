@@ -1,0 +1,14 @@
+# ASP.NET Application
+- Has to include CRUD operations(preferably with LINQ)
+- Database: PostgreSQL
+- Name: Camera Shop
+- One common header and footer
+- MVC type application
+
+# Main Idea
+- Camera Shop 
+- You can choose a camera from the menu at index page
+- Every camera will have a big image of it and sectons(bars/buttons)
+--- Section 1: Specifications (view the camera's specifications)
+--- Section 2: Photos (photos, made by the camera/can be submitted by the users)
+--- Section 3: Reviews (users made reviews about the product)

@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Camera_Shop.Database;
 using Camera_Shop.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Npgsql;
 
 namespace Camera_Shop.Controllers
 {
@@ -183,7 +181,7 @@ namespace Camera_Shop.Controllers
 			else
 				camera.Id = 
 					(from c in this._context.Cameras
-					select c).Max(x => x.Id);
+					select c).Max(x => x.Id) + 1;
 
 			return camera;
 		}

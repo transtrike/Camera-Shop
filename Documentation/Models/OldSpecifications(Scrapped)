@@ -1,0 +1,28 @@
+# Requered
+☑ Id
+☑ MegapixelCountX
+☑ MegapixelCountY
+☑ Megapixels
+☑ Base ISO
+☑ MaxISO
+☑ Fastest Shutter Speed
+☑ Continues AF FPS
+☑ Single AF FPS
+☑ Video Quality (4k)
+☑ Video Max FPS (60FPS)
+☑ Battery Type
+☑ Sensor Size (Full-Frame)
+☑ Sensor Tehnology (CMOS)
+☑ Mount Type
+☑ SizeX
+☑ SizeY
+☑ SizeZ
+☑ Weight
+
+# Not requred 
+☑ ExtendedISO
+☑ Rated Battery Life
+☑ WiFi
+☑ ---WiFi Band
+☑ Bluetooth
+☑ Shutter lag

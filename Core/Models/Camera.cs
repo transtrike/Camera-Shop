@@ -67,13 +67,13 @@ namespace Camera_Shop.Models
 		}
 
 		[AllowNull]
-		[Range(0, Double.MaxValue, ErrorMessage = "Megapixels cannot be a 0 or negative number")]
+		[Range(1, Double.MaxValue, ErrorMessage = "Megapixels cannot be a 0 or negative number")]
 		public decimal Megapixels
 		{
 			get => this._megapixels;
 			set
 			{
-				if(value <= 0)
+				if(value < 1)
 					throw new ArgumentException("Megapixels cannot be less than or equal to 0!");
                     
 				this._megapixels = value;
@@ -88,7 +88,7 @@ namespace Camera_Shop.Models
 			get => this._baseISO;
 			set
 			{
-				if(value <= 32)
+				if(value < 32)
 					throw new ArgumentException("Base ISO cannot be less than or equal to 0!");
                     
 				this._baseISO = value;
@@ -102,10 +102,10 @@ namespace Camera_Shop.Models
 			get => this._maxISO;
 			set
 			{
-				if(value <= 32)
+				if(value < 32)
 					throw new ArgumentException("Max ISO cannot be less than or equal to 0!");
-				if(value < this._baseISO)
-					throw new ArgumentException("Max ISO cannot be less than base ISO!");
+				//if(value < this._baseISO)
+				//	throw new ArgumentException("Max ISO cannot be less than base ISO!");
                     
 				this._maxISO = value;
 			}

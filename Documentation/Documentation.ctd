@@ -20,7 +20,7 @@
 	<node custom_icon_id="0" foreground="" is_bold="True" name="MyNotes" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589672522.23" ts_lastsave="1589672522.23" unique_id="17">
 		<rich_text></rich_text>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="True" name="TODO" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589672023.18" ts_lastsave="1590684385.86" unique_id="16">
+	<node custom_icon_id="0" foreground="" is_bold="True" name="TODO" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589672023.18" ts_lastsave="1590776690.4" unique_id="16">
 		<rich_text>#(</rich_text>
 		<rich_text weight="heavy">DONE</rich_text>
 		<rich_text>) Implement Camera Specs class 
@@ -60,6 +60,9 @@
 #(</rich_text>
 		<rich_text weight="heavy">DONE</rich_text>
 		<rich_text>) Add try/catch blocks where needed
+#(</rich_text>
+		<rich_text weight="heavy">DONE</rich_text>
+		<rich_text>) Replace ADO.NET with EntiyFrameworkCore
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
@@ -108,26 +111,53 @@
 - Redirects to the pages nessessary
 - Contains the current logged user(optional/unknown can it be done)</rich_text>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="CatalogController" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1590211212.83" ts_lastsave="1590654101.55" unique_id="21">
-			<rich_text># Controller that implements fuctions for the Catalog
+		<node custom_icon_id="0" foreground="" is_bold="False" name="CatalogController" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1590211212.83" ts_lastsave="1590777439.02" unique_id="21">
+			<rich_text># Controller that implements functions for the Catalog
+
+### Public ###
+
 
 # Create
-- InsertIntoDatabase(Camera camera) - Method that inserts camera into database
+- InsertIntoDatabase(Camera camera) - Inserts camera into database
 
 # Read
-- ShowCatalog() - Method that gets all cameras from database (first 100) and displays them to the user
-- CreateCamera() - Method that redirects to a page, where users can enter camera specifications
-- EditCamera(int cameraId) - Method that gets a camera by id and displays it for the user to edit/correct it
-- DeleteCamera(int cameraId) - MEthod that gets a camera by id, shows the specifications to the user and an option to delete it from the database
+- ShowCatalog() - Gets all cameras from database (first 100) and displays them to the user
+- CreateCamera() - Redirects to a page, where users can enter camera specifications
+- EditCamera(int cameraId) - Gets a camera by id and displays it for the user to edit/correct it
+- DeleteCamera(int cameraId) - Gets a camera by id, shows the specifications to the user and an option to delete it from the database
 
 # Update
-- EditACamera(Camera camera) - Method that alters the edited camera from the user into the database
+- CreateACamera(Camera camera) - Creates the camera and sends it into the database
+- EditACamera(Camera camera) - Alters the edited camera from the user into the database
 
 # Delete
-- DeleteACamera(Camera camera) - Method that matches a given camera with a camera from the database and erases it from the database
+- DeleteACamera(Camera camera) - Matches a given camera with a camera from the database and erases it from the database
 
-# Misc
-- CameraExists(Camera camera) - Method that checks does a newly created camera exists already in the database</rich_text>
+# Validations
+- CameraExists(Camera camera) - Redirects to a page and displays that the camera given already exists in the database
+
+
+### Private ###
+
+
+# Create
+- InsertCameraIntoDatabase(Camera cameraToInsert) - Validates and inserts camera into the database
+- InsertId(Camera camera) - Gets the max Id, adds one and gives it to the camera for insertion into the database later on
+
+# Read
+- GetCatalog() - Gets all the cameras in the database
+
+# Update
+- GetCamera(int id) - Gets a particular camera from the database 
+
+# Delete
+- UpdateCamera(Camera camera) - Updates/Alters a camera from the database with the new given one
+
+# Validations
+- CameraExists(Camera camera) - Method that checks does a newly created camera exists already in the database
+
+# Errors
+Error(string errorMessage) - Redirects to the 404 Page and displays the errors to the user from the exceptions</rich_text>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="True" name="Database" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1589407360.47" ts_lastsave="1590239826.05" unique_id="7">

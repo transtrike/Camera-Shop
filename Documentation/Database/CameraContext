@@ -1,0 +1,3 @@
+# Wrapper for the Database and connection to it to pull and push data
+- Contain OnModelCreate that bind the key(database Id bind)
+- Contains DbSet<Camera>, so it can display and use the camera class
