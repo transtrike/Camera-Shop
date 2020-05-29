@@ -11,12 +11,13 @@
 
 <div>
     <form method="post" asp-action="EditACamera">
+        <tr><h5><b>Camera Id:</b> <input type="text" asp-for="@Model.Id" readonly="readonly"/></h5></tr>
         <tr><h5><b>Camera Brand:</b> <input type="text" asp-for="@Model.Brand"/></h5></tr>
         <tr><h5><b>Camera Model:</b> <input type="text" asp-for="@Model.Model"/></h5></tr>
         <tr><h5><b>Megapixels:</b> <input type="number" asp-for="@Model.Megapixels"/></h5></tr>
         <tr><h5><b>Base ISO:</b> <input type="number" asp-for="@Model.BaseISO"/></h5></tr>
         <tr><h5><b>Max ISO:</b> <input type="number" asp-for="@Model.MaxISO"/></h5></tr>
-        
+
         <input type="submit" value="Save" class="btn btn-outline-primary"/>
     </form>
 </div>

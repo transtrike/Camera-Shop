@@ -23,11 +23,16 @@
       <Compile Remove="Models\OldCameraDto.cs" />
       <Compile Remove="Models\CameraDto.cs" />
       <Compile Remove="Models\CameraSpecifications.cs" />
+      <Compile Remove="Database\Connection.cs" />
     </ItemGroup>
 
     <ItemGroup>
       <Content Remove="Views\Catalog\OldCreateCamera.cshtml" />
       <Content Remove="Views\Catalog\ShowSpecification.cshtml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Views\Error" />
     </ItemGroup>
 
 </Project>

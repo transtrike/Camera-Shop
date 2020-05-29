@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
 using System.Linq;
 using Camera_Shop.Database;
 using Camera_Shop.Models;
@@ -13,10 +11,16 @@ namespace Camera_Shop.Controllers
 {
 	public class CatalogController : Controller
 	{
+		private readonly CameraContext _context;
+		
+		public CatalogController(CameraContext context) => this._context = context;
+		
+		
 		/* =-=-=-=-=-=-=-=-=-=-=-=-= */
 		/* =-=- Public methods =-=-= */
 		/* =-=-=-=-=-=-=-=-=-=-=-=-= */
-
+ 
+		
 		//Create
 		[HttpPost]
 		public IActionResult InsertIntoDatabase(Camera camera)
@@ -27,15 +31,15 @@ namespace Camera_Shop.Controllers
 				if(DoesCameraExist(camera))
 					return RedirectToAction("CameraExists", camera);
 
-				InsertId(camera);
+				camera = InsertId(camera);
 				InsertCameraIntoDatabase(camera);
+				
+				return RedirectToAction("ShowCatalog");
 			}
-			catch(Exception e)
+			catch(ArgumentException e)
 			{
-				return RedirectToAction("Error", "Catalog", e.Message);
+				return RedirectToAction("Error", "Catalog", Error(e.Message));
 			}
-			
-			return RedirectToAction("ShowCatalog");
 		}
 
 		//Read
@@ -61,13 +65,13 @@ namespace Camera_Shop.Controllers
 					throw new ArgumentException($"Camera {camera.Brand}: {camera.Model} exists!");
 
 				InsertIntoDatabase(camera);
+				
+				return RedirectToAction("ShowCatalog");
 			}
-			catch(Exception e)
+			catch(ArgumentException e)
 			{
-				return RedirectToAction("Error", "Catalog", e.Message);
-			}
-			
-			return RedirectToAction("ShowCatalog");
+				return RedirectToAction("Error", "Catalog", Error(e.Message));
+			} 
 		}
 		
 		[HttpPost]
@@ -75,17 +79,17 @@ namespace Camera_Shop.Controllers
 		{
 			try
 			{
-				if(DoesCameraExist(camera))
-					throw new ArgumentException($"Camera {camera.Brand}: {camera.Model} exists!");
+				if(!DoesCameraExist(camera))
+					throw new ArgumentException($"Camera {camera.Brand}: {camera.Model} does not exist!");
 				
 				UpdateCamera(camera);
+
+				return RedirectToAction("ShowCatalog");
 			}
 			catch(Exception e)
 			{
-				return RedirectToAction("Error", "Catalog", e.Message);
+				return RedirectToAction("Error", "Catalog", Error(e.Message));
 			}
-
-			return RedirectToAction("ShowCatalog");
 		}
 
 		//Delete
@@ -95,13 +99,13 @@ namespace Camera_Shop.Controllers
 			try
 			{
 				DeleteCameraFromDatabase(camera);
+				
+				return RedirectToAction("ShowCatalog");
 			}
 			catch(Exception e)
 			{
-				return RedirectToAction("Error", "Catalog", e.Message);
+				return RedirectToAction("Error", "Catalog", Error(e.Message));
 			}
-			
-			return RedirectToAction("ShowCatalog");
 		}
 
 		//Validations
@@ -117,7 +121,7 @@ namespace Camera_Shop.Controllers
 		//Create
 		private void InsertCameraIntoDatabase(Camera cameraToInsert)
 		{
-			var connection = Connection.GetConnection;
+			/*var connection = Connection.GetConnection;
 			connection.Open();
 
 			Camera camera = new Camera();
@@ -128,24 +132,32 @@ namespace Camera_Shop.Controllers
 			camera.BaseISO = cameraToInsert.BaseISO;
 			camera.MaxISO = cameraToInsert.MaxISO;
 
-			var queryForCameraInsert =
+			var query =
 				$"INSERT INTO \"Cameras\"(\"Id\", \"Brand\", \"Model\", \"Megapixels\", \"BaseISO\", \"MaxISO\") " +
 				$"VALUES ({camera.Id}, '{camera.Brand}', '{camera.Model}', '{camera.Megapixels}', '{camera.BaseISO}', '{camera.MaxISO}');";
-			var commandForCameraInsert = new NpgsqlCommand(queryForCameraInsert, connection);
+			var command = new NpgsqlCommand(query, connection);
 
-			//commandForCameraInsert.Parameters.AddWithValue("@specsId", DBNull.Value);
-			//commandForCameraInsert.Parameters.AddWithValue("@specsId", $"{camera.Camera.Specifications.Id}");
-			//commandForCameraInsert.Parameters.AddWithValue("@id", $"{camera.Camera.Id}");
-			//commandForCameraInsert.Parameters.AddWithValue("@brand", $"{camera.Camera.Brand}");
-			//commandForCameraInsert.Parameters.AddWithValue("@model", $"{camera.Camera.Model}"); 
+			/*var query = $"INSERT INTO \"Cameras\"(\"Id\", \"Brand\", \"Model\", \"Megapixels\", \"BaseISO\", \"MaxISO\") " +
+							$"VALUES ('@id', '@brand', '@model', '@megapixels', '@baseiso', '@maxiso');";
+			var command = new NpgsqlCommand(query, connection);
 
-			commandForCameraInsert.ExecuteNonQuery();
-			connection.Close();
+			command.Parameters.AddWithValue("id", $"{camera.Id}");
+			command.Parameters.AddWithValue("brand", $"{camera.Brand}");
+			command.Parameters.AddWithValue("model", $"{camera.Model}");
+			command.Parameters.AddWithValue("megapixel", $"{camera.Megapixels}");
+			command.Parameters.AddWithValue("baseiso", $"{camera.BaseISO}");
+			command.Parameters.AddWithValue("maxiso", $"{camera.MaxISO}");
+
+			int affectedRows = command.ExecuteNonQuery();
+			connection.Close();*/
+
+			this._context.Cameras.Add(cameraToInsert);
+			this._context.SaveChanges();
 		}
 
-		private void InsertId(Camera camera)
+		private Camera InsertId(Camera camera)
 		{
-			var connection = Connection.GetConnection;
+			/*var connection = Connection.GetConnection;
 			connection.Open();
 
 			var queryForId = $"SELECT MAX(\"Cameras\".\"Id\") FROM \"Cameras\";";
@@ -160,40 +172,28 @@ namespace Camera_Shop.Controllers
 				number = reader.GetInt32("max") + 1;
 			camera.Id = number;
 
-			connection.Close();
+			connection.Close();*/
+
+			var maxInt = 
+					from c in this._context.Cameras
+					select c;
+
+			if(maxInt.Any() == false)
+				camera.Id = 0;
+			else
+				camera.Id = 
+					(from c in this._context.Cameras
+					select c).Max(x => x.Id);
+
+			return camera;
 		}
 
 		//Read
-		private IEnumerable<Camera> GetCatalog()
-		{
-			var connection = Connection.GetConnection;
-			List<Camera> cameras = new List<Camera>();
-			connection.Open();
-
-			var query = "SELECT * FROM \"Cameras\";";
-			var command = new NpgsqlCommand(query, connection);
-			var reader = command.ExecuteReader();
-
-			while(reader.Read())
-			{
-				Camera camera = new Camera();
-				camera.Id = reader.GetInt32("Id");
-				camera.Brand = reader.GetString("Brand");
-				camera.Model = reader.GetString("Model");
-				camera.Megapixels = reader.GetDecimal("Megapixels");
-				camera.BaseISO = reader.GetInt32("BaseISO");
-				camera.MaxISO = reader.GetInt32("MaxISO");
-
-				cameras.Add(camera);
-			}
-
-			connection.Close();
-			return cameras.AsEnumerable();
-		}
+		private IEnumerable<Camera> GetCatalog() => new List<Camera>(this._context.Cameras).AsEnumerable();
 
 		private Camera GetCamera(int id)
 		{
-			var connection = Connection.GetConnection;
+			/*var connection = Connection.GetConnection;
 			connection.Open();
 
 			var query = $"SELECT * FROM \"Cameras\" " +
@@ -212,13 +212,20 @@ namespace Camera_Shop.Controllers
 			camera.MaxISO = reader.GetInt32("MaxISO");
 
 			connection.Close();
-			return camera;
+			return camera;*/
+			
+			var cameras = 
+				from s in this._context.Cameras
+				where s.Id == id
+				select s;
+
+			return cameras.FirstOrDefault();
 		}
 
 		//Update
 		private void UpdateCamera(Camera camera)
 		{
-			var connection = Connection.GetConnection;
+			/*var connection = Connection.GetConnection;
 			connection.Open();
 
 			var query = "UPDATE \"Cameras\" " +
@@ -236,26 +243,44 @@ namespace Camera_Shop.Controllers
 			//command.Parameters.AddWithValue("model", camera.Model);
 
 			command.ExecuteNonQuery();
-			connection.Close();
+			connection.Close();*/
+
+			var cameraToModify = (
+				from c in this._context.Cameras
+				where c.Id == camera.Id
+				select c).FirstOrDefault();
+
+			foreach(var property in camera.GetType().GetProperties())
+				property.SetValue(cameraToModify, property.GetValue(camera));
+
+			this._context.SaveChanges();
 		}
 
 		//Delete
 		private void DeleteCameraFromDatabase(Camera camera)
 		{
-			var connection = Connection.GetConnection;
+			/*var connection = Connection.GetConnection;
 			connection.Open();
 
 			var query = $"DELETE FROM \"Cameras\" WHERE \"Id\" = {camera.Id};";
 			var command = new NpgsqlCommand(query, connection);
 			command.ExecuteNonQuery();
 
-			connection.Close();
+			connection.Close();*/
+			
+			var cameraToDelete = (
+					from c in this._context.Cameras
+					where c.Id == camera.Id
+					select c).FirstOrDefault();
+			
+			this._context.Remove(cameraToDelete);
+			this._context.SaveChanges();
 		}
 
 		//Validations
 		private bool DoesCameraExist(Camera camera)
 		{
-			var connection = Connection.GetConnection;
+			/*var connection = Connection.GetConnection;
 			connection.Open();
 
 			var query = $"SELECT \"Id\" FROM \"Cameras\" " +
@@ -273,17 +298,27 @@ namespace Camera_Shop.Controllers
 			bool exists = reader.HasRows;
 
 			connection.Close();
+			return exists;*/
+
+			var doesCameraExist =
+				(from c in this._context.Cameras
+				where c.Brand == camera.Brand &
+				      c.Model == camera.Model
+				select c).ToList();
+
+			bool exists = doesCameraExist.Count != 0;
+
 			return exists;
 		}
 
 		//Errors
-		[AllowAnonymous]
-		public IActionResult Error(string error)
+		[HttpGet]
+		public IActionResult Error(string errorMessage)
 		{
-			return View(new ErrorViewModel
-			{
-				ErrorMessage = error
-			});
+			ErrorViewModel error = new ErrorViewModel();
+			error.ErrorMessage = errorMessage;
+
+			return View("Error", error);
 		}
 	}
 }

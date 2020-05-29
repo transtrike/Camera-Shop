@@ -11,18 +11,24 @@ namespace Camera_Shop
 {
      public class Startup
      {
-          public Startup(IConfiguration configuration) => this.Configuration = configuration;
+          public Startup(IConfiguration configuration)
+          {
+               this.Configuration = configuration;
+          }
 
           public IConfiguration Configuration { get; }
 
           // This method gets called by the runtime. Use this method to add services to the container.
           public void ConfigureServices(IServiceCollection services)
           {
+               services.AddControllersWithViews();
                services.AddRazorPages();
                services.AddMvc();
 
+               var conn = Configuration.GetConnectionString("DEV");
+
                services.AddDbContext<CameraContext>(options =>
-                    options.UseNpgsql(Configuration.GetConnectionString("DEV")));
+                    options.UseNpgsql(conn));
           }
 
           // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,7 +53,9 @@ namespace Camera_Shop
                app.UseEndpoints(endpoints =>
                {
                     endpoints.MapRazorPages();
-                    endpoints.MapDefaultControllerRoute();
+                    endpoints.MapControllerRoute(
+                         name: "default",
+                         pattern: "{controller=Home}/{action=Index}/{id?}");
                });
           }
      }
