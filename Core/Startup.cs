@@ -1,3 +1,4 @@
+using System.Security.Policy;
 using Camera_Shop.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -5,7 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Npgsql;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace Camera_Shop
 {
@@ -25,10 +27,8 @@ namespace Camera_Shop
                services.AddRazorPages();
                services.AddMvc();
 
-               var conn = Configuration.GetConnectionString("DEV");
-
                services.AddDbContext<CameraContext>(options =>
-                    options.UseNpgsql(conn));
+                    options.UseNpgsql(Configuration.GetConnectionString("DEV")));
           }
 
           // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +53,17 @@ namespace Camera_Shop
                app.UseEndpoints(endpoints =>
                {
                     endpoints.MapRazorPages();
+
+                    /*endpoints.MapControllerRoute(
+                         name: "CatalogMap",
+                         pattern: "Catalog?{cameraId=id}",
+                         new
+                         {
+                              controller = "Catalog",
+                              action = "Edit",
+                              cameraId = ""
+                         });*/
+                    
                     endpoints.MapControllerRoute(
                          name: "default",
                          pattern: "{controller=Home}/{action=Index}/{id?}");

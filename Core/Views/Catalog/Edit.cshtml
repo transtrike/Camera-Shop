@@ -6,12 +6,11 @@
 }
 
 <h1>Here you can edit an existing camera. Maybe there was an error when someone submited it.</h1>
-<h4>Come on, buddy. Help me fix the errors if any.</h4>
+<h4>Come on, buddy. Help me fix the errors, if any.</h4>
 <br/>
 
 <div>
-    <form method="post" asp-action="EditACamera">
-        <tr><h5><b>Camera Id:</b> <input type="text" asp-for="@Model.Id" readonly="readonly"/></h5></tr>
+    <form method="post" asp-action="EditPost" asp-route-id="@Model.Id">
         <tr><h5><b>Camera Brand:</b> <input type="text" asp-for="@Model.Brand"/></h5></tr>
         <tr><h5><b>Camera Model:</b> <input type="text" asp-for="@Model.Model"/></h5></tr>
         <tr><h5><b>Megapixels:</b> <input type="number" asp-for="@Model.Megapixels"/></h5></tr>

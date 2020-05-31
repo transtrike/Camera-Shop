@@ -1,7 +1,9 @@
 using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
+using Camera_Shop.Extension;
 
 namespace Camera_Shop.Models
 {
@@ -15,6 +17,8 @@ namespace Camera_Shop.Models
 		private int _baseISO;
 		private int _maxISO;
 
+		public Camera() { }
+		
 		public Camera(int id, string brand, string model, decimal megapixels, int baseIso, int maxIso)
 		{
 			this.Id = id;
@@ -25,10 +29,8 @@ namespace Camera_Shop.Models
 			this.MaxISO = maxIso;
 		}
 
-		// For Reflection purposes
-		public Camera() { }
-
 		[Key]
+		[SkipProperty]
 		[Required(ErrorMessage = "Id is required")]
 		public int Id
 		{
@@ -37,8 +39,8 @@ namespace Camera_Shop.Models
 		}
 
 		[NotNull]
-		[Required(ErrorMessage = "Brand is required")]
 		[MinLength(3)]
+		[Required(ErrorMessage = "Brand is required")]
 		public string Brand
 		{
 			get => this._brand;
@@ -52,8 +54,8 @@ namespace Camera_Shop.Models
 		}
 
 		[NotNull]
-		[Required(ErrorMessage = "Model is required")]
 		[MinLength(3)]
+		[Required(ErrorMessage = "Model is required")]
 		public string Model
 		{
 			get => this._model;

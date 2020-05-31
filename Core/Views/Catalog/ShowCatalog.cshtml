@@ -1,13 +1,11 @@
+@using Camera_Shop.Extension
 @model IEnumerable<Camera_Shop.Models.Camera>
 
 @{
     ViewData["Title"] = "Camera Catalog";
     Layout = "_Layout";
-}
 
-<!-- Show all cameras-->
-<div>
-    @foreach(var camera in Model) //var camera in Model
+    @*foreach(var camera in Model)
     {
         <tr>
             <td>
@@ -16,16 +14,36 @@
                 <h5><b>Camera Megapixels:</b> @camera.Megapixels</h5>
                 <h5><b>Camera Base ISO:</b> @camera.BaseISO</h5>
                 <h5><b>Camera Max ISO:</b> @camera.MaxISO</h5>
-                
-                <a class="btn btn-outline-primary" asp-action="EditCamera" asp-route-cameraId="@camera.Id">Edit</a>
-                <a class="btn btn-outline-primary alert-danger" asp-action="DeleteCamera" asp-route-cameraId="@camera.Id">Delete</a>
+
+                <a class="btn btn-outline-primary" asp-action="Edit" asp-route-cameraId="@camera.Id">Edit</a>
+                <a class="btn btn-outline-primary alert-danger" asp-action="Delete" asp-route-cameraId="@camera.Id">Delete</a>
             </td>
         </tr>
         <hr/>
+    }*@
+}
+
+<!-- Show all cameras-->
+<div>
+    @foreach(var camera in Model)
+    {
+        var propertyInfoEnum = Model
+            .GetType()
+            .GetProperties().
+            Where(pi =>
+                !Attribute.IsDefined(pi, typeof(SkipProperty)));
+
+        foreach(var property in propertyInfoEnum)
+        {
+            var propertyName = property.Name;
+            var value = property.GetValue(camera, null);
+
+            <h5><b>Camera @propertyName</b>: @value</h5>
+        }
     }
 </div>
 
-<!-- Create a Camera-->
+<!--Create a Camera -->
 <div>
-    <a class="btn btn-outline-primary" asp-action="CreateCamera">Create a Camera</a>
+    <a class="btn btn-outline-primary" asp-action="Create"> Create a Camera</a>
 </div>
