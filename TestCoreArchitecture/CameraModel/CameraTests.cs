@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 namespace Camera_Shop.Tests.CameraModel
 {
-     public class CameraTests
+     public class CameraServiceTests
      {
           [Test]
           public void TestShouldAlwaysPass()

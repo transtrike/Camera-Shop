@@ -40,6 +40,7 @@ namespace Camera_Shop.Models
 
 		[NotNull]
 		[MinLength(3)]
+		[Display(Name = "Brand")]
 		[Required(ErrorMessage = "Brand is required")]
 		public string Brand
 		{
@@ -55,6 +56,7 @@ namespace Camera_Shop.Models
 
 		[NotNull]
 		[MinLength(3)]
+		[Display(Name = "Model")]
 		[Required(ErrorMessage = "Model is required")]
 		public string Model
 		{
@@ -69,6 +71,7 @@ namespace Camera_Shop.Models
 		}
 
 		[AllowNull]
+		[Display(Name = "Megapixels")]
 		[Range(1, Double.MaxValue, ErrorMessage = "Megapixels cannot be a 0 or negative number")]
 		public decimal Megapixels
 		{
@@ -84,6 +87,7 @@ namespace Camera_Shop.Models
 		}
 
 		[AllowNull]
+		[Display(Name = "Base ISO")]
 		[Range(32, Double.MaxValue, ErrorMessage = "Base ISO cannot be less than 32")]
 		public int BaseISO
 		{
@@ -98,6 +102,7 @@ namespace Camera_Shop.Models
 		}
 
 		[AllowNull]
+		[Display(Name = "Max ISO")]
 		[Range(32, Double.MaxValue, ErrorMessage = "Max ISO cannot be less than 32")]
 		public int MaxISO
 		{

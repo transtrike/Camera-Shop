@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <component name="ModuleManager">
+    <modules>
+      <module name="Camera-Shop (Solution)" dirurl="file://$PROJECT_DIR$" current-layer="Default">
+        <module-layer name="Default">
+          <extension id="client-javascript" />
+          <extension id="microsoft-aspnet" />
+          <extension id="microsoft-csharp" unsafe-code="false" optimize-code="true" platform="ANY_CPU" />
+          <extension id="microsoft-dotnet" sdk-module-name="" sdk-name="" target="EXECUTABLE" debug="false" allow-source-roots="false" file-name="$ModuleName$.$TargetFileExt$" output-dir="$ModuleProductionOutputDirPath$" namespace-prefix="" />
+          <extension id="microsoft-nuget" />
+          <extension id="microsoft-nunit" />
+          <content url="file://$MODULE_DIR$" />
+          <orderEntry type="module-extension-sdk" extension-id="client-javascript" />
+          <orderEntry type="sourceFolder" />
+        </module-layer>
+      </module>
+      <module name="Core" current-layer="Default">
+        <module-layer name="Default">
+          <extension id="msbuild-csharp" unsafe-code="false" optimize-code="false" platform="ANY_CPU" />
+          <extension id="msbuild-dotnet" sdk-module-name="" sdk-name="" target="EXECUTABLE" debug="false" allow-source-roots="false" file-name="$ModuleName$.$TargetFileExt$" output-dir="$ModuleProductionOutputDirPath$" namespace-prefix="" />
+          <content url="file://$USER_HOME$/Documents/Programming/Projects/C#/Camera-Shop/Core/Core.csproj" />
+          <content url="file://$USER_HOME$/Documents/Programming/Projects/C#/Camera-Shop/Core/obj">
+            <content-folder type="EXCLUDED" url="file://$USER_HOME$/Documents/Programming/Projects/C#/Camera-Shop/Core/obj" />
+          </content>
+          <orderEntry type="sourceFolder" />
+          <orderEntry type="dot-net-library" name="mscorlib" />
+        </module-layer>
+      </module>
+      <module name="TestCoreArchitecture" current-layer="Default">
+        <module-layer name="Default">
+          <extension id="msbuild-csharp" unsafe-code="false" optimize-code="false" platform="ANY_CPU" />
+          <extension id="msbuild-dotnet" sdk-module-name="" sdk-name="" target="EXECUTABLE" debug="false" allow-source-roots="false" file-name="$ModuleName$.$TargetFileExt$" output-dir="$ModuleProductionOutputDirPath$" namespace-prefix="" />
+          <content url="file://$USER_HOME$/Documents/Programming/Projects/C#/Camera-Shop/TestCoreArchitecture/TestCoreArchitecture.csproj" />
+          <content url="file://$USER_HOME$/Documents/Programming/Projects/C#/Camera-Shop/TestCoreArchitecture/obj">
+            <content-folder type="EXCLUDED" url="file://$USER_HOME$/Documents/Programming/Projects/C#/Camera-Shop/TestCoreArchitecture/obj" />
+          </content>
+          <orderEntry type="sourceFolder" />
+          <orderEntry type="dot-net-library" name="mscorlib" />
+        </module-layer>
+      </module>
+    </modules>
+  </component>
+</project>

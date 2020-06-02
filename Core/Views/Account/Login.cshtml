@@ -1,0 +1,28 @@
+@model Camera_Shop.Models.LoginViewModel
+
+@{
+    ViewBag.Title = "User Login";
+    Layout = "_Layout";
+}
+
+<h1>User Login</h1>
+
+<div asp-validation-summary="All">
+    <form method="post">
+        <label asp-for="Email"></label>
+        <input asp-for="Email"/>
+        <span asp-validation-for="Email"></span>
+        
+        <label asp-for="Password"></label>
+        <input asp-for="Password"/>
+        <span asp-validation-for="Password"></span>
+
+        
+        <label asp-for="RememberMe">
+            <input asp-for="RememberMe"/>
+            @Html.DisplayFor(m => m.RememberMe)
+        </label>
+        
+        <button type="submit" class="btn btn-outline-primary">Login</button>
+    </form>
+</div>
