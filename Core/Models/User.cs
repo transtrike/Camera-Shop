@@ -1,16 +1,31 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
 namespace Camera_Shop.Models
 {
-	public class User
+	public class User : IdentityUser
 	{
-		private int _id;
+		[Required]
+		[MinLength(3)]
+		public override string UserName
+		{
+			get => base.UserName;
+			set => base.UserName = value;
+		}
+
+		/*private int _id;
 		private string _username;
 		private string _name;
 		private int _age;
 		private string _password;
 		private string _email;
 
+		public User(string email, string password)
+		{
+			this.Email = email;
+			this.Password = password;
+		}
+		
 		public User(int id, string username, string email, string name, int age, string password)
 		{
 			this.Id = id;
@@ -44,14 +59,6 @@ namespace Camera_Shop.Models
 		}
 
 		[Required]
-		[MinLength(3)]
-		public string Name
-		{
-			get => this._name;
-			set => this._name = value;
-		}
-
-		[Required]
 		[Range(12, 150)]
 		public int Age
 		{
@@ -65,6 +72,6 @@ namespace Camera_Shop.Models
 		{
 			get => this._password;
 			set => this._password = value;
-		}
+		}*/
 	}
 }

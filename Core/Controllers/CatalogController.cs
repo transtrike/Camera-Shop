@@ -28,10 +28,10 @@ namespace Camera_Shop.Controllers
 		{
 			try
 			{
-				//TODO: Figure out how to validate product without id and possibly
-				//without going trough every property. If needed, use Reflections
-				
-				//!!! Use Model as unique property for checking
+				if(this._service.DoesCameraExist(camera.Model))
+				{
+					return RedirectToAction("CameraExists", camera.Model);
+				}
 
 				this._service.Insert(camera);
 				
@@ -39,7 +39,7 @@ namespace Camera_Shop.Controllers
 			}
 			catch(ArgumentException e)
 			{
-				return RedirectToAction("Error", "Catalog", Error(e.Message));
+				return View("~/Views/Error/Error.cshtml", new ErrorViewModel(e.Message));
 			} 
 		}
 		
@@ -71,7 +71,7 @@ namespace Camera_Shop.Controllers
 			}
 			catch(Exception e)
 			{
-				return RedirectToAction("Error", "Catalog", Error(e.Message));
+				return View("~/Views/Error/Error.cshtml", new ErrorViewModel(e.Message));
 			}
 		}
 
@@ -93,7 +93,7 @@ namespace Camera_Shop.Controllers
 			}
 			catch(Exception e)
 			{
-				return RedirectToAction("Error", "Catalog", Error(e.Message));
+				return View("~/Views/Error/Error.cshtml", new ErrorViewModel(e.Message));
 			}
 		}
 
@@ -102,16 +102,6 @@ namespace Camera_Shop.Controllers
 		public IActionResult CameraExists(Camera camera)
 		{
 			return View(camera);
-		}
-
-		//Errors
-		[HttpGet]
-		public IActionResult Error(string errorMessage)
-		{
-			ErrorViewModel error = new ErrorViewModel();
-			error.ErrorMessage = errorMessage;
-
-			return View("Error", error);
 		}
 	}
 }

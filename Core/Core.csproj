@@ -6,6 +6,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.4" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.4" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.4">
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -29,10 +31,6 @@
     <ItemGroup>
       <Content Remove="Views\Catalog\OldCreateCamera.cshtml" />
       <Content Remove="Views\Catalog\ShowSpecification.cshtml" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Views\Error" />
     </ItemGroup>
 
 </Project>

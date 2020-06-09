@@ -13,6 +13,14 @@
     </p>
 }
 
+@if(Model.ErrorMessages != null)
+{
+    @foreach(var message in Model.ErrorMessages)
+    {
+        <div><b>Error</b>: @message</div>
+    }
+}
+
 <h3>Development Mode</h3>
 <p>
     Swapping to <strong>Development</strong> environment will display more detailed information about the error that occurred.

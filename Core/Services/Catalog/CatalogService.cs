@@ -7,15 +7,13 @@ namespace Camera_Shop.Services.Catalog
 {
 	public class CatalogService
 	{
-		private CameraContext _context;
+		private readonly CameraContext _context;
 
 		public CatalogService(CameraContext context) => this._context = context;
 		
 		//Create
 		public void Insert(Camera camera)
 		{
-			//camera.Id = NewId();
-			
 			this._context.Cameras.Add(camera);
 			this._context.SaveChanges();
 		}
@@ -70,6 +68,18 @@ namespace Camera_Shop.Services.Catalog
 			bool exists = doesCameraExist.Count() != 0;
 
 			return exists;
+		}
+
+		public bool DoesCameraExist(string model)
+		{
+			var doesCameraExist =
+				from c in this._context.Cameras
+				where c.Model == model
+				select c;
+
+			bool exists = doesCameraExist.Count() != 0;
+
+			return exists; 
 		}
 	}
 }
