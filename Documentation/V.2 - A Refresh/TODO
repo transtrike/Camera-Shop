@@ -2,19 +2,25 @@
 
 (DONE) Rethink the naming of the methods
 (DONE) Refactor the DoesCameraExist to use id for edit, not model & brand
-(!!!ASK!!!) Figure out how to check for exisiting camera without id (make one thing unique)
+(DONE) How to check for exisiting camera without id -> Use model as unique property
 (DONE) Refactor Edit() and Delete() to accept an Id and function only on it
 (DONE) Hide the Id in a property in the view
 (NOT NOW) Hide the Id from the url with "Hide Id"(by Ivo's words) via the route customization(prob)
 (NOT NOW) Make diplaying properties dynamic(exclude id!), so that you can expand easily
 (NOT NOW) Rewrite all CRUD Views to be dynamic
-Write a better documentation to extand on future use
+Rewrite the documentation for better explination and future use
 (DONE) Fix the Views that display the Id. Unneeded and unnecessary 
-(REQUIRED) Expand the Camera class to have more funcionality, better attributes and more properties
-Harded the validations before and after the database
-Make "login only" exclusive features, such as favourites
-Look to potentially swap the database provider, if necessary
-Harden and expand the EntityFrameworkCore knowledge
+(NOT NOW) Expand the Camera class to have more funcionality, better attributes and more properties
+(DONE)Make one unified Errors page and redirect to it for errors with direct path
+(DONE)Harded the validations before and after the database
+(DONE)Fix the Error pathing and model creation for errors on Regisetr and Login
+(DONE)Finish Login func
+(DONE)Display properly Name in _Layout
+(DONE)Implement proper Logout 
+Fix bugs with staying logged in
+(DONE)Make "login only" exclusive features
+(NOT NOW)Look to potentially swap the database provider, if necessary
+(DONE)Harden and expand the EntityFrameworkCore knowledge
 (NOT NOW)Try to migrate to ASYNC methods for every operation
 Construct and layout the "Guide" section
 Implement the "Guide" controller and simple view
@@ -22,7 +28,7 @@ Make better visuals for the Views(make use of the linked js and cc in the wwwroo
 Look into implementing login and password(hash the pasword, at least)
 If enough time left, write only important Unit tests(func and hardend features are priority)
 
-
+Notes:
 ViewBack, ViewData to fill with data and use in the view
 @inject UserManager
 
