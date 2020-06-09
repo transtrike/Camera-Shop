@@ -5,8 +5,8 @@ namespace Camera_Shop.Models
 	public class LoginViewModel
 	{
 		[Required]
-		[EmailAddress]
-		public string Email { get; set; }
+		[DataType(DataType.Text)]
+		public string Username { get; set; }
 
 		[Required]
 		[DataType(DataType.Password)]

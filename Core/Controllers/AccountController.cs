@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Camera_Shop.Database;
 using Camera_Shop.Models;
@@ -12,7 +11,6 @@ namespace Camera_Shop.Controllers
 	public class AccountController : Controller
 	{
 		//private readonly AccountService _service;
-		
 		private readonly CameraContext _context;
 		private readonly UserManager<User> _userManager;
 		private readonly SignInManager<User> _signInManager;
@@ -83,8 +81,8 @@ namespace Camera_Shop.Controllers
 			if(ModelState.IsValid)
 			{
 				var result = await this._signInManager
-					.PasswordSignInAsync(model.Email, model.Password,
-						model.RememberMe, true);
+					.PasswordSignInAsync(model.Username, model.Password,
+						model.RememberMe, false);
 
 				if(result.Succeeded)
 				{

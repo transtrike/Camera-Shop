@@ -3,19 +3,19 @@
 @{
     ViewData["Title"] = "Delete a Camera";
     Layout = "_Layout";
+    int id = Model.Id;
 }
 
 <h1 class="alert-danger">BE CAUTIOUS! DON'T DELETE WHAT ISN'T SUPPOSED TO BE DELETED!</h1>
 <br/>
 
 <div>
-    <form method="post" asp-action="DeletePost">
-         <tr><h5><b>Camera Id:</b> <input type="text" asp-for="@Model.Id" readonly="readonly"/></h5></tr>
-         <tr><h5><b>Camera Brand:</b> <input type="text" asp-for="@Model.Brand" readonly="readonly"/></h5></tr>
-         <tr><h5><b>Camera Model:</b> <input type="text" asp-for="@Model.Model" readonly="readonly"/></h5></tr>
-         <tr><h5><b>Megapixels:</b> <input type="text" asp-for="@Model.Megapixels" readonly="readonly"/></h5></tr>
-         <tr><h5><b>Base ISO:</b> <input type="text" asp-for="@Model.BaseISO" readonly="readonly"/></h5></tr>
-         <tr><h5><b>Max ISO:</b> <input type="text" asp-for="@Model.MaxISO" readonly="readonly"/></h5></tr>
+    <form method="post" asp-action="DeletePost" asp-route-id="@id">
+         <tr><h5><b>Camera Brand:</b> @Model.Brand</h5></tr>
+         <tr><h5><b>Camera Model:</b> @Model.Model</h5></tr>
+         <tr><h5><b>Megapixels:</b> @Model.Megapixels</h5></tr>
+         <tr><h5><b>Base ISO:</b> @Model.BaseISO</h5></tr>
+         <tr><h5><b>Max ISO:</b> @Model.MaxISO</h5></tr>
 
         <input type="submit" value="DELETE" class="btn btn-outline-primary alert-danger"/>
     </form>

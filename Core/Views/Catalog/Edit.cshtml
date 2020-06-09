@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Edit a Camera";
     Layout = "_Layout";
+    int id = Model.Id;
 }
 
 <h1>Here you can edit an existing camera. Maybe there was an error when someone submited it.</h1>
@@ -10,7 +11,7 @@
 <br/>
 
 <div>
-    <form method="post" asp-action="EditPost" asp-route-id="@Model.Id">
+    <form method="post" asp-action="EditPost" asp-route-id="@id">
         <tr><h5><b>Camera Brand:</b> <input type="text" asp-for="@Model.Brand"/></h5></tr>
         <tr><h5><b>Camera Model:</b> <input type="text" asp-for="@Model.Model"/></h5></tr>
         <tr><h5><b>Megapixels:</b> <input type="number" asp-for="@Model.Megapixels"/></h5></tr>

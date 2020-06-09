@@ -1,14 +1,10 @@
-@using Microsoft.AspNetCore.Identity
 @model IEnumerable<Camera_Shop.Models.Camera>
 
 @{
     ViewData["Title"] = "Camera Catalog";
     Layout = "_Layout";
     
-    @*
-    @inject SignInManager<User> UserManager
-    
-    foreach(var camera in Model)
+    @*foreach(var camera in Model)
     {
         var propertyInfoEnum = camera
             .GetType()
@@ -48,8 +44,11 @@
             <h5><b>Camera Base ISO:</b> @camera.BaseISO</h5>
             <h5><b>Camera Max ISO:</b> @camera.MaxISO</h5>
             
-            <a class="btn btn-outline-primary" asp-action="Edit" asp-route-cameraId="@camera.Id">Edit</a>
-            <a class="btn btn-outline-primary alert-danger" asp-action="Delete" asp-route-cameraId="@camera.Id">Delete</a> 
+            @if(SignInManager.IsSignedIn(User))
+            {
+                <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@camera.Id">Edit</a>
+                <a class="btn btn-outline-primary alert-danger" asp-action="Delete" asp-route-id="@camera.Id">Delete</a>    
+            }
         </td>
     </tr>
     <hr/>
