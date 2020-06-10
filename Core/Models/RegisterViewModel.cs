@@ -21,5 +21,8 @@ namespace Camera_Shop.Models
 		[Compare("Password", 
 			ErrorMessage = "Password and Confirm Password do not match.")]
 		public string ConfirmPassword { get; set; }
+		
+		[Display(Name = "Remember Me")]
+		public bool RememberMe { get; set; }
 	}
 }

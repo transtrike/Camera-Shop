@@ -17,7 +17,7 @@ Rewrite the documentation for better explination and future use
 (DONE)Finish Login func
 (DONE)Display properly Name in _Layout
 (DONE)Implement proper Logout 
-Fix bugs with staying logged in
+(!!!ASK!!!)Fix bugs with staying logged in
 (DONE)Make "login only" exclusive features
 (NOT NOW)Look to potentially swap the database provider, if necessary
 (DONE)Harden and expand the EntityFrameworkCore knowledge

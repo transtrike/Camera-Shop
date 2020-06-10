@@ -46,7 +46,7 @@ namespace Camera_Shop.Controllers
 
 				if(result.Succeeded)
 				{
-					await this._signInManager.SignInAsync(user, false);
+					await this._signInManager.SignInAsync(user, model.RememberMe);
 					return RedirectToAction("Index", "Home");
 				}
 				else
