@@ -7,7 +7,7 @@ namespace Camera_Shop.Database
      public class CameraContext : IdentityDbContext
      {
           public DbSet<Camera> Cameras { get; set; }
-          public DbSet<User> Users { get; set; }
+          public new DbSet<User> Users { get; set; }
           
           public CameraContext(DbContextOptions options)
                : base(options) { }

@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.IO.Compression;
+using System.Linq;
 using System.Threading.Tasks;
 using Camera_Shop.Database;
 using Camera_Shop.Models;
@@ -104,6 +106,93 @@ namespace Camera_Shop.Controllers
 			await this._signInManager.SignOutAsync();
 
 			return RedirectToAction("Index", "Home");
+		}
+
+		[HttpGet]
+		public IActionResult UserProfile(string id)
+		{
+			return View(GetUser(id));
+		}
+		
+		//Edit
+		[HttpGet]
+		public IActionResult Edit(string id)
+		{
+			return View(GetUser(id));
+		}
+
+		[HttpPost]
+		public IActionResult EditPost(string id, User user)
+		{
+			if(!UserExists(id))
+			{
+				return View("Error", new ErrorViewModel("Person already exists!"));
+			}
+			
+			Update(id, user);
+			RelogUser(user);
+			
+			return RedirectToAction("UserProfile", "Account", id);
+		}
+		
+		//Delete
+		[HttpGet]
+		public IActionResult Delete(string id)
+		{
+			return View(GetUser(id));
+		}
+		
+		[HttpPost]
+		public IActionResult DeletePost(string id)
+		{
+			var user = (from u in this._context.Users
+				where u.Id == id
+				select u).FirstOrDefault();
+
+			this._context.Users.Remove(user);
+
+			return RedirectToAction("Index", "Home");
+		}
+
+		//Private methods
+		private User GetUser(string id)
+		{
+			var user = (from u in this._context.Users
+				where u.Id == id
+				select u).FirstOrDefault();
+			
+			return user;
+		}
+
+		private void Update(string id, User user)
+		{
+			var cameraToModify = (
+				from u in this._context.Users
+				where u.Id == id
+				select u).FirstOrDefault();
+
+			foreach(var property in user.GetType().GetProperties())
+				property.SetValue(cameraToModify, property.GetValue(user));
+
+			this._context.SaveChanges();
+		}
+
+		private void RelogUser(User user)
+		{
+			//SignOut using id
+			//SignIn using user
+			
+		}
+		
+		private bool UserExists(string id)
+		{
+			var user = from u in this._context.Users
+				where u.Id == id
+				select u;
+
+			bool exists = user.Any();
+				
+			return exists;
 		}
 	}
 }

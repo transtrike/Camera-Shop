@@ -1,0 +1,25 @@
+@model Camera_Shop.Models.User
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = $"{Model.UserName}'s profile";
+
+    string id = Model.Id;
+}
+
+<div>Hello @Model.UserName</div>
+<br/>
+
+<div>
+    <h2>Here is your info, that you have given us:</h2>
+</div>
+<br/>
+
+<div>
+    <!-- Replace with dynamic way of showing properties-->
+    <h5>Your Username: @Model.UserName</h5>
+    <h5>Your Email: @Model.Email</h5>
+    
+    <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@id">Edit Profile</a>
+    <a class="btn btn-outline-primary alert-danger" asp-action="Delete" asp-route-id="@id">Delete Profile</a>
+</div>

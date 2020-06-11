@@ -33,7 +33,7 @@
                 @if(SignInManager.IsSignedIn(User))
                 {
                     <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
-                    <div>Welcome @UserManager.GetUserName(User)</div>
+                    <div>Welcome <a asp-action="UserProfile" asp-controller="Account" asp-route-id="@UserManager.GetUserId(User)">@UserManager.GetUserName(User)</a></div>
                 }
                 else
                 {

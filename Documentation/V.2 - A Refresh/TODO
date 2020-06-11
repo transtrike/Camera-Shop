@@ -22,6 +22,8 @@ Rewrite the documentation for better explination and future use
 (NOT NOW)Look to potentially swap the database provider, if necessary
 (DONE)Harden and expand the EntityFrameworkCore knowledge
 (NOT NOW)Try to migrate to ASYNC methods for every operation
+Rewrite the Update func in the CatalogController to use thr DbContext.Update()
+Move all logic from AccountController to AccountService
 Construct and layout the "Guide" section
 Implement the "Guide" controller and simple view
 Make better visuals for the Views(make use of the linked js and cc in the wwwroot)

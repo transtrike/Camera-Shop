@@ -1,0 +1,17 @@
+@model Camera_Shop.Models.User
+
+@{
+    ViewBag.Title = $"DELETE {Model.UserName}";
+    Layout = "_Layout";
+
+    string id = Model.Id;
+}
+<h1 class="alert-danger">Beware, that deleting the user will delete it permanently!!!</h1>
+
+<div>
+    <!-- Replace with dynamic way of showing properties-->
+    <h5>Your Username: @Model.UserName</h5>
+    <h5>Your Email: @Model.Email</h5>
+        
+    <a class="btn btn-outline-primary alert-danger" asp-action="DeletePost" asp-route-id="@id">DELETE</a>
+</div>
