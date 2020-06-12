@@ -34,9 +34,12 @@ namespace Camera_Shop.Services.Catalog
 		}
 
 		//Read
-		public IEnumerable<Camera> GetCatalog() => new List<Camera>(
-			this._context.Cameras.Include("Brand"))
-			.AsEnumerable();
+		public IEnumerable<Camera> GetCatalog()
+		{
+			return this._context.Cameras
+				.Include("Brand")
+				.AsEnumerable();
+		}
 
 		public Camera GetCamera(int id)
 		{
@@ -106,8 +109,7 @@ namespace Camera_Shop.Services.Catalog
 			var brand = this._context.Brands
 				.FirstOrDefault(x => x.Name == brandName);
 
-			return brand != null ? 
-				brand : throw new ArgumentException("Brand doesn't exist!");
+			return brand ?? throw new ArgumentException("Brand doesn't exist!");
 		}
 
 		private string GetBrandNameById(int id)

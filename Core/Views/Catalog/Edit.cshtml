@@ -11,7 +11,7 @@
 
 <div>
     <form method="post" asp-action="EditPost" asp-controller="Catalog" 
-          asp-route-id="@Model.Id" asp-route-cameraDTO="@Model">
+          asp-route-id="@Model.Id">
         <tr><h5><b>Model Brand:</b> <input type="text" asp-for="@Model.Brand"/></h5></tr>
         <tr><h5><b>Model Model:</b> <input type="text" asp-for="@Model.Model"/></h5></tr>
         <tr><h5><b>Megapixels:</b> <input type="number" asp-for="@Model.Megapixels"/></h5></tr>
