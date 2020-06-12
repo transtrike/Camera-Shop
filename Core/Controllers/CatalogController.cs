@@ -1,8 +1,9 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
-
 using Camera_Shop.Database;
-using Camera_Shop.Models;
+using Camera_Shop.Models.Classes;
+using Camera_Shop.Models.DTOs;
+using Camera_Shop.Models.ViewModels;
 using Camera_Shop.Services.Catalog;
 
 namespace Camera_Shop.Controllers
@@ -24,22 +25,18 @@ namespace Camera_Shop.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult CreatePost(Camera camera)
+		public IActionResult CreatePost(CameraDTO camera)
 		{
 			try
 			{
-				if(this._service.DoesCameraExist(camera.Model))
-				{
-					return RedirectToAction("CameraExists", camera.Model);
-				}
-
 				this._service.Insert(camera);
 				
 				return RedirectToAction("ShowCatalog");
 			}
 			catch(ArgumentException e)
 			{
-				return View("~/Views/Error/Error.cshtml", new ErrorViewModel(e.Message));
+				return View("~/Views/Error/Error.cshtml",
+					new ErrorViewModel(e.Message));
 			} 
 		}
 		
@@ -54,22 +51,19 @@ namespace Camera_Shop.Controllers
 		[HttpGet]
 		public IActionResult Edit(int id)
 		{
-			return View(this._service.GetCamera(id));
+			return View(this._service.GetCameraDTO(id));
 		}
 
 		[HttpPost]
-		public IActionResult EditPost(int id, Camera camera)
+		public IActionResult EditPost(int id, CameraDTO cameraDTO)
 		{
 			try
 			{
-				if(!this._service.DoesCameraExist(id))
-					throw new ArgumentException($"Camera {camera.Brand}: {camera.Model} does not exist!");
-				
-				this._service.Update(id, camera);
+				this._service.Update(id, cameraDTO);
 
 				return RedirectToAction("ShowCatalog");
 			}
-			catch(Exception e)
+			catch(ArgumentException e)
 			{
 				return View("~/Views/Error/Error.cshtml", new ErrorViewModel(e.Message));
 			}
@@ -91,7 +85,7 @@ namespace Camera_Shop.Controllers
 				
 				return RedirectToAction("ShowCatalog");
 			}
-			catch(Exception e)
+			catch(ArgumentException e)
 			{
 				return View("~/Views/Error/Error.cshtml", new ErrorViewModel(e.Message));
 			}

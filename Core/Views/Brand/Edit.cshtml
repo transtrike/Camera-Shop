@@ -1,0 +1,21 @@
+@model Camera_Shop.Models.Classes.Brand
+
+@{
+    ViewBag.Title = "Edit a Brand";
+    Layout = "_Layout";
+}
+
+<h1>Here you can edit an existing brand. Maybe there was an error when someone submited it.</h1>
+<h4>Come on, buddy. Help me fix the errors, if there are any.</h4>
+<br/>
+
+<div>
+    <form method="post" asp-action="EditPost" asp-controller="Brand" asp-route-id="@Model.Id">
+        <tr><h5><b>Brand Name:</b> <input type="text" asp-for="Name"/></h5></tr>
+        
+        <button type="submit" class="btn btn-outline-primary">Save</button>
+    </form>
+</div>
+<div>
+    <a asp-action="ShowBrands" class="btn btn-outline-primary">Back to the brands</a>
+</div>

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Camera_Shop.Models
+namespace Camera_Shop.Models.ViewModels
 {
 	public class RegisterViewModel
 	{

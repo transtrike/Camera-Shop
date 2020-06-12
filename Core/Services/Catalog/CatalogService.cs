@@ -1,7 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Camera_Shop.Database;
-using Camera_Shop.Models;
+using Camera_Shop.Models.Classes;
+using Camera_Shop.Models.DTOs;
+using Microsoft.EntityFrameworkCore;
 
 namespace Camera_Shop.Services.Catalog
 {
@@ -12,74 +15,107 @@ namespace Camera_Shop.Services.Catalog
 		public CatalogService(CameraContext context) => this._context = context;
 		
 		//Create
-		public void Insert(Camera camera)
+		public void Insert(CameraDTO cameraDTO)
 		{
+			if(DoesCameraExist(cameraDTO.Model) && GetBrandByName(cameraDTO.Brand) != null)
+			{
+				throw new ArgumentException($"Camera {cameraDTO.Model} already exists!");
+			}
+			
+			var camera = new Camera();
+			camera.Brand = GetBrandByName(cameraDTO.Brand);
+			camera.Model = cameraDTO.Model;
+			camera.Megapixels = cameraDTO.Megapixels;
+			camera.BaseISO = cameraDTO.BaseISO;
+			camera.MaxISO = cameraDTO.MaxISO;
+
 			this._context.Cameras.Add(camera);
 			this._context.SaveChanges();
 		}
 
 		//Read
-		public IEnumerable<Camera> GetCatalog() => new List<Camera>(this._context.Cameras).AsEnumerable();
+		public IEnumerable<Camera> GetCatalog() => new List<Camera>(
+			this._context.Cameras.Include("Brand"))
+			.AsEnumerable();
 
 		public Camera GetCamera(int id)
 		{
-			var cameras = 
-				from s in this._context.Cameras
-				where s.Id == id
-				select s;
+			var camera = this._context.Cameras
+				.Include(x => x.Brand)
+				.FirstOrDefault(x => x.Id == id);
 
-			return cameras.FirstOrDefault();
+			return camera;
+		}
+		
+		public CameraDTO GetCameraDTO(int id)
+		{
+			var camera = this._context.Cameras
+				.FirstOrDefault(x => x.Id == id);
+
+			var cameraDTO = new CameraDTO();
+			cameraDTO.Id = camera.Id;
+			cameraDTO.Brand = GetBrandNameById(camera.BrandId);
+			cameraDTO.Model = camera.Model;
+			cameraDTO.Megapixels = camera.Megapixels;
+			cameraDTO.BaseISO = camera.BaseISO;
+			cameraDTO.MaxISO = camera.MaxISO;
+			
+			return cameraDTO;
 		}
 	
 		//Update
-		public void Update(int id, Camera camera)
+		public void Update(int id, CameraDTO cameraDTO)
 		{
-			var cameraToModify = (
-				from c in this._context.Cameras
-				where c.Id == id
-				select c).FirstOrDefault();
+			var cameraToModify = this._context.Cameras
+				.FirstOrDefault(x => x.Id == id);
 
-			foreach(var property in camera.GetType().GetProperties())
-				property.SetValue(cameraToModify, property.GetValue(camera));
-
+			if(cameraToModify == null)
+			{
+				throw new ArgumentException($"Camera {cameraDTO.Brand}: {cameraDTO.Model} does not exist!");
+			}
+			
+			cameraToModify.Brand = GetBrandByName(cameraDTO.Brand);
+			cameraToModify.Megapixels = cameraDTO.Megapixels;
+			cameraToModify.BaseISO = cameraDTO.BaseISO;
+			cameraToModify.MaxISO= cameraDTO.MaxISO;
+			
 			this._context.SaveChanges();
 		}
 
 		//Delete
 		public void Delete(int id)
 		{
-			var cameraToDelete = (
-				from c in this._context.Cameras
-				where c.Id == id
-				select c).FirstOrDefault();
+			var cameraToDelete = this._context.Cameras
+				.FirstOrDefault(x => x.Id == id);
 			
 			this._context.Remove(cameraToDelete);
 			this._context.SaveChanges();
 		}
 
 		//Validations
-		public bool DoesCameraExist(int id)
+		private bool DoesCameraExist(string model)
 		{
-			var doesCameraExist =
-				from c in this._context.Cameras
-				where c.Id == id
-				select c;
+			var doesCameraExist = this._context.Cameras
+				.FirstOrDefault(x => x.Model == model);
 
-			bool exists = doesCameraExist.Count() != 0;
-
-			return exists;
+			return doesCameraExist != null;
 		}
 
-		public bool DoesCameraExist(string model)
+		private Brand GetBrandByName(string brandName)
 		{
-			var doesCameraExist =
-				from c in this._context.Cameras
-				where c.Model == model
-				select c;
+			var brand = this._context.Brands
+				.FirstOrDefault(x => x.Name == brandName);
 
-			bool exists = doesCameraExist.Count() != 0;
+			return brand != null ? 
+				brand : throw new ArgumentException("Brand doesn't exist!");
+		}
 
-			return exists; 
+		private string GetBrandNameById(int id)
+		{
+			var brandName = this._context.Brands
+				.FirstOrDefault(x => x.Id == id);
+
+			return brandName.Name;
 		}
 	}
 }

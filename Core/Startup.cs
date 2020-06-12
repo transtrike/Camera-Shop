@@ -1,5 +1,6 @@
 using Camera_Shop.Database;
 using Camera_Shop.Models;
+using Camera_Shop.Models.Classes;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -40,6 +41,8 @@ namespace Camera_Shop
                     options.Password.RequireUppercase = false;
                     options.Password.RequireNonAlphanumeric = false;
                });
+               
+               services.AddHttpContextAccessor();
           }
 
           // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

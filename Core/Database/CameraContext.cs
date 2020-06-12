@@ -1,13 +1,15 @@
-using Camera_Shop.Models;
+using Camera_Shop.Models.Classes;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Camera_Shop.Database
 {
-     public class CameraContext : IdentityDbContext
+     public class CameraContext : IdentityDbContext<User, IdentityRole, string>
      {
           public DbSet<Camera> Cameras { get; set; }
-          public new DbSet<User> Users { get; set; }
+
+          public DbSet<Brand> Brands { get; set; }
           
           public CameraContext(DbContextOptions options)
                : base(options) { }

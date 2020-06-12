@@ -1,0 +1,20 @@
+@model Camera_Shop.Models.Classes.Brand
+
+@{
+    ViewBag.Title = "Delete a brand";
+    Layout = "_Layout";
+}
+
+<h1 class="alert-danger">BE CAUTIOUS! DON'T DELETE WHAT ISN'T SUPPOSED TO BE DELETED!</h1>
+<br/>
+
+<div>
+    <form method="post" asp-action="DeletePost" asp-controller="Brand" asp-route-id="@Model.Id">
+        <tr><h5><b>Brand Name:</b> @Model.Name</h5></tr>
+        
+        <button type="submit" class="btn btn-outline-primary alert-danger">DELETE</button>
+    </form>
+</div>
+<div>
+    <a asp-action="ShowBrands" class="btn btn-outline-primary">Back to the brands</a>
+</div>

@@ -1,10 +1,12 @@
-using System.Collections.Generic;
-using System.IO.Compression;
-using System.Linq;
+using System;
 using System.Threading.Tasks;
 using Camera_Shop.Database;
 using Camera_Shop.Models;
+using Camera_Shop.Models.Classes;
+using Camera_Shop.Models.ViewModels;
+using Camera_Shop.Services.Account;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,24 +14,18 @@ namespace Camera_Shop.Controllers
 {
 	public class AccountController : Controller
 	{
-		//private readonly AccountService _service;
-		private readonly CameraContext _context;
-		private readonly UserManager<User> _userManager;
-		private readonly SignInManager<User> _signInManager;
-		
-		public AccountController(CameraContext context, UserManager<User> userManager, SignInManager<User> signInManager)
-		{
-			//this._service = new AccountService(context, userManager, signInManager);
+		private readonly AccountService _service;
 
-			this._context = context;
-			this._userManager = userManager;
-			this._signInManager = signInManager;
+		public AccountController(CameraContext context, UserManager<User> userManager,
+			SignInManager<User> signInManager, IHttpContextAccessor httpContext)
+		{
+			this._service = new AccountService(context, userManager, signInManager, httpContext);
 		}
-		
+
 		//Create
 		[HttpGet]
 		[AllowAnonymous]
-	 	public IActionResult Register()
+		public IActionResult Register()
 		{
 			return View();
 		}
@@ -37,40 +33,43 @@ namespace Camera_Shop.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Register(RegisterViewModel model)
 		{
-			if(ModelState.IsValid)
+			try
 			{
-				var user = new User
+				if(ModelState.IsValid)
 				{
-					UserName = model.UserName,
-					Email = model.Email
-				};
-				var result = await this._userManager.CreateAsync(user, model.Password);
+					var result = await this._service.CreateUserAsync(model);
 
-				if(result.Succeeded)
-				{
-					await this._signInManager.SignInAsync(user, model.RememberMe);
-					return RedirectToAction("Index", "Home");
-				}
-				else
-				{
-					var errors = new List<string>();
-
-					foreach(var error in result.Errors)
+					if(result.Succeeded)
 					{
-						errors.Add(error.Description);
+						await this._service.SignInWithPassAsync(model.UserName,
+							model.Password, model.RememberMe);
+						return RedirectToAction("Index", "Home");
 					}
-					
-					//Unsuccessful user creation. Show error 
-					return View("~/Views/Error/Error.cshtml", 
-						new ErrorViewModel("Register failed!", errors.ToArray()));
+
+					throw new ArgumentException("Register failed!");
 				}
+
+				//Invalid Model state. Repeat Register
+				throw new ArgumentException(
+					"Problem with Register occured! Please try again!");
 			}
+			catch(ArgumentException e)
+			{
+				//Unsuccessful user creation. Show error 
+				return View("~/Views/Error/Error.cshtml", 
+					new ErrorViewModel(e.Message));
+			}
+		}
+
+		//Read
+		[HttpGet]
+		public IActionResult UserProfile()
+		{
+			var user =  this._service.GetLoggedUser();
 			
-			//Invalid Model state. Repeat Register
-			return RedirectToAction("Register");
+			return View(user);
 		}
 		
-		//Read
 		[HttpGet]
 		public IActionResult Login()
 		{
@@ -80,119 +79,77 @@ namespace Camera_Shop.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Login(LoginViewModel model)
 		{
-			if(ModelState.IsValid)
+			try
 			{
-				var result = await this._signInManager
-					.PasswordSignInAsync(model.Username, model.Password,
-						model.RememberMe, false);
-
-				if(result.Succeeded)
+				if(ModelState.IsValid)
 				{
-					return RedirectToAction("Index", "Home");
+					var result = await this._service.SignInWithPassAsync(model.Username,
+						model.Password, model.RememberMe);
+					
+					if(result.Succeeded)
+					{
+						return RedirectToAction("Index", "Home");
+					}
+					
+					throw new ArgumentException("Login failed!");
 				}
 
-				//Unsuccessful user login. Show error
-				return View("~/Views/Error/Error.cshtml", 
-					new ErrorViewModel("Login error!"));
+				//Invalid Model state. Repeat Login
+				throw new ArgumentException(
+					"Problem with Login occured! Please try again!");
 			}
-
-			//Invalid Model state. Repeat Login
-			return RedirectToAction("Login");
+			catch(ArgumentException e)
+			{
+				//Unsuccessful user login. Show error
+				return View("~/Views/Error/Error.cshtml",
+					new ErrorViewModel(e.Message));
+			}
 		}
 
 		[HttpGet]
-		public async Task<IActionResult> Logout()
+		public IActionResult Logout()
 		{
-			await this._signInManager.SignOutAsync();
+			this._service.Logout();
 
 			return RedirectToAction("Index", "Home");
 		}
 
-		[HttpGet]
-		public IActionResult UserProfile(string id)
-		{
-			return View(GetUser(id));
-		}
-		
 		//Edit
 		[HttpGet]
-		public IActionResult Edit(string id)
+		public IActionResult Edit()
 		{
-			return View(GetUser(id));
+			return View(this._service.GetLoggedUser());
 		}
 
 		[HttpPost]
 		public IActionResult EditPost(string id, User user)
 		{
-			if(!UserExists(id))
+			try
 			{
-				return View("Error", new ErrorViewModel("Person already exists!"));
+				this._service.Update(id, user);
+
+				return RedirectToAction("UserProfile", "Account");
 			}
-			
-			Update(id, user);
-			RelogUser(user);
-			
-			return RedirectToAction("UserProfile", "Account", id);
+			catch(ArgumentException e)
+			{
+				return View("~/Views/Error/Error.cshtml",
+					new ErrorViewModel(e.Message));
+			}
 		}
-		
+
 		//Delete
 		[HttpGet]
-		public IActionResult Delete(string id)
+		public IActionResult Delete()
 		{
-			return View(GetUser(id));
+			return View(this._service.GetLoggedUser());
 		}
-		
+
 		[HttpPost]
 		public IActionResult DeletePost(string id)
 		{
-			var user = (from u in this._context.Users
-				where u.Id == id
-				select u).FirstOrDefault();
-
-			this._context.Users.Remove(user);
+			this._service.DeleteUser(id);
 
 			return RedirectToAction("Index", "Home");
-		}
-
-		//Private methods
-		private User GetUser(string id)
-		{
-			var user = (from u in this._context.Users
-				where u.Id == id
-				select u).FirstOrDefault();
-			
-			return user;
-		}
-
-		private void Update(string id, User user)
-		{
-			var cameraToModify = (
-				from u in this._context.Users
-				where u.Id == id
-				select u).FirstOrDefault();
-
-			foreach(var property in user.GetType().GetProperties())
-				property.SetValue(cameraToModify, property.GetValue(user));
-
-			this._context.SaveChanges();
-		}
-
-		private void RelogUser(User user)
-		{
-			//SignOut using id
-			//SignIn using user
-			
-		}
-		
-		private bool UserExists(string id)
-		{
-			var user = from u in this._context.Users
-				where u.Id == id
-				select u;
-
-			bool exists = user.Any();
-				
-			return exists;
 		}
 	}
 }

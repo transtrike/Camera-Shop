@@ -1,33 +1,19 @@
 using System;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
 using Camera_Shop.Extension;
 
-namespace Camera_Shop.Models
+namespace Camera_Shop.Models.Classes
 {
 	[Table("Cameras")]
 	public class Camera
 	{
 		private int _id;
-		private string _brand;
 		private string _model;
 		private decimal _megapixels;
 		private int _baseISO;
 		private int _maxISO;
-
-		public Camera() { }
-		
-		public Camera(int id, string brand, string model, decimal megapixels, int baseIso, int maxIso)
-		{
-			this.Id = id;
-			this.Brand = brand;
-			this.Model = model;
-			this.Megapixels = megapixels;
-			this.BaseISO = baseIso;
-			this.MaxISO = maxIso;
-		}
 
 		[Key]
 		[SkipProperty]
@@ -38,21 +24,10 @@ namespace Camera_Shop.Models
 			set => this._id = value;
 		}
 
-		[NotNull]
-		[MinLength(3)]
-		[Display(Name = "Brand")]
-		[Required(ErrorMessage = "Brand is required")]
-		public string Brand
-		{
-			get => this._brand;
-			set
-			{
-				if(value == null)
-					throw new ArgumentException("Brand can't be null!");
+		[Required]
+		public int BrandId { get; set; }
 
-				this._brand = value;
-			}
-		}
+		public Brand Brand { get; set; }
 
 		[NotNull]
 		[MinLength(3)]

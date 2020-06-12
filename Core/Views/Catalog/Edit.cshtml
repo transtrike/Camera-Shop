@@ -1,29 +1,26 @@
-@model Camera_Shop.Models.Camera
+@model Camera_Shop.Models.DTOs.CameraDTO
 
 @{
-    ViewData["Title"] = "Edit a Camera";
+    ViewData["Title"] = "Edit a Model";
     Layout = "_Layout";
-    int id = Model.Id;
 }
 
 <h1>Here you can edit an existing camera. Maybe there was an error when someone submited it.</h1>
-<h4>Come on, buddy. Help me fix the errors, if any.</h4>
+<h4>Come on, buddy. Help me fix the errors, if there are any.</h4>
 <br/>
 
 <div>
-    <form method="post" asp-action="EditPost" asp-route-id="@id">
-        <tr><h5><b>Camera Brand:</b> <input type="text" asp-for="@Model.Brand"/></h5></tr>
-        <tr><h5><b>Camera Model:</b> <input type="text" asp-for="@Model.Model"/></h5></tr>
+    <form method="post" asp-action="EditPost" asp-controller="Catalog" 
+          asp-route-id="@Model.Id" asp-route-cameraDTO="@Model">
+        <tr><h5><b>Model Brand:</b> <input type="text" asp-for="@Model.Brand"/></h5></tr>
+        <tr><h5><b>Model Model:</b> <input type="text" asp-for="@Model.Model"/></h5></tr>
         <tr><h5><b>Megapixels:</b> <input type="number" asp-for="@Model.Megapixels"/></h5></tr>
         <tr><h5><b>Base ISO:</b> <input type="number" asp-for="@Model.BaseISO"/></h5></tr>
         <tr><h5><b>Max ISO:</b> <input type="number" asp-for="@Model.MaxISO"/></h5></tr>
 
-        <input type="submit" value="Save" class="btn btn-outline-primary"/>
+         <button type="submit" class="btn btn-outline-primary">Save</button>
     </form>
 </div>
-
-<br/>
-
 <div>
     <a asp-action="ShowCatalog" class="btn btn-outline-primary">Back to the catalog</a>
 </div>

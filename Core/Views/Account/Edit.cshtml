@@ -1,10 +1,8 @@
-@model Camera_Shop.Models.User
+@model Camera_Shop.Models.Classes.User
 
 @{
     ViewBag.Title = $"Edit {Model.UserName}";
     Layout = "_Layout";
-
-    string id = Model.Id;
 }
 
 <div><h1>Hello @Model.UserName</h1></div>
@@ -17,7 +15,7 @@
 
 <div>
     <!-- Replace with dynamic way of showing properties-->
-    <form method="post" asp-action="EditPost" asp-route-id="@id">
+    <form method="post" asp-action="EditPost" asp-controller="Account" asp-route-id="@Model.Id">
         <h5>Your Username: <input asp-for="UserName" value="@Model.UserName"/></h5>
         <h5>Your Email: <input asp-for="Email" value="@Model.Email"/></h5>
         

@@ -1,4 +1,4 @@
-namespace Camera_Shop.Models
+namespace Camera_Shop.Models.ViewModels
 {
      public class ErrorViewModel
      {

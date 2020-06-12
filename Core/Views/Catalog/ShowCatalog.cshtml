@@ -1,4 +1,4 @@
-@model IEnumerable<Camera_Shop.Models.Camera>
+@model IEnumerable<Camera_Shop.Models.Classes.Camera>
 
 @{
     ViewData["Title"] = "Camera Catalog";
@@ -38,7 +38,7 @@
     {
     <tr>
         <td>
-            <h5><b>Camera Brand:</b> @camera.Brand</h5>
+            <h5><b>Camera Brand:</b> @camera.Brand.Name</h5>
             <h5><b>Camera Model:</b> @camera.Model</h5>
             <h5><b>Camera Megapixels:</b> @camera.Megapixels</h5>
             <h5><b>Camera Base ISO:</b> @camera.BaseISO</h5>

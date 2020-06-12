@@ -1,0 +1,13 @@
+@model Camera_Shop.Models.Classes.Brand
+
+@{
+    ViewBag.Title = "Create a brand";
+    Layout = "_Layout";
+}
+
+<form method="post" asp-action="CreatePost">
+     <h4>Enter brand name:</h4>
+    <input type="text" asp-for="@Model.Name" class="form-control"/>
+    
+    <button type="submit" class="btn btn-outline-primary">Create</button>
+</form>

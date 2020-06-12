@@ -1,0 +1,10 @@
+@model Camera_Shop.Models.Classes.Brand
+
+@{
+    ViewData["Title"] = "Brand Error";
+    Layout = "_Layout";
+}
+
+<h1 class="alert-danger">Camera model "@Model.Name" already exists!</h1>
+<br/>
+<a class="btn btn-outline-primary" asp-controller="Catalog" asp-action="ShowCatalog">Back to the catalog</a>

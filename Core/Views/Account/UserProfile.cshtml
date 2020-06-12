@@ -1,13 +1,11 @@
-@model Camera_Shop.Models.User
+@model Camera_Shop.Models.Classes.User
 
 @{
     Layout = "_Layout";
     ViewBag.Title = $"{Model.UserName}'s profile";
-
-    string id = Model.Id;
 }
 
-<div>Hello @Model.UserName</div>
+<div><h1>Hello @Model.UserName</h1></div>
 <br/>
 
 <div>
@@ -20,6 +18,8 @@
     <h5>Your Username: @Model.UserName</h5>
     <h5>Your Email: @Model.Email</h5>
     
-    <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@id">Edit Profile</a>
-    <a class="btn btn-outline-primary alert-danger" asp-action="Delete" asp-route-id="@id">Delete Profile</a>
+    <a class="btn btn-outline-primary" asp-action="Edit" 
+       asp-controller="Account" asp-route-id="@Model.Id">Edit Profile</a>
+    <a class="btn btn-outline-primary alert-danger" asp-action="Delete" 
+       asp-controller="Account" asp-route-id="@Model.Id">Delete Profile</a>
 </div>

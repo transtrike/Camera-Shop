@@ -8,3 +8,8 @@
 <!-- Make a button that directs to CatalogController's ShowCatalog()-->
 
 <a class="btn btn-outline-primary" asp-controller="Catalog" asp-action="ShowCatalog">Show Catalog</a>
+<a class="btn btn-outline-primary" asp-controller="Brand" asp-action="ShowBrands">Show Brands</a>
+@if(SignInManager.IsSignedIn(User))
+{
+    <a class="btn btn-outline-primary" asp-controller="Account" asp-action="UserProfile">Show Profile</a>
+}
