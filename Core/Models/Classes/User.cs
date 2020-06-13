@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
@@ -13,7 +14,15 @@ namespace Camera_Shop.Models.Classes
 		public override string UserName
 		{
 			get => base.UserName;
-			set => base.UserName = value;
+			set
+			{
+				if(value.Length < 3)
+				{
+					throw new ArgumentException("Username cannot be shorter than 3!");
+				}
+				
+				base.UserName = value;
+			}
 		}
 	}
 }

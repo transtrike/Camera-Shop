@@ -17,7 +17,8 @@ namespace Camera_Shop.Services.Catalog
 		//Create
 		public void Insert(CameraDTO cameraDTO)
 		{
-			if(DoesCameraExist(cameraDTO.Model) && GetBrandByName(cameraDTO.Brand) != null)
+			if(DoesCameraExist(cameraDTO.Model) 
+			   && GetBrandByName(cameraDTO.Brand) != null)
 			{
 				throw new ArgumentException($"Camera {cameraDTO.Model} already exists!");
 			}
@@ -76,8 +77,13 @@ namespace Camera_Shop.Services.Catalog
 			{
 				throw new ArgumentException($"Camera {cameraDTO.Brand}: {cameraDTO.Model} does not exist!");
 			}
+			if(DoesCameraExist(cameraDTO.Model))
+			{
+				throw new ArgumentException("Model already exists!");
+			}
 			
 			cameraToModify.Brand = GetBrandByName(cameraDTO.Brand);
+			cameraToModify.Model = cameraDTO.Model;
 			cameraToModify.Megapixels = cameraDTO.Megapixels;
 			cameraToModify.BaseISO = cameraDTO.BaseISO;
 			cameraToModify.MaxISO= cameraDTO.MaxISO;

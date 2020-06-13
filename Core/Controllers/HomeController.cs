@@ -7,8 +7,6 @@ namespace Camera_Shop.Controllers
 {
      public class HomeController : Controller
      {
-          public HomeController() {}
-
           [HttpGet]
           public IActionResult Index() => View();
 

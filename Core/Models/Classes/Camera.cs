@@ -14,6 +14,7 @@ namespace Camera_Shop.Models.Classes
 		private decimal _megapixels;
 		private int _baseISO;
 		private int _maxISO;
+		private Brand _brand;
 
 		[Key]
 		[SkipProperty]
@@ -27,7 +28,20 @@ namespace Camera_Shop.Models.Classes
 		[Required]
 		public int BrandId { get; set; }
 
-		public Brand Brand { get; set; }
+		[NotNull]
+		public Brand Brand
+		{
+			get => this._brand;
+			set
+			{
+				if(value == null)
+				{
+					throw new ArgumentException("Brand cannot be null!");
+				}
+				
+				this._brand = value;
+			}
+		}
 
 		[NotNull]
 		[MinLength(3)]
@@ -39,7 +53,13 @@ namespace Camera_Shop.Models.Classes
 			set
 			{
 				if(value == null)
+				{
 					throw new ArgumentException("Model can't be null!");
+				}
+				if(value.Length < 3)
+				{
+					throw new ArgumentException("Model cannot be shorter than 3!");
+				}
 
 				this._model = value;
 			}
