@@ -8,7 +8,7 @@
 (NOT NOW) Hide the Id from the url with "Hide Id"(by Ivo's words) via the route customization(prob)
 (NOT NOW) Make diplaying properties dynamic(exclude id!), so that you can expand easily
 (NOT NOW) Rewrite all CRUD Views to be dynamic
-Rewrite the documentation for better explination and future use
+(FUCK THAT SHIT)Rewrite the documentation for better explination and future use
 (DONE) Fix the Views that display the Id. Unneeded and unnecessary 
 (NOT NOW) Expand the Camera class to have more funcionality, better attributes and more properties
 (DONE)Make one unified Errors page and redirect to it for errors with direct path
@@ -22,18 +22,21 @@ Rewrite the documentation for better explination and future use
 (NOT NOW)Look to potentially swap the database provider, if necessary
 (DONE)Harden and expand the EntityFrameworkCore knowledge
 (NOT NOW)Try to migrate to ASYNC methods for every operation
-Make a new table for Brand
-Rewrite the Update func in the CatalogController to use thr DbContext.Update()
-Move all logic from AccountController to AccountService
+(DONE)Make a new table for Brand
+(DONE)Fix the broken model given when editing a Camera
+(DONE)CRUD for Users
+(DONE)CRUD for Brand
+(FAILED)Rewrite the Update func in the CatalogController to use thr DbContext.Update()
+(DONE)Move all logic from AccountController to AccountService
+(DONE)Add try-catch in BrandController
+Add validations for null in Update and Delete in BrandService and CatalogService
+(DONE)Harden Get and Set validations in Brand class
 Construct and layout the "Guide" section
 Implement the "Guide" controller and simple view
 Make better visuals for the Views(make use of the linked js and cc in the wwwroot)
-Look into implementing login and password(hash the pasword, at least)
-If enough time left, write only important Unit tests(func and hardend features are priority)
+(DONE)Look into implementing login and password(hash the pasword, at least)
+(DONE)If enough time left, write only important Unit tests(func and hardend features are priority)
 Look into GlobalExceptionHandler
 
 Notes:
 ViewBack, ViewData to fill with data and use in the view
-@inject UserManager
-
-Auto haches the passwords EF CORE
