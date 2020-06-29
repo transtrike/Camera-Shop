@@ -18,7 +18,6 @@ namespace Camera_Shop.Models.Classes
 
 		[Key]
 		[SkipProperty]
-		[Required(ErrorMessage = "Id is required")]
 		public int Id
 		{
 			get => this._id;
@@ -26,7 +25,7 @@ namespace Camera_Shop.Models.Classes
 		}
 
 		[Required]
-		public int BrandId { get; set; }
+		public string BrandId { get; set; }
 
 		[NotNull]
 		public Brand Brand

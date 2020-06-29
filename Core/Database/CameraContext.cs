@@ -18,6 +18,9 @@ namespace Camera_Shop.Database
           {
                modelBuilder.Entity<Camera>()
                     .HasKey(key => key.Id);
+
+               modelBuilder.Entity<Brand>()
+                    .HasKey(key => key.Id);
                
                base.OnModelCreating(modelBuilder);
           }

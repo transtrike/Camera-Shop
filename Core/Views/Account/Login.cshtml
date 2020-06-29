@@ -8,7 +8,7 @@
 <h1>User Login</h1>
 
 <div asp-validation-summary="All">
-    <form method="post">
+    <form method="post" asp-action="LoginPost">
         <label asp-for="Username"></label>
         <input asp-for="Username"/>
         <span asp-validation-for="Username"></span>

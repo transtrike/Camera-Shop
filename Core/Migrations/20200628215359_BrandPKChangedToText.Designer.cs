@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Camera_Shop.Migrations
 {
     [DbContext(typeof(CameraContext))]
-    [Migration("20200611204215_LatestMig")]
-    partial class LatestMig
+    [Migration("20200628215359_BrandPKChangedToText")]
+    partial class BrandPKChangedToText
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,12 +21,11 @@ namespace Camera_Shop.Migrations
                 .HasAnnotation("ProductVersion", "3.1.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            modelBuilder.Entity("Camera_Shop.Models.Brand", b =>
+            modelBuilder.Entity("Camera_Shop.Models.Classes.Brand", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -34,10 +33,10 @@ namespace Camera_Shop.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Brand");
+                    b.ToTable("Brands");
                 });
 
-            modelBuilder.Entity("Camera_Shop.Models.Camera", b =>
+            modelBuilder.Entity("Camera_Shop.Models.Classes.Camera", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -47,8 +46,9 @@ namespace Camera_Shop.Migrations
                     b.Property<int>("BaseISO")
                         .HasColumnType("integer");
 
-                    b.Property<int>("BrandId")
-                        .HasColumnType("integer");
+                    b.Property<string>("BrandId")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<int>("MaxISO")
                         .HasColumnType("integer");
@@ -67,7 +67,7 @@ namespace Camera_Shop.Migrations
                     b.ToTable("Cameras");
                 });
 
-            modelBuilder.Entity("Camera_Shop.Models.User", b =>
+            modelBuilder.Entity("Camera_Shop.Models.Classes.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -262,9 +262,9 @@ namespace Camera_Shop.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Camera_Shop.Models.Camera", b =>
+            modelBuilder.Entity("Camera_Shop.Models.Classes.Camera", b =>
                 {
-                    b.HasOne("Camera_Shop.Models.Brand", "Brand")
+                    b.HasOne("Camera_Shop.Models.Classes.Brand", "Brand")
                         .WithMany("Cameras")
                         .HasForeignKey("BrandId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -282,7 +282,7 @@ namespace Camera_Shop.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Camera_Shop.Models.User", null)
+                    b.HasOne("Camera_Shop.Models.Classes.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -291,7 +291,7 @@ namespace Camera_Shop.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Camera_Shop.Models.User", null)
+                    b.HasOne("Camera_Shop.Models.Classes.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -306,7 +306,7 @@ namespace Camera_Shop.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Camera_Shop.Models.User", null)
+                    b.HasOne("Camera_Shop.Models.Classes.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -315,7 +315,7 @@ namespace Camera_Shop.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Camera_Shop.Models.User", null)
+                    b.HasOne("Camera_Shop.Models.Classes.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

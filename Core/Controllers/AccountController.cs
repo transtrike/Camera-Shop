@@ -1,7 +1,6 @@
 using System;
 using System.Threading.Tasks;
 using Camera_Shop.Database;
-using Camera_Shop.Models;
 using Camera_Shop.Models.Classes;
 using Camera_Shop.Models.ViewModels;
 using Camera_Shop.Services.Account;
@@ -51,7 +50,7 @@ namespace Camera_Shop.Controllers
 
 				//Invalid Model state. Repeat Register
 				throw new ArgumentException(
-					"Problem with Register occured! Please try again!");
+					"Problem with Register occurred! Please try again!");
 			}
 			catch(ArgumentException e)
 			{
@@ -77,7 +76,7 @@ namespace Camera_Shop.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Login(LoginViewModel model)
+		public async Task<IActionResult> LoginPost(LoginViewModel model)
 		{
 			try
 			{
@@ -127,7 +126,9 @@ namespace Camera_Shop.Controllers
 			try
 			{
 				this._service.Update(id, user);
-
+				
+				//TODO: Reload the _Layout page to update the username link
+				
 				return RedirectToAction("UserProfile", "Account");
 			}
 			catch(ArgumentException e)
@@ -147,7 +148,7 @@ namespace Camera_Shop.Controllers
 		[HttpPost]
 		public IActionResult DeletePost(string id)
 		{
-			this._service.DeleteUser(id);
+			this._service.Delete(id);
 
 			return RedirectToAction("Index", "Home");
 		}

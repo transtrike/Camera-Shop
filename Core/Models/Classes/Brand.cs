@@ -11,7 +11,8 @@ namespace Camera_Shop.Models.Classes
 		private string _name;
 
 		[Key]
-		public int Id { get; set; }
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		public string Id { get; set; }
 
 		[Required]
 		[MinLength(3)]

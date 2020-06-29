@@ -23,12 +23,6 @@
             var value = property.GetValue(camera);
 
             <h5><b>Camera @name</b>: @value</h5>
-            
-            @if(UserManager.IsSignedIn(User))
-            {
-                <a class="btn btn-outline-primary" asp-action="Edit" asp-route-cameraId="@camera.Id">Edit</a>
-                <a class="btn btn-outline-primary alert-danger" asp-action="Delete" asp-route-cameraId="@camera.Id">Delete</a>
-            }
         }*@
 }
 

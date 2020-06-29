@@ -3,78 +3,95 @@ using System.Collections.Generic;
 using System.Linq;
 using Camera_Shop.Database;
 using Camera_Shop.Models.Classes;
+using Camera_Shop.Repository;
 
 namespace Camera_Shop.Services.Brands
 {
 	public class BrandService
 	{
-		private readonly CameraContext _context;
+		private readonly CameraRepository<Brand> _repository;
 		
 		public BrandService(CameraContext context)
 		{
-			this._context = context;
+			this._repository = new CameraRepository<Brand>(context);
 		}
 
 		//Create
 		public void CreateBrand(Brand brand)
 		{
+			//Null check
+			if(brand == null)
+			{
+				throw new ArgumentNullException("Brand cannot be null!");
+			}
+			
+			//Check for brand in database
 			if(DoesBrandExist(brand))
 			{
 				throw new ArgumentException($"Brand {brand.Name} exists!");
 			}
 			
-			this._context.Brands.Add(brand);
-			this._context.SaveChanges();
+			this._repository.Add(brand);
 		}
 		
 		//Read
 		public IEnumerable<Brand> GetAllBrands()
 		{
-			return this._context.Brands.AsEnumerable();
+			return this._repository.QueryAll();
 		}
 		
-		public Brand GetBrand(int id)
+		public Brand GetBrand(string id)
 		{
-			return this._context.Brands
+			return this._repository.QueryAll()
 				.FirstOrDefault(x => x.Id == id);
 		}
 		
 		//Update
-		public void UpdateBrand(int id, Brand brand)
+		public void UpdateBrand(string id, Brand brand)
 		{
+			//Null check for given brand
+			if(brand == null)
+			{
+				throw new ArgumentNullException("Brand cannot be null!");
+			}
+			
+			//Check for brand in database
 			if(DoesBrandExist(brand))
 			{
 				throw new ArgumentException($"Brand {brand.Name} exists!");
 			}
 
-			var brandToModify = this._context.Brands
+			var brandToModify = this._repository.QueryAll()
 				.FirstOrDefault(x => x.Id == id);
 
+			//Null check for brand that should be modified
 			if(brandToModify == null)
 			{
 				throw new ArgumentException($"Brand {brand.Name} does not exist!");
 			}
-
-			brandToModify.Id = brand.Id;
-			brandToModify.Name = brand.Name;
 			
-			this._context.SaveChanges();
+			this._repository.Edit(id, brand);
 		}
 		
 		//Delete
-		public void DeleteBrand(int id)
+		public void DeleteBrand(string id)
 		{
-			var brandToDelete = this._context.Brands
+			var brandToDelete = this._repository.QueryAll()
 				.FirstOrDefault(x => x.Id == id);
 
-			this._context.Remove(brandToDelete);
-			this._context.SaveChanges();
+			//Null check for brand that should be deleted
+			if(brandToDelete == null)
+			{
+				throw new ArgumentException("Brand doesn't exist");
+			}
+			
+			this._repository.Delete(brandToDelete);
 		}
 		
 		//Validations
 		private bool DoesBrandExist(Brand brand)
 		{
-			return this._context.Brands
+			return this._repository.QueryAll()
 				.Any(x => x.Name == brand.Name);
 		}
 	}

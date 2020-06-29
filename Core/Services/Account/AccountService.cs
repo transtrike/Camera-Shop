@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Camera_Shop.Database;
 using Camera_Shop.Models.Classes;
 using Camera_Shop.Models.ViewModels;
+using Camera_Shop.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 
@@ -13,7 +14,7 @@ namespace Camera_Shop.Services.Account
 {
 	public class AccountService
 	{
-		private readonly CameraContext _context;
+		private readonly CameraRepository<User> _repository;
 		private readonly UserManager<User> _userManager;
 		private readonly SignInManager<User> _signInManager;
 		private readonly IHttpContextAccessor _httpContext;
@@ -21,7 +22,7 @@ namespace Camera_Shop.Services.Account
 		public AccountService(CameraContext context, UserManager<User> userManager, 
 			SignInManager<User> signInManager, IHttpContextAccessor httpContext)
 		{
-			this._context = context;
+			this._repository = new CameraRepository<User>(context);
 			this._userManager = userManager;
 			this._signInManager = signInManager;
 			this._httpContext = httpContext;
@@ -44,22 +45,26 @@ namespace Camera_Shop.Services.Account
 		{
 			var userId = _httpContext.HttpContext.User
 				.FindFirst(ClaimTypes.NameIdentifier).Value;
-			
+
 			return GetUser(userId);
 		}
 		
 		//Update
 		public void Update(string id, User user)
 		{
+			//Null check
+			if(user == null)
+			{
+				throw new ArgumentNullException("User cannot be null!");
+			}
+			
 			var currentUser = GetUser(id);
 			
 			if(currentUser != null 
 			   && user != null
 			   && !UserExists(user.UserName))
 			{
-				currentUser.UserName = user.UserName;
-				currentUser.Email = user.Email;
-				this._context.SaveChanges();
+				this._repository.Edit(id, user);
 			}
 			else
 			{
@@ -68,13 +73,18 @@ namespace Camera_Shop.Services.Account
 		}
 		
 		//Delete
-		public void DeleteUser(string id)
+		public void Delete(string id)
 		{
+			var user = GetUser(id);
+			//Null check
+			if(user == null)
+			{
+				throw new ArgumentNullException("User cannot be null!");
+			}
+			
 			Logout();
 
-			var user = GetUser(id);
-			this._context.Users.Remove(user);
-			this._context.SaveChangesAsync();
+			this._repository.Delete(user);
 		}
 
 		//Misc
@@ -95,7 +105,7 @@ namespace Camera_Shop.Services.Account
 
 		private User GetUser(string id)
 		{
-			var user = this._context.Users
+			var user = this._repository.QueryAll()
 				.FirstOrDefault(x => x.Id == id);
 
 			return user;
@@ -104,7 +114,7 @@ namespace Camera_Shop.Services.Account
 		//Validations
 		private bool UserExists(string username)
 		{
-			var exists = this._context.Users
+			var exists = this._repository.QueryAll()
 				.Any(x => x.UserName == username);
 
 			return exists;

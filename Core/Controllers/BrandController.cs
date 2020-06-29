@@ -48,13 +48,13 @@ namespace Camera_Shop.Controllers
 		
 		//Update
 		[HttpGet]
-		public IActionResult Edit(int id)
+		public IActionResult Edit(string id)
 		{
 			return View(this._service.GetBrand(id));
 		}
 
 		[HttpPost]
-		public IActionResult EditPost(int id, Brand brand)
+		public IActionResult EditPost(string id, Brand brand)
 		{
 			try
 			{
@@ -71,13 +71,13 @@ namespace Camera_Shop.Controllers
 		
 		//Delete
 		[HttpGet]
-		public IActionResult Delete(int id)
+		public IActionResult Delete(string id)
 		{
 			return View(this._service.GetBrand(id));
 		}
 
 		[HttpPost]
-		public IActionResult DeletePost(int id)
+		public IActionResult DeletePost(string id)
 		{
 			try
 			{
