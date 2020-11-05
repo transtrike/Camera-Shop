@@ -1,0 +1,18 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"**/.vscode" : true,
+			"**/bin" : true,
+			"**/obj" : true,
+			"**/.git": true,
+			".gitignore" : true,
+			".projectile" : true,
+			"LICENSE" : true,
+		}
+	}
+}

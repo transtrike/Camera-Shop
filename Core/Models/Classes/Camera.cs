@@ -112,4 +112,4 @@ namespace Camera_Shop.Models.Classes
 			}
 		}
 	}
-}	
+}

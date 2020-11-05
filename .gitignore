@@ -1,8 +1,5 @@
-Core/bin/
-Core/obj/
-TestCoreArchitecture/bin/
-TestCoreArchitecture/obj/
-.idea/
+**/bin
+**/obj
 *.blob
-Core/appsettings.json
-Core/appsettings.Development.json
+**/*.json
+**/.vscode/

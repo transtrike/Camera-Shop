@@ -8,7 +8,7 @@
 (NOT NOW) Hide the Id from the url with "Hide Id"(by Ivo's words) via the route customization(prob)
 (NOT NOW) Make diplaying properties dynamic(exclude id!), so that you can expand easily
 (NOT NOW) Rewrite all CRUD Views to be dynamic
-(FUCK THAT SHIT)Rewrite the documentation for better explination and future use
+(DONE)Rewrite the documentation for better explination and future use
 (DONE) Fix the Views that display the Id. Unneeded and unnecessary 
 (NOT NOW) Expand the Camera class to have more funcionality, better attributes and more properties
 (DONE)Make one unified Errors page and redirect to it for errors with direct path
@@ -17,7 +17,7 @@
 (DONE)Finish Login func
 (DONE)Display properly Name in _Layout
 (DONE)Implement proper Logout 
-(NOT NOT)Fix bugs with staying logged in
+(DONE)Fix bugs with staying logged in
 (DONE)Make "login only" exclusive features
 (NOT NOW)Look to potentially swap the database provider, if necessary
 (DONE)Harden and expand the EntityFrameworkCore knowledge
@@ -29,14 +29,20 @@
 (FAILED)Rewrite the Update func in the CatalogController to use thr DbContext.Update()
 (DONE)Move all logic from AccountController to AccountService
 (DONE)Add try-catch in BrandController
-Add validations for null in Update and Delete in BrandService and CatalogService
+(DONE)Add validations for null in Update and Delete in BrandService and CatalogService
 (DONE)Harden Get and Set validations in Brand class
+Make Brand's Id string from int
+Create a new pepository and move the DB interaction in it
+Find how to update global view after username change
+Configure for HTTPS instead of HTTP
 Construct and layout the "Guide" section
 Implement the "Guide" controller and simple view
-Make better visuals for the Views(make use of the linked js and cc in the wwwroot)
+Use Blazor instead of JavaScript
 (DONE)Look into implementing login and password(hash the pasword, at least)
 (DONE)If enough time left, write only important Unit tests(func and hardend features are priority)
 Look into GlobalExceptionHandler
+Look into the ViewBag way of passing information to the Views 
+Separate Data, Business and View into 3 different projects, lightly loosen from one another
 
 Notes:
-ViewBack, ViewData to fill with data and use in the view
+ViewBag, ViewData to fill with data and use in the view

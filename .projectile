@@ -1,0 +1,12 @@
+  total used in directory 15 available 1.6 TiB
+  drwxr-xr-x    290 09-14 02:50 Core/
+  drwxr-xr-x     60 09-06 23:13 Documentation/
+  drwxr-xr-x    182 10-06 15:36 .git/
+  drwxr-xr-x     34 09-06 23:13 .idea/
+  drwxr-xr-x    154 09-06 23:13 TestCoreArchitecture/
+  drwxr-xr-x     76 09-06 23:13 .vscode/
+  -rw-r--r--   1.2k 09-06 23:13 Camera-Shop.sln
+  -rw-r--r--    202 09-06 23:13 .gitignore
+  -rw-r--r--  10.5k 09-06 23:13 LICENSE
+  -rw-r--r--    316 10-06 15:34 .projectile
+  -rw-r--r--   1.1k 09-06 23:13 README.md
