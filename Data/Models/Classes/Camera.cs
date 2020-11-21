@@ -2,9 +2,9 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
-using Camera_Shop.Extension;
+using Data.Extension;
 
-namespace Camera_Shop.Models.Classes
+namespace Data.Models.Classes
 {
 	[Table("Cameras")]
 	public class Camera

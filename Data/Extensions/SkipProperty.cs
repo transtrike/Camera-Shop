@@ -1,6 +1,6 @@
 using System;
 
-namespace Camera_Shop.Extension
+namespace Data.Extension
 {
 	public class SkipProperty : Attribute
 	{ }

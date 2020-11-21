@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Camera_Shop.Models.Classes
+namespace Data.Models.Classes
 {
 	[Table("Brands")]
 	public class Brand
@@ -28,9 +28,7 @@ namespace Camera_Shop.Models.Classes
 				
 				this._name = value;
 			}
-
 		}
-
 		public ICollection<Camera> Cameras { get; set; }
 	}
 }

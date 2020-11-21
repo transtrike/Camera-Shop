@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Camera_Shop.Models.ViewModels
+namespace Data.Models.ViewModels
 {
 	public class LoginViewModel
 	{

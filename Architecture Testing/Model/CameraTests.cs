@@ -1,5 +1,5 @@
 using System;
-using Camera_Shop.Models.Classes;
+using Data.Models.Classes;
 using NUnit.Framework;
 
 namespace Camera_Shop.Tests.Model

@@ -1,6 +1,5 @@
 using Camera_Shop.Database;
-using Camera_Shop.Models;
-using Camera_Shop.Models.Classes;
+using Data.Models.Classes;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;

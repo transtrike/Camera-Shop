@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
-using Camera_Shop.Models;
-using Camera_Shop.Models.ViewModels;
+using Data.Models;
+using Data.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Camera_Shop.Controllers

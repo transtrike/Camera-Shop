@@ -1,4 +1,4 @@
-using Camera_Shop.Models.Classes;
+using Data.Models.Classes;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;

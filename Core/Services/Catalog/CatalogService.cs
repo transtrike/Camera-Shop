@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Camera_Shop.Database;
-using Camera_Shop.Models.Classes;
-using Camera_Shop.Models.DTOs;
+using Data.Models.Classes;
+using Data.Models.DTOs;
 using Microsoft.EntityFrameworkCore;
 
 namespace Camera_Shop.Services.Catalog

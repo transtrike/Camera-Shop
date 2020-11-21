@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
 
-namespace Camera_Shop.Models.Classes
+namespace Data.Models.Classes
 {
 	[Table("Users")]
 	public class User : IdentityUser

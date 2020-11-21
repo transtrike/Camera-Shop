@@ -1,4 +1,4 @@
-namespace Camera_Shop.Models.DTOs
+namespace Data.Models.DTOs
 {
 	public class CameraDTO
 	{

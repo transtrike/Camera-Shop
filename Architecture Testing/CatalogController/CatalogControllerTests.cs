@@ -1,4 +1,4 @@
-using Camera_Shop.Models;
+using Data.Models;
 using NUnit.Framework;
 
 namespace Camera_Shop.Tests.CatalogController

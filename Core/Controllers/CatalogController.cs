@@ -1,9 +1,9 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
 using Camera_Shop.Database;
-using Camera_Shop.Models.Classes;
-using Camera_Shop.Models.DTOs;
-using Camera_Shop.Models.ViewModels;
+using Data.Models.Classes;
+using Data.Models.DTOs;
+using Data.Models.ViewModels;
 using Camera_Shop.Services.Catalog;
 
 namespace Camera_Shop.Controllers

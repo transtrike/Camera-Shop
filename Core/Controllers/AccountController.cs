@@ -1,8 +1,8 @@
 using System;
 using System.Threading.Tasks;
 using Camera_Shop.Database;
-using Camera_Shop.Models.Classes;
-using Camera_Shop.Models.ViewModels;
+using Data.Models.Classes;
+using Data.Models.ViewModels;
 using Camera_Shop.Services.Account;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;

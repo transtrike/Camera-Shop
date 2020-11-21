@@ -32,4 +32,8 @@
       <Content Remove="Views\Catalog\ShowSpecification.cshtml" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Data\Data.csproj" />
+    </ItemGroup>
+
 </Project>

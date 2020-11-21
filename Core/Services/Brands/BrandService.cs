@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Camera_Shop.Database;
-using Camera_Shop.Models.Classes;
+using Data.Models.Classes;
 using Camera_Shop.Repository;
 
 namespace Camera_Shop.Services.Brands
