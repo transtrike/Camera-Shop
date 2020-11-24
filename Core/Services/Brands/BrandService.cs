@@ -40,14 +40,14 @@ namespace Camera_Shop.Services.Brands
 			return this._repository.QueryAll();
 		}
 		
-		public Brand GetBrand(string id)
+		public Brand GetBrand(int id)
 		{
 			return this._repository.QueryAll()
 				.FirstOrDefault(x => x.Id == id);
 		}
 		
 		//Update
-		public void UpdateBrand(string id, Brand brand)
+		public void UpdateBrand(int id, Brand brand)
 		{
 			//Null check for given brand
 			if(brand == null)
@@ -74,7 +74,7 @@ namespace Camera_Shop.Services.Brands
 		}
 		
 		//Delete
-		public void DeleteBrand(string id)
+		public void DeleteBrand(int id)
 		{
 			var brandToDelete = this._repository.QueryAll()
 				.FirstOrDefault(x => x.Id == id);

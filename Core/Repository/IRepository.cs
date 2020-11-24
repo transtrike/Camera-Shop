@@ -11,6 +11,7 @@ namespace Camera_Shop.Repository
 		IEnumerable<TEntity> QueryAll();
 		
 		//Modify Entity from database
+		void Edit(int id, TEntity entity);
 		void Edit(string id, TEntity entity);
 
 		//Delete Entity from database

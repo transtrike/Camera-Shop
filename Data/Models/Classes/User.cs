@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 namespace Data.Models.Classes
 {
 	[Table("Users")]
-	public class User : IdentityUser
+	public class User : IdentityUser<int>
 	{
 		[Required]
 		[MinLength(3)]

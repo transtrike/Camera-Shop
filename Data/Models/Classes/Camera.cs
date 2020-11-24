@@ -9,7 +9,6 @@ namespace Data.Models.Classes
 	[Table("Cameras")]
 	public class Camera
 	{
-		private int _id;
 		private string _model;
 		private decimal _megapixels;
 		private int _baseISO;
@@ -18,14 +17,11 @@ namespace Data.Models.Classes
 
 		[Key]
 		[SkipProperty]
-		public int Id
-		{
-			get => this._id;
-			set => this._id = value;
-		}
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		public int Id { get; set; }
 
 		[Required]
-		public string BrandId { get; set; }
+		public int BrandId { get; set; }
 
 		[NotNull]
 		public Brand Brand

@@ -118,7 +118,7 @@ namespace Camera_Shop.Services.Catalog
 			return brand ?? throw new ArgumentException("Brand doesn't exist!");
 		}
 
-		private string GetBrandNameById(string id)
+		private string GetBrandNameById(int id)
 		{
 			var brandName = this._context.Brands
 				.FirstOrDefault(x => x.Id == id);

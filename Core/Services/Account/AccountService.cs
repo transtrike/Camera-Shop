@@ -41,16 +41,13 @@ namespace Camera_Shop.Services.Account
 		}
 		
 		//Read
-		public User GetLoggedUser()
+		public async Task<User> GetLoggedUser()
 		{
-			var userId = _httpContext.HttpContext.User
-				.FindFirst(ClaimTypes.NameIdentifier).Value;
-
-			return GetUser(userId);
+			return await _userManager.GetUserAsync(_httpContext.HttpContext.User);
 		}
 		
 		//Update
-		public void Update(string id, User user)
+		public void Update(int id, User user)
 		{
 			//Null check
 			if(user == null)
@@ -73,7 +70,7 @@ namespace Camera_Shop.Services.Account
 		}
 		
 		//Delete
-		public void Delete(string id)
+		public void Delete(int id)
 		{
 			var user = GetUser(id);
 			//Null check
@@ -82,7 +79,7 @@ namespace Camera_Shop.Services.Account
 				throw new ArgumentNullException("User cannot be null!");
 			}
 			
-			Logout();
+			LogoutAsync();
 
 			this._repository.Delete(user);
 		}
@@ -91,33 +88,27 @@ namespace Camera_Shop.Services.Account
 		public async Task<SignInResult> SignInWithPassAsync(string username,
 			string password, bool rememberMe)
 		{
-			var result = await this._signInManager
+			return await this._signInManager
 				.PasswordSignInAsync(username, password,
 					rememberMe, false);
-			
-			return result;
 		}
 		
-		public async void Logout()
+		public async void LogoutAsync()
 		{
 			await this._signInManager.SignOutAsync();
 		}
 
-		private User GetUser(string id)
+		private User GetUser(int id)
 		{
-			var user = this._repository.QueryAll()
+			return this._repository.QueryAll()
 				.FirstOrDefault(x => x.Id == id);
-
-			return user;
 		}
 		
 		//Validations
 		private bool UserExists(string username)
 		{
-			var exists = this._repository.QueryAll()
+			return _repository.QueryAll()
 				.Any(x => x.UserName == username);
-
-			return exists;
 		}
 		
 		public ErrorViewModel CollectErrors(IdentityResult result)
@@ -130,7 +121,7 @@ namespace Camera_Shop.Services.Account
 			}
 
 			var errorViewModel = new ErrorViewModel();
-			errorViewModel.ErrorMessages = errors.ToArray();
+			errorViewModel.Errors = errors.ToArray();
 			
 			return errorViewModel;
 		}

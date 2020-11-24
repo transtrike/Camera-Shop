@@ -9,12 +9,15 @@
 
 <br/>
 
-<h1>Error message: @Model.ErrorMessage</h1>
-
-@if(Model.ErrorMessages != null)
+@if (Model.ShowRequestId)
 {
-    foreach(var error in Model.ErrorMessages)
+    <p><strong>Request ID:</strong> <code>@Model.RequestId</code></p>
+}
+
+@if(Model.Errors != null)
+{
+    @foreach(var message in Model.Errors)
     {
-        <h2><b>Error</b>: @error</h2>
+        <div><b>Error(s): @message</b></div>
     }
 }

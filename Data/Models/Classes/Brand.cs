@@ -12,7 +12,7 @@ namespace Data.Models.Classes
 
 		[Key]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-		public string Id { get; set; }
+		public int Id { get; set; }
 
 		[Required]
 		[MinLength(3)]

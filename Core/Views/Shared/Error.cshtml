@@ -8,16 +8,14 @@
 
 @if (Model.ShowRequestId)
 {
-    <p>
-        <strong>Request ID:</strong> <code>@Model.RequestId</code>
-    </p>
+    <p><strong>Request ID:</strong> <code>@Model.RequestId</code></p>
 }
 
-@if(Model.ErrorMessages != null)
+@if(Model.Errors != null)
 {
-    @foreach(var message in Model.ErrorMessages)
+    @foreach(var message in Model.Errors)
     {
-        <div><b>Error</b>: @message</div>
+        <div><b>Error(s): @message</b></div>
     }
 }
 

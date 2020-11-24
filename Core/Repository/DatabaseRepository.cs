@@ -30,6 +30,21 @@ namespace Camera_Shop.Repository
 				.AsEnumerable();
 		}
 
+		public void Edit(int id, TEntity entity)
+		{
+			var dbSet = this._context.Set<TEntity>();
+			var entityToModify = dbSet.Find(id);
+			
+			foreach(var propertyInfo in entity.GetType().GetProperties())
+			{
+				propertyInfo.SetValue(entityToModify, propertyInfo.GetValue(entity));
+			}
+				
+			dbSet.Update(entityToModify);
+			
+			this._context.SaveChanges();
+		}
+		
 		public void Edit(string id, TEntity entity)
 		{
 			var dbSet = this._context.Set<TEntity>();
