@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Camera_Shop.Database;
 using Data.Models.Classes;
@@ -28,6 +29,19 @@ namespace Camera_Shop
 			services.AddRazorPages();
 			services.AddMvc();
 
+			services.AddHsts(options =>
+			{
+				options.Preload = true;
+				options.IncludeSubDomains = true;
+				options.MaxAge = TimeSpan.FromDays(60);
+			});
+
+			services.AddHttpsRedirection(options =>
+			{
+				//TODO: Change when in production to 443
+				options.HttpsPort = 5001;
+			});
+
 			services.AddDbContext<CameraContext>(options =>
 				 options.UseNpgsql(Configuration.GetConnectionString("DEV")));
 
@@ -41,6 +55,8 @@ namespace Camera_Shop
 				options.Password.RequireLowercase = false;
 				options.Password.RequireUppercase = false;
 				options.Password.RequireNonAlphanumeric = false;
+
+				options.User.RequireUniqueEmail = true;
 			});
 
 			services.AddHttpContextAccessor();
@@ -50,7 +66,8 @@ namespace Camera_Shop
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
 			if (env.IsDevelopment())
-				app.UseDeveloperExceptionPage();
+				app.UseExceptionHandler("/Error"); //TESTING!
+				//app.UseDeveloperExceptionPage();
 			else
 			{
 				app.UseExceptionHandler("/Error");
@@ -75,12 +92,8 @@ namespace Camera_Shop
 					 pattern: "{controller=Home}/{action=Index}");
 			});
 
-			//CreateWindow();
-		}
-
-		private async void CreateWindow()
-		{
-			await Electron.WindowManager.CreateWindowAsync();
+			// Open the Electron-Window here
+    		//Task.Run(async () => await Electron.WindowManager.CreateWindowAsync());
 		}
 	}
 }

@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 
-namespace Camera_Shop.Repository
+namespace Camera_Shop.Database
 {
-	interface IRepository<TEntity>
+	public interface IRepository<TEntity>
 	{
 		//Add Entity to database
 		void Add(TEntity schema);

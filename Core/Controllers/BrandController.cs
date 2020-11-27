@@ -4,92 +4,69 @@ using Data.Models.Classes;
 using Data.Models.ViewModels;
 using Camera_Shop.Services.Brands;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Camera_Shop.Controllers
 {
 	public class BrandController : Controller
 	{
 		private readonly BrandService _service;
-		
+
 		public BrandController(CameraContext context)
 		{
 			this._service = new BrandService(context);
 		}
-		
+
 		//Create
 		[HttpGet]
-		public IActionResult Create()
+		public async Task<IActionResult> Create()
 		{
 			return View();
 		}
-		
+
 		[HttpPost]
-		public IActionResult CreatePost(Brand brand)
+		public async Task<IActionResult> CreatePost(Brand brand)
 		{
-			try
-			{
-				this._service.CreateBrand(brand);
-			
-				return RedirectToAction("ShowBrands");
-			}
-			catch(ArgumentException e)
-			{
-				return View("~/Views/Error/Error.cshtml",
-					new ErrorViewModel(e.Message));
-			}
+			this._service.CreateBrand(brand);
+
+			return RedirectToAction("ShowBrands");
 		}
-		
+
 		//Read
 		[HttpGet]
-		public IActionResult ShowBrands()
+		public async Task<IActionResult> ShowBrands()
 		{
 			return View(this._service.GetAllBrands());
 		}
-		
+
 		//Update
 		[HttpGet]
-		public IActionResult Edit(int id)
+		public async Task<IActionResult> Edit(int id)
 		{
 			return View(this._service.GetBrand(id));
 		}
 
 		[HttpPost]
-		public IActionResult EditPost(int id, Brand brand)
+		public async Task<IActionResult> EditPost(int id, Brand brand)
 		{
-			try
-			{
-				this._service.UpdateBrand(id, brand);
-			
-				return RedirectToAction("ShowBrands");
-			}
-			catch(ArgumentException e)
-			{
-				return View("~/Views/Error/Error.cshtml",
-					new ErrorViewModel(e.Message));
-			}
+			this._service.UpdateBrand(id, brand);
+
+			return RedirectToAction("ShowBrands");
 		}
-		
+
 		//Delete
 		[HttpGet]
-		public IActionResult Delete(int id)
+		public async Task<IActionResult> Delete(int id)
 		{
 			return View(this._service.GetBrand(id));
 		}
 
 		[HttpPost]
-		public IActionResult DeletePost(int id)
+		public async Task<IActionResult> DeletePost(int id)
 		{
-			try
-			{
-				this._service.DeleteBrand(id);
-			
-				return RedirectToAction("ShowBrands");
-			}
-			catch(ArgumentException e)
-			{
-				return View("~/Views/Error/Error.cshtml",
-					new ErrorViewModel(e.Message));
-			}
+			this._service.DeleteBrand(id);
+
+			return RedirectToAction("ShowBrands");
 		}
 	}
 }

@@ -5,13 +5,14 @@ using Data.Models.Classes;
 using Data.Models.DTOs;
 using Data.Models.ViewModels;
 using Camera_Shop.Services.Catalog;
+using System.Threading.Tasks;
 
 namespace Camera_Shop.Controllers
 {
 	public class CatalogController : Controller
 	{
 		private readonly CatalogService _service;
-		
+
 		public CatalogController(CameraContext context)
 		{
 			this._service = new CatalogService(context);
@@ -19,81 +20,59 @@ namespace Camera_Shop.Controllers
 
 		//Create
 		[HttpGet]
-		public IActionResult Create()
+		public async Task<IActionResult> Create()
 		{
 			return View();
 		}
 
 		[HttpPost]
-		public IActionResult CreatePost(CameraDTO camera)
+		public async Task<IActionResult> CreatePost(CameraDTO camera)
 		{
-			try
-			{
-				this._service.Insert(camera);
-				
-				return RedirectToAction("ShowCatalog");
-			}
-			catch(ArgumentException e)
-			{
-				return View("~/Views/Error/Error.cshtml",
-					new ErrorViewModel(e.Message));
-			} 
+			await this._service.Insert(camera);
+
+			return RedirectToAction("ShowCatalog");
 		}
-		
+
 		//Read
 		[HttpGet]
-		public IActionResult ShowCatalog()
+		public async Task<IActionResult> ShowCatalog()
 		{
-			return View(this._service.GetCatalog());
+			return View(await this._service.GetCatalogAsync());
 		}
 
 		//Update
 		[HttpGet]
-		public IActionResult Edit(int id)
+		public async Task<IActionResult> Edit(int id)
 		{
-			return View(this._service.GetCameraDTO(id));
+			return View(await this._service.GetCameraDTOAsync(id));
 		}
 
 		[HttpPost]
-		public IActionResult EditPost(int id, CameraDTO cameraDTO)
+		public async Task<IActionResult> EditPost(int id, CameraDTO cameraDTO)
 		{
-			try
-			{
-				this._service.Update(id, cameraDTO);
+			await this._service.Update(id, cameraDTO);
 
-				return RedirectToAction("ShowCatalog");
-			}
-			catch(ArgumentException e)
-			{
-				return View("~/Views/Error/Error.cshtml", new ErrorViewModel(e.Message));
-			}
+			return RedirectToAction("ShowCatalog");
 		}
 
 		//Delete
 		[HttpGet]
-		public IActionResult Delete(int id)
+		public async Task<IActionResult> Delete(int id)
 		{
-			return View(this._service.GetCamera(id));
+			return View(await this._service.GetCameraAsync(id));
 		}
 
 		[HttpPost]
-		public IActionResult DeletePost(int id)
+		public async Task<IActionResult> DeletePost(int id)
 		{
-			try
-			{
-				this._service.Delete(id);
-				
-				return RedirectToAction("ShowCatalog");
-			}
-			catch(ArgumentException e)
-			{
-				return View("~/Views/Error/Error.cshtml", new ErrorViewModel(e.Message));
-			}
+			await this._service.Delete(id);
+
+			return RedirectToAction("ShowCatalog");
 		}
 
 		//Validations
 		[HttpGet]
-		public IActionResult CameraExists(Camera camera)
+		public async Task<IActionResult> CameraExists(Camera camera)
 		{
 			return View(camera);
 		}

@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Camera_Shop.Database;
 using Data.Models.Classes;
 using Data.Models.ViewModels;
-using Camera_Shop.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 
@@ -14,7 +13,7 @@ namespace Camera_Shop.Services.Account
 {
 	public class AccountService
 	{
-		private readonly CameraRepository<User> _repository;
+		private readonly EntityRepository<User> _repository;
 		private readonly UserManager<User> _userManager;
 		private readonly SignInManager<User> _signInManager;
 		private readonly IHttpContextAccessor _httpContext;
@@ -22,7 +21,7 @@ namespace Camera_Shop.Services.Account
 		public AccountService(CameraContext context, UserManager<User> userManager, 
 			SignInManager<User> signInManager, IHttpContextAccessor httpContext)
 		{
-			this._repository = new CameraRepository<User>(context);
+			this._repository = new EntityRepository<User>(context);
 			this._userManager = userManager;
 			this._signInManager = signInManager;
 			this._httpContext = httpContext;

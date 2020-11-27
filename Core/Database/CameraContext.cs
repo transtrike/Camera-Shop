@@ -1,5 +1,4 @@
 using Data.Models.Classes;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
@@ -13,7 +12,7 @@ namespace Camera_Shop.Database
 		
 		public CameraContext(DbContextOptions options)
 			: base(options) { }
-		
+
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<Camera>()
@@ -21,7 +20,7 @@ namespace Camera_Shop.Database
 
 			modelBuilder.Entity<Brand>()
 				.HasKey(key => key.Id);
-				
+
 			base.OnModelCreating(modelBuilder);
 		}
 	}

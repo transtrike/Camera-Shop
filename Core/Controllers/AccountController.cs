@@ -25,7 +25,7 @@ namespace Camera_Shop.Controllers
 		//Create
 		[HttpGet]
 		[AllowAnonymous]
-		public IActionResult Register()
+		public async Task<IActionResult> Register()
 		{
 			return View();
 		}
@@ -70,7 +70,7 @@ namespace Camera_Shop.Controllers
 
 				if (e.Data.Count != 0)
 					errorViewModel.Errors = e.Data["Error"] as string[];
-			
+
 				//Unsuccessful user creation. Show error 
 				return View("~/Views/Error/Error.cshtml", errorViewModel);
 			}
@@ -78,7 +78,7 @@ namespace Camera_Shop.Controllers
 
 		//Read
 		[HttpGet]
-		public IActionResult UserProfile()
+		public async Task<IActionResult> UserProfile()
 		{
 			var user = this._service.GetLoggedUser();
 
@@ -86,7 +86,7 @@ namespace Camera_Shop.Controllers
 		}
 
 		[HttpGet]
-		public IActionResult Login()
+		public async Task<IActionResult> Login()
 		{
 			return View();
 		}
@@ -94,35 +94,25 @@ namespace Camera_Shop.Controllers
 		[HttpPost]
 		public async Task<IActionResult> LoginPost(LoginViewModel model)
 		{
-			try
+			if (ModelState.IsValid)
 			{
-				if (ModelState.IsValid)
-				{
-					var result = await this._service.SignInWithPassAsync(model.Username,
-						model.Password, model.RememberMe);
+				var result = await this._service.SignInWithPassAsync(model.Username,
+					model.Password, model.RememberMe);
 
-					if (result.Succeeded)
-					{
-						return RedirectToAction("Index", "Home");
-					}
+				if (result.Succeeded)
+					return RedirectToAction("Index", "Home");
 
-					throw new ArgumentException("Login failed!");
-				}
-
+				throw new ArgumentException("Login failed!");
+			}
+			else
 				//Invalid Model state. Repeat Login
 				throw new ArgumentException(
-					"Problem with Login occured! Please try again!");
-			}
-			catch (ArgumentException e)
-			{
-				//Unsuccessful user login. Show error
-				return View("~/Views/Error/Error.cshtml",
-					new ErrorViewModel(e.Message));
-			}
+					"Problem with Login occurred! Please try again!");
+
 		}
 
 		[HttpGet]
-		public IActionResult Logout()
+		public async Task<IActionResult> Logout()
 		{
 			this._service.LogoutAsync();
 
@@ -131,38 +121,30 @@ namespace Camera_Shop.Controllers
 
 		//Edit
 		[HttpGet]
-		public IActionResult Edit()
+		public async Task<IActionResult> Edit()
 		{
 			return View(this._service.GetLoggedUser());
 		}
 
 		[HttpPost]
-		public IActionResult EditPost(int id, User user)
+		public async Task<IActionResult> EditPost(int id, User user)
 		{
-			try
-			{
-				this._service.Update(id, user);
+			this._service.Update(id, user);
 
-				//TODO: Reload the _Layout page to update the username link
+			//TODO: Reload the _Layout page to update the username link
 
-				return RedirectToAction("UserProfile", "Account");
-			}
-			catch (ArgumentException e)
-			{
-				return View("~/Views/Error/Error.cshtml",
-					new ErrorViewModel(e.Message));
-			}
+			return RedirectToAction("UserProfile", "Account");
 		}
 
 		//Delete
 		[HttpGet]
-		public IActionResult Delete()
+		public async Task<IActionResult> Delete()
 		{
 			return View(this._service.GetLoggedUser());
 		}
 
 		[HttpPost]
-		public IActionResult DeletePost(int id)
+		public async Task<IActionResult> DeletePost(int id)
 		{
 			this._service.Delete(id);
 

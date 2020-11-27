@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Camera_Shop.Controllers
@@ -5,7 +6,7 @@ namespace Camera_Shop.Controllers
 	public class GuideController : Controller
 	{
 		// GET
-		public IActionResult Index()
+		public async Task<IActionResult> Index()
 		{
 			return View();
 		}

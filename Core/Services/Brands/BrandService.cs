@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using Camera_Shop.Database;
 using Data.Models.Classes;
-using Camera_Shop.Repository;
 
 namespace Camera_Shop.Services.Brands
 {
 	public class BrandService
 	{
-		private readonly CameraRepository<Brand> _repository;
+		private readonly EntityRepository<Brand> _repository;
 		
 		public BrandService(CameraContext context)
 		{
-			this._repository = new CameraRepository<Brand>(context);
+			this._repository = new EntityRepository<Brand>(context);
 		}
 
 		//Create

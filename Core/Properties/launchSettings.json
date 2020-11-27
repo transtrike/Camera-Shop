@@ -11,7 +11,7 @@
     "Electron.NET App": {
       "commandName": "Executable",
       "executablePath": "electronize",
-      "commandLineArgs": "start",
+      "commandLineArgs": "start /watch",
       "workingDirectory": "."
     },
 
@@ -22,12 +22,20 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Camera_Shop": {
+    "Development Core": {
       "commandName": "Project",
       "launchBrowser": true,
       "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "Production Core": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:5001;http://localhost:5000",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production"
       }
     }
   }

@@ -5,13 +5,27 @@
     Layout = "_Layout";
 }
 
-<h1 class="align-content-center align-items-center alert-danger" >You've done an "ops"-ie!</h1>
+<h2 class="align-content-center align-items-center alert-danger" >You've done an "ops"-ie!</h2>
 
 <br/>
 
+@if (Model.Exception != null)
+{
+    <p><strong>Error:</strong> <b>@Model.Exception.Message</b></p>
+    @foreach (var data in Model.Exception.Data.Values)
+    {
+        <p>Error: @data</p>
+    }
+}
+
 @if (Model.ShowRequestId)
 {
-    <p><strong>Request ID:</strong> <code>@Model.RequestId</code></p>
+    <p><strong>Request ID:</strong> <b>@Model.RequestId</b></p>
+}
+
+@if(!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <div><h5>Error: @Model.ErrorMessage</h5></div>
 }
 
 @if(Model.Errors != null)

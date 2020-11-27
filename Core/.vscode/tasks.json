@@ -37,6 +37,15 @@
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Electronize",
+            "command" : "electronize",
+            "type": "shell",
+            "args": [
+                "start",
+                "/watch"
+            ]
         }
     ]
 }

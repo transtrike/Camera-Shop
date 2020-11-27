@@ -2,14 +2,14 @@ using System.Collections.Generic;
 using System.Linq;
 using Camera_Shop.Database;
 
-namespace Camera_Shop.Repository
+namespace Camera_Shop.Database
 {
-	public class CameraRepository<TEntity> : IRepository<TEntity>
+	public class EntityRepository<TEntity> : IRepository<TEntity>
 		where TEntity : class
 	{
 		private readonly CameraContext _context;
 
-		public CameraRepository(CameraContext context)
+		public EntityRepository(CameraContext context)
 		{
 			this._context = context;
 		}
@@ -36,9 +36,7 @@ namespace Camera_Shop.Repository
 			var entityToModify = dbSet.Find(id);
 			
 			foreach(var propertyInfo in entity.GetType().GetProperties())
-			{
 				propertyInfo.SetValue(entityToModify, propertyInfo.GetValue(entity));
-			}
 				
 			dbSet.Update(entityToModify);
 			
@@ -51,9 +49,7 @@ namespace Camera_Shop.Repository
 			var entityToModify = dbSet.Find(id);
 			
 			foreach(var propertyInfo in entity.GetType().GetProperties())
-			{
 				propertyInfo.SetValue(entityToModify, propertyInfo.GetValue(entity));
-			}
 				
 			dbSet.Update(entityToModify);
 			
