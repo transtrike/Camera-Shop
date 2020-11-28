@@ -33,12 +33,14 @@
 (DONE) Configure for HTTPS instead of HTTP
 (DONE) Make the entire infrastucture async(starting from the Controllers)
 (DONE) Fix the Error View to display when having Exception
-Fix empty Exception getting to Error View 
+(DONE) Fix empty Exception getting to Error View 
+Fix Error() method not binding to Error View 
 Fix reflection breaking the Update in CatalogServices.cs
 Implement the "Guide" controller and simple view
 Write Unit tests(functionality and hardened features are priority)
 Construct and layout the "Guide" section
 Make global exceptions catcher (GlobalExceptionHandler)
+Change AccountService's UserExists() & GetUser() to async queries
 Catch exceptions from "No connection to SQL Server"
 Fix "InvalidOperationException" upon viewing Profile
 Fix "Brand's Cameras" showing "None"

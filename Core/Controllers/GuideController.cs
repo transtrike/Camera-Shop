@@ -6,9 +6,6 @@ namespace Camera_Shop.Controllers
 	public class GuideController : Controller
 	{
 		// GET
-		public async Task<IActionResult> Index()
-		{
-			return View();
-		}
+		public async Task<IActionResult> Index() => View();
 	}
 }

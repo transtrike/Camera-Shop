@@ -40,19 +40,17 @@ namespace Camera_Shop.Services.Account
 		}
 		
 		//Read
-		public async Task<User> GetLoggedUser()
+		public async Task<User> GetLoggedUserAsync()
 		{
 			return await _userManager.GetUserAsync(_httpContext.HttpContext.User);
 		}
 		
 		//Update
-		public void Update(int id, User user)
+		public async Task Update(int id, User user)
 		{
 			//Null check
 			if(user == null)
-			{
 				throw new ArgumentNullException("User cannot be null!");
-			}
 			
 			var currentUser = GetUser(id);
 			
@@ -63,13 +61,11 @@ namespace Camera_Shop.Services.Account
 				this._repository.Edit(id, user);
 			}
 			else
-			{
 				throw new ArgumentException("User is either null or already exists!");
-			}
 		}
 		
 		//Delete
-		public void Delete(int id)
+		public async Task Delete(int id)
 		{
 			var user = GetUser(id);
 			//Null check
@@ -92,7 +88,7 @@ namespace Camera_Shop.Services.Account
 					rememberMe, false);
 		}
 		
-		public async void LogoutAsync()
+		public async Task LogoutAsync()
 		{
 			await this._signInManager.SignOutAsync();
 		}
@@ -108,21 +104,6 @@ namespace Camera_Shop.Services.Account
 		{
 			return _repository.QueryAll()
 				.Any(x => x.UserName == username);
-		}
-		
-		public ErrorViewModel CollectErrors(IdentityResult result)
-		{
-			var errors = new List<string>();
-			
-			foreach(var error in result.Errors)
-			{
-				errors.Add(error.Description);
-			}
-
-			var errorViewModel = new ErrorViewModel();
-			errorViewModel.Errors = errors.ToArray();
-			
-			return errorViewModel;
 		}
 	}
 }

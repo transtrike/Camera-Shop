@@ -31,48 +31,31 @@ namespace Camera_Shop.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Register(RegisterViewModel model)
+		public async Task<IActionResult> RegisterPost(RegisterViewModel model)
 		{
-			try
+			if (ModelState.IsValid)
 			{
-				if (ModelState.IsValid)
+				IdentityResult result = await this._service.CreateUserAsync(model);
+
+				if (result.Succeeded)
 				{
-					var result = await this._service.CreateUserAsync(model);
-
-					if (result.Succeeded)
-					{
-						await this._service.SignInWithPassAsync(model.UserName,
-							model.Password, model.RememberMe);
-						return RedirectToAction("Index", "Home");
-					}
-					else
-					{
-						List<string> errors = new(1);
-						foreach (var err in result.Errors)
-							errors.Add(err.Description);
-
-						ArgumentException exception = new("Register failed!");
-						exception.Data.Add("Error", errors.ToArray());
-
-						throw exception;
-					}
+					await this._service.SignInWithPassAsync(model.UserName,
+						model.Password, model.RememberMe);
+					
+					return RedirectToAction("Index", "Home");
 				}
 				else
 				{
-					//Invalid Model state. Repeat Register
-					throw new ArgumentException("Problem with Register occurred! Please try again!");
+					ArgumentException argumentException = new("Registration failed!");
+					argumentException.Data.Add("Error", result.Errors);
+
+					throw argumentException;
 				}
 			}
-			catch (ArgumentException e)
+			else
 			{
-				ErrorViewModel errorViewModel = new ErrorViewModel();
-				errorViewModel.ErrorMessage = e.Message;
-
-				if (e.Data.Count != 0)
-					errorViewModel.Errors = e.Data["Error"] as string[];
-
-				//Unsuccessful user creation. Show error 
-				return View("~/Views/Error/Error.cshtml", errorViewModel);
+				//Invalid Model state. Repeat Register
+				throw new ArgumentException("Problem with registration occurred! Please fill all reqired fields!");
 			}
 		}
 
@@ -80,9 +63,7 @@ namespace Camera_Shop.Controllers
 		[HttpGet]
 		public async Task<IActionResult> UserProfile()
 		{
-			var user = this._service.GetLoggedUser();
-
-			return View(user);
+			return View(await this._service.GetLoggedUserAsync());
 		}
 
 		[HttpGet]
@@ -114,7 +95,7 @@ namespace Camera_Shop.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Logout()
 		{
-			this._service.LogoutAsync();
+			await this._service.LogoutAsync();
 
 			return RedirectToAction("Index", "Home");
 		}
@@ -123,13 +104,13 @@ namespace Camera_Shop.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Edit()
 		{
-			return View(this._service.GetLoggedUser());
+			return View(await this._service.GetLoggedUserAsync());
 		}
 
 		[HttpPost]
 		public async Task<IActionResult> EditPost(int id, User user)
 		{
-			this._service.Update(id, user);
+			await this._service.Update(id, user);
 
 			//TODO: Reload the _Layout page to update the username link
 
@@ -140,13 +121,13 @@ namespace Camera_Shop.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Delete()
 		{
-			return View(this._service.GetLoggedUser());
+			return View(await this._service.GetLoggedUserAsync());
 		}
 
 		[HttpPost]
 		public async Task<IActionResult> DeletePost(int id)
 		{
-			this._service.Delete(id);
+			await this._service.Delete(id);
 
 			return RedirectToAction("Index", "Home");
 		}

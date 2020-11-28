@@ -1,20 +1,29 @@
 using System;
 using System.Threading.Tasks;
 using Data.Models.ViewModels;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Camera_Shop.Controllers
 {
 	public class ErrorController : Controller
 	{
+		[HttpPost]
 		[Route("/Error")]
-		public async Task<IActionResult> Error(ArgumentException e)
+		public async Task<IActionResult> Error()
 		{
-			System.Console.WriteLine(e.Message);
-			foreach (var item in e.Data.Values)
-				System.Console.WriteLine(item);
+			var context = HttpContext.Features.Get<IExceptionHandlerFeature>();
+			var exception = context?.Error;
 
-			return View(new ErrorViewModel(e));
+			ErrorViewModel errorViewModel = new();
+			errorViewModel.ErrorMessage = exception.Message;
+
+			if (exception is ArgumentException)
+				errorViewModel.ArgumentException = exception as ArgumentException;
+			else
+				errorViewModel.Exception = exception as Exception;
+
+			return View(errorViewModel);
 		}
 	}
 }
