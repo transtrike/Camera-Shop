@@ -58,7 +58,7 @@ namespace Camera_Shop.Services.Account
 			   && user != null
 			   && !UserExists(user.UserName))
 			{
-				this._repository.Edit(id, user);
+				await this._repository.EditAsync(id, user);
 			}
 			else
 				throw new ArgumentException("User is either null or already exists!");
@@ -74,9 +74,9 @@ namespace Camera_Shop.Services.Account
 				throw new ArgumentNullException("User cannot be null!");
 			}
 			
-			LogoutAsync();
+			await LogoutAsync();
 
-			this._repository.Delete(user);
+			await this._repository.DeleteAsync(user);
 		}
 
 		//Misc

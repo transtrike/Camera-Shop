@@ -27,7 +27,7 @@ namespace Camera_Shop.Controllers
 		[HttpPost]
 		public async Task<IActionResult> CreatePost(Brand brand)
 		{
-			this._service.CreateBrand(brand);
+			await this._service.CreateBrandAsync(brand);
 
 			return RedirectToAction("ShowBrands");
 		}
@@ -49,7 +49,7 @@ namespace Camera_Shop.Controllers
 		[HttpPost]
 		public async Task<IActionResult> EditPost(int id, Brand brand)
 		{
-			this._service.UpdateBrand(id, brand);
+			await this._service.UpdateBrandAsync(id, brand);
 
 			return RedirectToAction("ShowBrands");
 		}
@@ -64,7 +64,7 @@ namespace Camera_Shop.Controllers
 		[HttpPost]
 		public async Task<IActionResult> DeletePost(int id)
 		{
-			this._service.DeleteBrand(id);
+			await this._service.DeleteBrandAsync(id);
 
 			return RedirectToAction("ShowBrands");
 		}

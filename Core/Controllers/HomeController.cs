@@ -1,12 +1,9 @@
-﻿using System.Diagnostics;
-using System.Threading.Tasks;
-using Data.Models;
-using Data.Models.ViewModels;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Camera_Shop.Controllers
 {
-     public class HomeController : Controller
+	public class HomeController : Controller
      {
           [HttpGet]
           public async Task<IActionResult> Index() => View();

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Camera_Shop.Database;
 using Data.Models.Classes;
 
@@ -16,21 +17,17 @@ namespace Camera_Shop.Services.Brands
 		}
 
 		//Create
-		public void CreateBrand(Brand brand)
+		public async Task CreateBrandAsync(Brand brand)
 		{
 			//Null check
 			if(brand == null)
-			{
 				throw new ArgumentNullException("Brand cannot be null!");
-			}
 			
 			//Check for brand in database
 			if(DoesBrandExist(brand))
-			{
 				throw new ArgumentException($"Brand {brand.Name} exists!");
-			}
 			
-			this._repository.Add(brand);
+			await this._repository.AddAsync(brand);
 		}
 		
 		//Read
@@ -46,34 +43,28 @@ namespace Camera_Shop.Services.Brands
 		}
 		
 		//Update
-		public void UpdateBrand(int id, Brand brand)
+		public async Task UpdateBrandAsync(int id, Brand brand)
 		{
 			//Null check for given brand
 			if(brand == null)
-			{
 				throw new ArgumentNullException("Brand cannot be null!");
-			}
 			
 			//Check for brand in database
 			if(DoesBrandExist(brand))
-			{
 				throw new ArgumentException($"Brand {brand.Name} exists!");
-			}
 
 			var brandToModify = this._repository.QueryAll()
 				.FirstOrDefault(x => x.Id == id);
 
 			//Null check for brand that should be modified
 			if(brandToModify == null)
-			{
 				throw new ArgumentException($"Brand {brand.Name} does not exist!");
-			}
 			
-			this._repository.Edit(id, brand);
+			await this._repository.EditAsync(id, brand);
 		}
 		
 		//Delete
-		public void DeleteBrand(int id)
+		public async Task DeleteBrandAsync(int id)
 		{
 			var brandToDelete = this._repository.QueryAll()
 				.FirstOrDefault(x => x.Id == id);
@@ -84,7 +75,7 @@ namespace Camera_Shop.Services.Brands
 				throw new ArgumentException("Brand doesn't exist");
 			}
 			
-			this._repository.Delete(brandToDelete);
+			await this._repository.DeleteAsync(brandToDelete);
 		}
 		
 		//Validations

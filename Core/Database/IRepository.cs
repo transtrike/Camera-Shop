@@ -1,20 +1,20 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Camera_Shop.Database
 {
 	public interface IRepository<TEntity>
 	{
 		//Add Entity to database
-		void Add(TEntity schema);
+		Task AddAsync(TEntity schema);
 
 		//Return all instances of Entity from database
 		IEnumerable<TEntity> QueryAll();
 		
 		//Modify Entity from database
-		void Edit(int id, TEntity entity);
-		void Edit(string id, TEntity entity);
+		Task EditAsync(object id, TEntity entity);
 
 		//Delete Entity from database
-		void Delete(TEntity entity);
+		Task DeleteAsync(TEntity entity);
 	}
 }

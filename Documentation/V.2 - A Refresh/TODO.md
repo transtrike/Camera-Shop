@@ -34,15 +34,16 @@
 (DONE) Make the entire infrastucture async(starting from the Controllers)
 (DONE) Fix the Error View to display when having Exception
 (DONE) Fix empty Exception getting to Error View 
-Fix Error() method not binding to Error View 
+(DONE) Fix Error() method not binding to Error View
+(DONE) Make global exceptions catcher (GlobalExceptionHandler)
+(DONE) Fix "InvalidOperationException" upon viewing Profile
+(DONE) Refactor EntityRepository to be async
 Fix reflection breaking the Update in CatalogServices.cs
+Catch exceptions from "No connection to SQL Server"
 Implement the "Guide" controller and simple view
 Write Unit tests(functionality and hardened features are priority)
 Construct and layout the "Guide" section
-Make global exceptions catcher (GlobalExceptionHandler)
 Change AccountService's UserExists() & GetUser() to async queries
-Catch exceptions from "No connection to SQL Server"
-Fix "InvalidOperationException" upon viewing Profile
 Fix "Brand's Cameras" showing "None"
 Fix login error not showing
 Fix Layout Page now showing username correctly after change

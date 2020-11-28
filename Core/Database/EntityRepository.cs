@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using Camera_Shop.Database;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Camera_Shop.Database
 {
@@ -14,13 +15,13 @@ namespace Camera_Shop.Database
 			this._context = context;
 		}
 		
-		public void Add(TEntity entity)
+		public async Task AddAsync(TEntity entity)
 		{
-			this._context
+			await this._context
 				.Set<TEntity>()
-				.Add(entity);
+				.AddAsync(entity);
 			
-			this._context.SaveChanges();
+			await this._context.SaveChangesAsync();
 		}
 
 		public IEnumerable<TEntity> QueryAll()
@@ -30,39 +31,26 @@ namespace Camera_Shop.Database
 				.AsEnumerable();
 		}
 
-		public void Edit(int id, TEntity entity)
+		public async Task EditAsync(object id, TEntity entity)
 		{
-			var dbSet = this._context.Set<TEntity>();
-			var entityToModify = dbSet.Find(id);
+			DbSet<TEntity> dbSet = this._context.Set<TEntity>();
+			TEntity entityToModify = await dbSet.FindAsync(id);
 			
 			foreach(var propertyInfo in entity.GetType().GetProperties())
 				propertyInfo.SetValue(entityToModify, propertyInfo.GetValue(entity));
 				
 			dbSet.Update(entityToModify);
 			
-			this._context.SaveChanges();
+			await this._context.SaveChangesAsync();
 		}
 		
-		public void Edit(string id, TEntity entity)
-		{
-			var dbSet = this._context.Set<TEntity>();
-			var entityToModify = dbSet.Find(id);
-			
-			foreach(var propertyInfo in entity.GetType().GetProperties())
-				propertyInfo.SetValue(entityToModify, propertyInfo.GetValue(entity));
-				
-			dbSet.Update(entityToModify);
-			
-			this._context.SaveChanges();
-		}
-		
-		public void Delete(TEntity entity)
+		public async Task DeleteAsync(TEntity entity)
 		{
 			this._context
 				.Set<TEntity>()
 				.Remove(entity);
 			
-			this._context.SaveChanges();
+			await this._context.SaveChangesAsync();
 		}
 	}
 }

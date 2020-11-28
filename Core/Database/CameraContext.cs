@@ -9,9 +9,9 @@ namespace Camera_Shop.Database
 		public DbSet<Camera> Cameras { get; set; }
 
 		public DbSet<Brand> Brands { get; set; }
-		
+
 		public CameraContext(DbContextOptions options)
-			: base(options) { }
+			: base(options) { } //=> this.ChangeTracker.LazyLoadingEnabled = false;
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
