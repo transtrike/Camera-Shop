@@ -10,7 +10,7 @@ namespace Camera_Shop.Controllers
 	{
 		[HttpPost]
 		[Route("/Error")]
-		public async Task<IActionResult> Error()
+		public IActionResult Error()
 		{
 			var context = HttpContext.Features.Get<IExceptionHandlerFeature>();
 			var exception = context?.Error;
@@ -20,6 +20,8 @@ namespace Camera_Shop.Controllers
 
 			if (exception is ArgumentException)
 				errorViewModel.ArgumentException = exception as ArgumentException;
+			else if (exception is ArgumentNullException)
+				errorViewModel.ArgumentNullException = exception as ArgumentNullException;
 			else
 				errorViewModel.Exception = exception as Exception;
 

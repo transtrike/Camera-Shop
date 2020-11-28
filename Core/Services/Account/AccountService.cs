@@ -16,15 +16,15 @@ namespace Camera_Shop.Services.Account
 		private readonly EntityRepository<User> _repository;
 		private readonly UserManager<User> _userManager;
 		private readonly SignInManager<User> _signInManager;
-		private readonly IHttpContextAccessor _httpContext;
+		private readonly IHttpContextAccessor _httpContextAccessor;
 		
 		public AccountService(CameraContext context, UserManager<User> userManager, 
-			SignInManager<User> signInManager, IHttpContextAccessor httpContext)
+			SignInManager<User> signInManager, IHttpContextAccessor httpContextAccessor)
 		{
 			this._repository = new EntityRepository<User>(context);
 			this._userManager = userManager;
 			this._signInManager = signInManager;
-			this._httpContext = httpContext;
+			this._httpContextAccessor = httpContextAccessor;
 		}
 
 		//Create 
@@ -42,11 +42,11 @@ namespace Camera_Shop.Services.Account
 		//Read
 		public async Task<User> GetLoggedUserAsync()
 		{
-			return await _userManager.GetUserAsync(_httpContext.HttpContext.User);
+			return await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
 		}
 		
 		//Update
-		public async Task Update(int id, User user)
+		public async Task UpdateAsync(int id, User user)
 		{
 			//Null check
 			if(user == null)
@@ -65,14 +65,12 @@ namespace Camera_Shop.Services.Account
 		}
 		
 		//Delete
-		public async Task Delete(int id)
+		public async Task DeleteAsync(int id)
 		{
 			var user = GetUser(id);
 			//Null check
 			if(user == null)
-			{
 				throw new ArgumentNullException("User cannot be null!");
-			}
 			
 			await LogoutAsync();
 

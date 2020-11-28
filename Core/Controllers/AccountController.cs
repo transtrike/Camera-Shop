@@ -25,7 +25,7 @@ namespace Camera_Shop.Controllers
 		//Create
 		[HttpGet]
 		[AllowAnonymous]
-		public async Task<IActionResult> Register()
+		public IActionResult Register()
 		{
 			return View();
 		}
@@ -67,7 +67,7 @@ namespace Camera_Shop.Controllers
 		}
 
 		[HttpGet]
-		public async Task<IActionResult> Login()
+		public IActionResult Login()
 		{
 			return View();
 		}
@@ -110,7 +110,7 @@ namespace Camera_Shop.Controllers
 		[HttpPost]
 		public async Task<IActionResult> EditPost(int id, User user)
 		{
-			await this._service.Update(id, user);
+			await this._service.UpdateAsync(id, user);
 
 			//TODO: Reload the _Layout page to update the username link
 
@@ -127,7 +127,7 @@ namespace Camera_Shop.Controllers
 		[HttpPost]
 		public async Task<IActionResult> DeletePost(int id)
 		{
-			await this._service.Delete(id);
+			await this._service.DeleteAsync(id);
 
 			return RedirectToAction("Index", "Home");
 		}

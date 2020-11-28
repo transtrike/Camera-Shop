@@ -19,7 +19,7 @@ namespace Camera_Shop.Controllers
 
 		//Create
 		[HttpGet]
-		public async Task<IActionResult> Create()
+		public IActionResult Create()
 		{
 			return View();
 		}
@@ -34,14 +34,14 @@ namespace Camera_Shop.Controllers
 
 		//Read
 		[HttpGet]
-		public async Task<IActionResult> ShowBrands()
+		public IActionResult ShowBrands()
 		{
 			return View(this._service.GetAllBrands());
 		}
 
 		//Update
 		[HttpGet]
-		public async Task<IActionResult> Edit(int id)
+		public IActionResult Edit(int id)
 		{
 			return View(this._service.GetBrand(id));
 		}
@@ -56,7 +56,7 @@ namespace Camera_Shop.Controllers
 
 		//Delete
 		[HttpGet]
-		public async Task<IActionResult> Delete(int id)
+		public IActionResult Delete(int id)
 		{
 			return View(this._service.GetBrand(id));
 		}

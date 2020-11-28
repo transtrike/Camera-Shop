@@ -21,7 +21,7 @@ namespace Camera_Shop.Services.Catalog
 		} 
 		
 		//Create
-		public async Task Insert(CameraDTO cameraDTO)
+		public async Task InsertAsync(CameraDTO cameraDTO)
 		{
 			if(await DoesCameraExistAsync(cameraDTO.Model)) 
 				throw new ArgumentException($"Camera {cameraDTO.Model} already exists!");
@@ -63,7 +63,7 @@ namespace Camera_Shop.Services.Catalog
 		}
 	
 		//Update
-		public async Task Update(int id, CameraDTO cameraDTO)
+		public async Task UpdateAsync(int id, CameraDTO cameraDTO)
 		{
 			Camera cameraToModify = await this._context.Cameras
 				.Include(x => x.Brand)
@@ -85,7 +85,7 @@ namespace Camera_Shop.Services.Catalog
 		}
 
 		//Delete
-		public async Task Delete(int id)
+		public async Task DeleteAsync(int id)
 		{
 			var cameraToDelete = await this._context.Cameras
 				.FirstOrDefaultAsync(x => x.Id == id);

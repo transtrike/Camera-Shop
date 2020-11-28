@@ -20,7 +20,7 @@ namespace Camera_Shop.Controllers
 
 		//Create
 		[HttpGet]
-		public async Task<IActionResult> Create()
+		public IActionResult Create()
 		{
 			return View();
 		}
@@ -28,7 +28,7 @@ namespace Camera_Shop.Controllers
 		[HttpPost]
 		public async Task<IActionResult> CreatePost(CameraDTO camera)
 		{
-			await this._service.Insert(camera);
+			await this._service.InsertAsync(camera);
 
 			return RedirectToAction("ShowCatalog");
 		}
@@ -50,7 +50,7 @@ namespace Camera_Shop.Controllers
 		[HttpPost]
 		public async Task<IActionResult> EditPost(int id, CameraDTO cameraDTO)
 		{
-			await this._service.Update(id, cameraDTO);
+			await this._service.UpdateAsync(id, cameraDTO);
 
 			return RedirectToAction("ShowCatalog");
 		}
@@ -65,16 +65,11 @@ namespace Camera_Shop.Controllers
 		[HttpPost]
 		public async Task<IActionResult> DeletePost(int id)
 		{
-			await this._service.Delete(id);
+			await this._service.DeleteAsync(id);
 
 			return RedirectToAction("ShowCatalog");
 		}
 
-		//Validations
-		[HttpGet]
-		public async Task<IActionResult> CameraExists(Camera camera)
-		{
-			return View(camera);
-		}
+		
 	}
 }
