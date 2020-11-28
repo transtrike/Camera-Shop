@@ -34,7 +34,3 @@ determine what Type of photographer are you and suggest a camera
 - It will contain a big picture of the model and show specs  
 - Users can post reviews and everyone can read them  
 - Users can post pictures, taken with the camera, to show it's abilities  
-
-## Documentation files
-
-- /Documentation
