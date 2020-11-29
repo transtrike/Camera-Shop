@@ -47,6 +47,13 @@ namespace Camera_Shop
 
 			services.AddIdentity<User, Role>()
 				 .AddEntityFrameworkStores<CameraContext>();
+			services.AddAuthorization(opt =>
+			{
+				opt.AddPolicy("Logged", policy =>
+				{
+					policy.RequireRole("User");
+				});
+			});
 
 			services.Configure<IdentityOptions>(options =>
 			{
@@ -65,7 +72,7 @@ namespace Camera_Shop
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
-			if (env.IsDevelopment())
+			if (env.IsDevelopment() || env.IsStaging())
 				app.UseExceptionHandler("/Error"); //TESTING!
 				//app.UseDeveloperExceptionPage();
 			else

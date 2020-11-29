@@ -23,7 +23,12 @@ namespace Camera_Shop.Controllers
 			else if (exception is ArgumentNullException)
 				errorViewModel.ArgumentNullException = exception as ArgumentNullException;
 			else
-				errorViewModel.Exception = exception as Exception;
+			{
+				if(exception.InnerException != null)
+					errorViewModel.Exception = exception.InnerException;
+				else
+					errorViewModel.Exception = exception;
+			}
 
 			return View(errorViewModel);
 		}

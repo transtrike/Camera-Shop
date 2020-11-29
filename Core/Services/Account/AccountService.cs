@@ -30,7 +30,7 @@ namespace Camera_Shop.Services.Account
 		//Create 
 		public async Task<IdentityResult> CreateUserAsync(RegisterViewModel model)
 		{
-			var user = new User
+			User user = new()
 			{
 				UserName = model.UserName,
 				Email = model.Email
@@ -52,28 +52,24 @@ namespace Camera_Shop.Services.Account
 			if(user == null)
 				throw new ArgumentNullException("User cannot be null!");
 			
-			var currentUser = GetUser(id);
-			
-			if(currentUser != null 
-			   && user != null
-			   && !UserExists(user.UserName))
-			{
-				await this._repository.EditAsync(id, user);
-			}
-			else
-				throw new ArgumentException("User is either null or already exists!");
+			var currentUser = GetUser(id) ??
+				throw new ArgumentNullException("No logged in user!");
+
+			if(UserExists(user.UserName))
+				throw new ArgumentException("Username already exists. Please user a different one!");
+
+			await this._repository.EditAsync(id, user);
 		}
 		
 		//Delete
 		public async Task DeleteAsync(int id)
 		{
 			var user = GetUser(id);
-			//Null check
+
 			if(user == null)
 				throw new ArgumentNullException("User cannot be null!");
 			
 			await LogoutAsync();
-
 			await this._repository.DeleteAsync(user);
 		}
 
@@ -82,8 +78,7 @@ namespace Camera_Shop.Services.Account
 			string password, bool rememberMe)
 		{
 			return await this._signInManager
-				.PasswordSignInAsync(username, password,
-					rememberMe, false);
+				.PasswordSignInAsync(username, password, rememberMe, false);
 		}
 		
 		public async Task LogoutAsync()
@@ -93,14 +88,16 @@ namespace Camera_Shop.Services.Account
 
 		private User GetUser(int id)
 		{
-			return this._repository.QueryAll()
+			return this._repository
+				.QueryAll()
 				.FirstOrDefault(x => x.Id == id);
 		}
 		
 		//Validations
 		private bool UserExists(string username)
 		{
-			return _repository.QueryAll()
+			return _repository
+				.QueryAll()
 				.Any(x => x.UserName == username);
 		}
 	}

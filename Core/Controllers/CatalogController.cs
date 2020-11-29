@@ -40,6 +40,11 @@ namespace Camera_Shop.Controllers
 			return View(await this._service.GetCatalogAsync());
 		}
 
+		public async Task<IActionResult> ViewCamera(int id)
+		{
+			return View(await this._service.GetCameraAsync(id));
+		}
+
 		//Update
 		[HttpGet]
 		public async Task<IActionResult> Edit(int id)
@@ -69,7 +74,5 @@ namespace Camera_Shop.Controllers
 
 			return RedirectToAction("ShowCatalog");
 		}
-
-		
 	}
 }

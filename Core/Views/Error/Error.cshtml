@@ -15,18 +15,3 @@
 {
     <div><h5>Error: @Model.ErrorMessage</h5></div>
 }
-
-@* @if (Model.ArgumentException != null)
-{
-    @foreach (var data in Model.ArgumentException.Data.Values)
-    {
-        <p>Error: @data</p>
-    }
-}
-@if (Model.Exception != null)
-{
-    @foreach (var data in Model.Exception.Data.Values)
-    {
-        <p>Error: @data</p>
-    }
-} *@

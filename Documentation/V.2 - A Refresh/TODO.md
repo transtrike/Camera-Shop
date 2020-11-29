@@ -38,7 +38,12 @@
 (DONE) Make global exceptions catcher (GlobalExceptionHandler)
 (DONE) Fix "InvalidOperationException" upon viewing Profile
 (DONE) Refactor EntityRepository to be async
-Fix reflection breaking the Update in CatalogServices.cs
+(DONE) Add AsNoTracking() to Read-Only queries to improve performance
+(DONE) Fix UpdateAsync() in CatalogServices.cs
+(DONE) Change Create() permissions to only logged in users
+(DONE) Create a ViewCamera() to hide Edit() and Create()
+Create a ViewBrand() to hide Edit() and Create()
+Edit ViewBrand.cshtml just like ViewCamera.cshtml
 Catch exceptions from "No connection to SQL Server"
 Implement the "Guide" controller and simple view
 Write Unit tests(functionality and hardened features are priority)

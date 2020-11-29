@@ -3,53 +3,27 @@
 @{
     ViewData["Title"] = "Camera Catalog";
     Layout = "_Layout";
-    
-    @*foreach(var camera in Model)
-    {
-        var propertyInfoEnum = camera
-            .GetType()
-            .GetProperties().
-            Where(pi =>
-                !Attribute.IsDefined(pi, typeof(SkipProperty)));
-
-        foreach(var property in propertyInfoEnum)
-        {
-            var attributePropertyInfo = property.GetCustomAttributes()
-                .FirstOrDefault(x =>
-                    x.GetType() == typeof(DisplayAttribute));
-            DisplayAttribute attribute = attributePropertyInfo as DisplayAttribute;
-            var name = attribute.Name;
-                
-            var value = property.GetValue(camera);
-
-            <h5><b>Camera @name</b>: @value</h5>
-        }*@
+    <link rel="stylesheet" href="~/css/Catalog/showCatalog.css" />
 }
 
 <!-- Show all cameras-->
-<div>
-    @foreach(var camera in Model)
+<div class="items">
+    @foreach (Camera camera in Model)
     {
-    <tr>
-        <td>
-            <h5><b>Camera Brand:</b> @camera.Brand.Name</h5>
-            <h5><b>Camera Model:</b> @camera.Model</h5>
-            <h5><b>Camera Megapixels:</b> @camera.Megapixels</h5>
-            <h5><b>Camera Base ISO:</b> @camera.BaseISO</h5>
-            <h5><b>Camera Max ISO:</b> @camera.MaxISO</h5>
-            
-            @if(SignInManager.IsSignedIn(User))
-            {
-                <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@camera.Id">Edit</a>
-                <a class="btn btn-outline-primary alert-danger" asp-action="Delete" asp-route-id="@camera.Id">Delete</a>    
-            }
-        </td>
-    </tr>
-    <hr/>
+        <div class="item camera span-2">
+            <h1>
+                <a class="image" asp-action="ViewCamera" asp-route-id="@camera.Id"><img src="~/images/Catalog/@(camera.Model).jpg" alt=""/></a>
+                <br/>
+                <a class="btn btn-outline-primary" asp-action="ViewCamera" asp-route-id="@camera.Id">@camera.Brand.Name @camera.Model</a>
+            </h1>
+        </div>
     }
 </div>
 
-<!--Create a Camera -->
-<div>
-    <a class="btn btn-outline-primary" asp-action="Create">Create a Camera</a>
-</div>
+@if (SignInManager.IsSignedIn(User))
+{
+    <!--Create a Camera -->
+    <div class="create">
+        <a class="btn btn-outline-primary" asp-action="Create">Create a Camera</a>
+    </div>
+}

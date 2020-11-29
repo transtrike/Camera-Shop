@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -28,6 +29,7 @@ namespace Camera_Shop.Database
 		{
 			return this._context
 				.Set<TEntity>()
+				.AsNoTracking()
 				.AsEnumerable();
 		}
 

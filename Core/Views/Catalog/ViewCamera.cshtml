@@ -1,0 +1,22 @@
+@model Data.Models.Classes.Camera
+
+@{
+	ViewData["Title"] = "Camera Catalog";
+    Layout = "_Layout";
+    <link rel="stylesheet" href="~/css/ViewCamera/camera.css" />
+}
+<div class="cameraSpecs">
+    <h3><b>Camera Brand:</b> @Model.Brand.Name</h3>
+    <h3><b>Camera Model:</b> @Model.Model</h3>
+    <h3><b>Camera Megapixels:</b> @Model.Megapixels</h3>
+    <h3><b>Camera Base ISO:</b> @Model.BaseISO</h3>
+    <h3><b>Camera Max ISO:</b> @Model.MaxISO</h3>
+</div>
+
+@if(SignInManager.IsSignedIn(User))
+{
+    <div class="operations">
+        <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+        <a class="btn btn-outline-primary alert-danger" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>    
+    </div>
+}

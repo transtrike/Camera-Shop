@@ -39,7 +39,10 @@
     }
 </div>
 
-<!--Create a Brand -->
-<div>
-    <a class="btn btn-outline-primary" asp-action="Create">Create a Brand</a>
-</div>
+@if (SignInManager.IsSignedIn(User))
+{
+    <!--Create a Brand -->
+    <div>
+        <a class="btn btn-outline-primary" asp-action="Create">Create a Brand</a>
+    </div>
+}

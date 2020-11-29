@@ -82,8 +82,8 @@ namespace Camera_Shop.Controllers
 
 				if (result.Succeeded)
 					return RedirectToAction("Index", "Home");
-
-				throw new ArgumentException("Login failed!");
+				else
+					throw new ArgumentException("Login failed! Please try again.");
 			}
 			else
 				//Invalid Model state. Repeat Login

@@ -72,15 +72,13 @@ namespace Camera_Shop.Services.Catalog
 			if(cameraToModify == null)
 				throw new ArgumentException($"Camera {cameraDTO.Brand}: {cameraDTO.Model} does not exist!");
 				
-			//if(DoesCameraExist(cameraDTO.Model))
-			//	throw new ArgumentException("Model already exists!");
+			if(await DoesCameraExistAsync(cameraDTO.Model))
+				throw new ArgumentException("Model already exists!");
 
-			Camera camera = await _converter.DtoToClassAsync(id, cameraDTO);
+			if(cameraToModify.Brand.Name != cameraDTO.Brand)
+				throw new ArgumentException("You can't change brand name!");
 
-			//TODO: Reflection breaks the Update
-			//foreach (var property in typeof(Camera).GetProperties())
-			//property.SetValue(cameraToModify, property.GetValue(camera));
-
+			this._context.Entry(cameraToModify).CurrentValues.SetValues(cameraDTO);
 			await this._context.SaveChangesAsync();
 		}
 

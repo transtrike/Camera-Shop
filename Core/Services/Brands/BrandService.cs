@@ -21,10 +21,10 @@ namespace Camera_Shop.Services.Brands
 		{
 			//Null check
 			if(brand == null)
-				throw new ArgumentNullException("Brand cannot be null!");
+				throw new ArgumentNullException("Brand cannot be empty!");
 			
 			//Check for brand in database
-			if(DoesBrandExist(brand))
+			if(DoesBrandExist(brand.Name))
 				throw new ArgumentException($"Brand {brand.Name} exists!");
 			
 			await this._repository.AddAsync(brand);
@@ -38,7 +38,8 @@ namespace Camera_Shop.Services.Brands
 		
 		public Brand GetBrand(int id)
 		{
-			return this._repository.QueryAll()
+			return this._repository
+				.QueryAll()
 				.FirstOrDefault(x => x.Id == id);
 		}
 		
@@ -47,10 +48,10 @@ namespace Camera_Shop.Services.Brands
 		{
 			//Null check for given brand
 			if(brand == null)
-				throw new ArgumentNullException("Brand cannot be null!");
+				throw new ArgumentNullException("Brand cannot be empty!");
 			
 			//Check for brand in database
-			if(DoesBrandExist(brand))
+			if(DoesBrandExist(brand.Name))
 				throw new ArgumentException($"Brand {brand.Name} exists!");
 
 			var brandToModify = this._repository.QueryAll()
@@ -79,10 +80,11 @@ namespace Camera_Shop.Services.Brands
 		}
 		
 		//Validations
-		private bool DoesBrandExist(Brand brand)
+		private bool DoesBrandExist(string brandName)
 		{
-			return this._repository.QueryAll()
-				.Any(x => x.Name == brand.Name);
+			return this._repository
+				.QueryAll()
+				.Any(x => x.Name == brandName);
 		}
 	}
 }
