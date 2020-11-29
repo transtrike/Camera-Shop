@@ -47,6 +47,7 @@ namespace Camera_Shop
 
 			services.AddIdentity<User, Role>()
 				 .AddEntityFrameworkStores<CameraContext>();
+				 
 			services.AddAuthorization(opt =>
 			{
 				opt.AddPolicy("Logged", policy =>

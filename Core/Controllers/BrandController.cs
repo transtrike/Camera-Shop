@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Camera_Shop.Controllers
 {
-	[Authorize(Policy = "Logged")]
+	//d[Authorize(Policy = "Logged")]
 	public class BrandController : Controller
 	{
 		private readonly BrandService _service;
@@ -39,7 +39,10 @@ namespace Camera_Shop.Controllers
 			return View(this._service.GetAllBrands());
 		}
 
-		public IActionResult ViewBrand(int id) => View(this._service.GetBrand(id));
+		public IActionResult ViewBrand(int id)
+		{
+			return View(this._service.GetBrand(id));
+		} 
 
 		//Update
 		[HttpGet]

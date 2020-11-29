@@ -5,37 +5,15 @@
     Layout = "_Layout";
 }
 
-<div>
-    @foreach(var brand in Model)
+<!-- Show all brands-->
+<div class="items">
+    @foreach (Brand brand in Model)
     {
-        <tr>
-            <td>
-                <h5>
-                    <b>Brand Name:</b> @brand.Name</h5>
-
-                @if(brand.Cameras != null)
-                {
-                    <h5>
-                        <b>Brand's Cameras: </b>
-                    </h5>
-                    @foreach(var camera in brand.Cameras)
-                    {
-                        <h4>
-                            <b>Camera Model:</b> @camera.Model
-                        </h4>
-                    }
-                }
-                else
-                {
-                    <h5><b>Brand's Cameras: </b>NONE</h5>
-                }
-                @if(SignInManager.IsSignedIn(User))
-                {
-                    <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@brand.Id">Edit</a>
-                    <a class="btn btn-outline-primary alert-danger" asp-action="Delete" asp-route-id="@brand.Id">Delete</a>
-                }
-            </td>
-        </tr>
+        <div class="item brand span-2">
+            <h1>
+                <a class="btn btn-outline-primary" asp-action="ViewBrand" asp-route-id="@brand.Id">@brand.Name</a>
+            </h1>
+        </div>
     }
 </div>
 

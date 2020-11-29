@@ -1,7 +1,7 @@
 @model Data.Models.ViewModels.ErrorViewModel;
 
 @{
-    ViewData["Title"] = "ERROR!";
+    ViewBag.Title = "ERROR!";
     Layout = "_Layout";
 }
 
@@ -11,6 +11,11 @@
 {
     <p><strong>Request ID:</strong> <b>@Model.RequestId</b></p>
 }
+@if(@Model.Exception != null)
+{
+    <h4>@Model.Exception.Message</h4>
+}
+
 @if(!string.IsNullOrEmpty(Model.ErrorMessage))
 {
     <div><h5>Error: @Model.ErrorMessage</h5></div>

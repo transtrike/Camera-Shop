@@ -1,0 +1,32 @@
+@model Data.Models.Classes.Brand
+
+@{
+	ViewBag.Title = "View @Brand.Name";
+    Layout = "_Layout";
+    <link rel="stylesheet" href="~/css/ViewCamera/camera.css" />
+}
+
+<div class="brand">
+    <h3><b>Brand Name:</b> @Model.Name</h3>
+	@if(Model.Cameras != null)
+	{
+		@foreach (Camera camera in Model.Cameras)
+		{
+    		<h3>
+				<a class="btn btn-outline-primary" asp-controller="Catalog" asp-action="ViewCamera" asp-route-id="@(camera.Id)">@Model.Name @camera.Model</a>
+			</h3>
+		}
+	}
+	else
+	{
+		<h5>This brand has no camears in our database</h5>
+	}
+</div>
+
+@if(SignInManager.IsSignedIn(User))
+{
+    <div class="operations">
+        <a class="btn btn-outline-primary" asp-controller="Brand" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+        <a class="btn btn-outline-primary alert-danger" asp-controller="Brand" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>    
+    </div>
+}

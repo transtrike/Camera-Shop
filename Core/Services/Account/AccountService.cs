@@ -64,9 +64,7 @@ namespace Camera_Shop.Services.Account
 		//Delete
 		public async Task DeleteAsync(int id)
 		{
-			var user = GetUser(id);
-
-			if(user == null)
+			var user = GetUser(id) ??
 				throw new ArgumentNullException("User cannot be null!");
 			
 			await LogoutAsync();

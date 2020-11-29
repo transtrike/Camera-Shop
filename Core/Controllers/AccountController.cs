@@ -61,6 +61,7 @@ namespace Camera_Shop.Controllers
 
 		//Read
 		[HttpGet]
+		[Authorize(Policy = "Logged")]
 		public async Task<IActionResult> UserProfile()
 		{
 			return View(await this._service.GetLoggedUserAsync());
