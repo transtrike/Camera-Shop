@@ -10,7 +10,10 @@ namespace Camera_Shop.Database
 
 		//Return all instances of Entity from database
 		IEnumerable<TEntity> QueryAll();
-		
+
+		//Find entity by id
+		Task<TEntity> FindByIdAsync(object id);
+
 		//Modify Entity from database
 		Task EditAsync(object id, TEntity entity);
 

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Camera_Shop.Controllers
 {
-	//d[Authorize(Policy = "Logged")]
+	[Authorize(Policy = "Logged", Roles = "User")]
 	public class BrandController : Controller
 	{
 		private readonly BrandService _service;

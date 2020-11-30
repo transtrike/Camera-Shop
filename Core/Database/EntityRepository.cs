@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,6 +32,11 @@ namespace Camera_Shop.Database
 				.Set<TEntity>()
 				.AsNoTracking()
 				.AsEnumerable();
+		}
+
+		public async Task<TEntity> FindByIdAsync(object id)
+		{
+			throw new NotImplementedException("Not implemented!");
 		}
 
 		public async Task EditAsync(object id, TEntity entity)

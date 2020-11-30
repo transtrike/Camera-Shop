@@ -40,11 +40,15 @@
 (DONE) Refactor EntityRepository to be async
 (DONE) Add AsNoTracking() to Read-Only queries to improve performance
 (DONE) Fix UpdateAsync() in CatalogServices.cs
+(DONE) Refactor Edit method in EntityRepository
 (DONE) Change Create() permissions to only logged in users
 (DONE) Create a ViewCamera() to hide Edit() and Create()
-Create a ViewBrand() to hide Edit() and Create()
-Edit ViewBrand.cshtml just like ViewCamera.cshtml
-Catch exceptions from "No connection to SQL Server"
+(Done) Create a ViewBrand() to hide Edit() and Create()
+(DONE) Edit ViewBrand.cshtml just like ViewCamera.cshtml
+(NOT POSSIBLE) Catch exceptions from "No connection to SQL Server"
+Implement Roles for users
+Implement Policyies
+Implement FindByIdAsync() in EntityRepository.cs
 Implement the "Guide" controller and simple view
 Write Unit tests(functionality and hardened features are priority)
 Construct and layout the "Guide" section
@@ -56,7 +60,6 @@ Hide the Id from the url with "Hide Id"(by Ivo's words) via the route customizat
 Rewrite all CRUD Views to be dynamic
 Make diplaying properties dynamic(exclude id!), so that you can expand easily
 Expand the Camera class to have more functionality, better attributes and more properties
-Refactor Edit method in EntityRepository
 Use Blazor instead of JavaScript
 
 ## Optional

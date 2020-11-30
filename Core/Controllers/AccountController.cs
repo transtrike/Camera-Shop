@@ -68,6 +68,7 @@ namespace Camera_Shop.Controllers
 		}
 
 		[HttpGet]
+		[AllowAnonymous]
 		public IActionResult Login()
 		{
 			return View();

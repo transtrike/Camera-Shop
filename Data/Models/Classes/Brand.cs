@@ -29,6 +29,7 @@ namespace Data.Models.Classes
 				this._name = value;
 			}
 		}
+		
 		public ICollection<Camera> Cameras { get; set; }
 	}
 }
