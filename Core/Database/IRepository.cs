@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -12,7 +13,8 @@ namespace Camera_Shop.Database
 		IEnumerable<TEntity> QueryAll();
 
 		//Find entity by id
-		Task<TEntity> FindByIdAsync(object id);
+		Task<Entity> FindByIdAsync<Entity>(object id)
+			where Entity : class;
 
 		//Modify Entity from database
 		Task EditAsync(object id, TEntity entity);

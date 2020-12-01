@@ -34,9 +34,12 @@ namespace Camera_Shop.Database
 				.AsEnumerable();
 		}
 
-		public async Task<TEntity> FindByIdAsync(object id)
+		public async Task<Entity> FindByIdAsync<Entity>(object id)
+			where Entity : class
 		{
-			throw new NotImplementedException("Not implemented!");
+			return await this._context
+				.Set<Entity>()
+				.FindAsync(id);
 		}
 
 		public async Task EditAsync(object id, TEntity entity)
