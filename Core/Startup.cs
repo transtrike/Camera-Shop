@@ -46,7 +46,7 @@ namespace Camera_Shop
 				 options.UseNpgsql(Configuration.GetConnectionString("DEV")));
 
 			services.AddIdentity<User, Role>()
-				.AddRoles<IdentityRole>()
+				//.AddRoles<IdentityRole>()
 				.AddEntityFrameworkStores<CameraContext>();
 				 
 			services.AddAuthorization(opt =>
