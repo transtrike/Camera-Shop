@@ -24,5 +24,7 @@ namespace Data.Models.Classes
 				base.UserName = value;
 			}
 		}
+	
+		//public string Role { get; set; }
 	}
 }

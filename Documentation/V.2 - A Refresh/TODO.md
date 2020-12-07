@@ -46,17 +46,17 @@
 (Done) Create a ViewBrand() to hide Edit() and Create()
 (DONE) Edit ViewBrand.cshtml just like ViewCamera.cshtml
 (NOT POSSIBLE) Catch exceptions from "No connection to SQL Server"
-Implement Roles for users
-Implement Policyies
-Implement FindByIdAsync() in EntityRepository.cs
+(DONE) Implement FindByIdAsync() in EntityRepository.cs
 Implement the "Guide" controller and simple view
 Write Unit tests(functionality and hardened features are priority)
 Construct and layout the "Guide" section
 Change AccountService's UserExists() & GetUser() to async queries
 Fix "Brand's Cameras" showing "None"
 Fix login error not showing
+Implement Policyies
+Implement Roles
 Fix Layout Page now showing username correctly after change
-Hide the Id from the url with "Hide Id"(by Ivo's words) via the route customization(prob)
+Hide the Id from the url with "Hide Id"(by Ivo's words)
 Rewrite all CRUD Views to be dynamic
 Make diplaying properties dynamic(exclude id!), so that you can expand easily
 Expand the Camera class to have more functionality, better attributes and more properties

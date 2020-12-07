@@ -7,5 +7,7 @@ namespace Data.Models.Classes
 	[Table("Roles")]
 	public class Role : IdentityRole<int>
 	{
+		public const string Admin = "Admin";
+		public const string User = "User";
 	}
 }

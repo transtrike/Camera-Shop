@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Camera_Shop.Controllers
 {
-	[Authorize]
+	//[Authorize]
 	public class GuideController : Controller
 	{
 		[HttpGet]
