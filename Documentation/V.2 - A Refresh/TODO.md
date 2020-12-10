@@ -31,9 +31,9 @@
 (DONE) Separate Data and Core into 2 different projects, lightly loosen from one another
 (DONE) Look into implementing login and password(hash the password, at least)
 (DONE) Configure for HTTPS instead of HTTP
-(DONE) Make the entire infrastucture async(starting from the Controllers)
+(DONE) Make the entire design async(starting from the Controllers)
 (DONE) Fix the Error View to display when having Exception
-(DONE) Fix empty Exception getting to Error View 
+(DONE) Fix empty Exception getting to Error View
 (DONE) Fix Error() method not binding to Error View
 (DONE) Make global exceptions catcher (GlobalExceptionHandler)
 (DONE) Fix "InvalidOperationException" upon viewing Profile
@@ -53,8 +53,8 @@ Construct and layout the "Guide" section
 Change AccountService's UserExists() & GetUser() to async queries
 Fix "Brand's Cameras" showing "None"
 Fix login error not showing
-Implement Policyies
 Implement Roles
+Implement Policies
 Fix Layout Page now showing username correctly after change
 Hide the Id from the url with "Hide Id"(by Ivo's words)
 Rewrite all CRUD Views to be dynamic
