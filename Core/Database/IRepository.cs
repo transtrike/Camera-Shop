@@ -10,7 +10,7 @@ namespace Camera_Shop.Database
 		Task AddAsync(TEntity entity);
 
 		//Return *count* instances of Entity from the database
-		Task<IAsyncEnumerable<TEntity>> Query(int count);
+		Task<IEnumerable<TEntity>> Query(int count);
 
 		//Find entity by id
 		Task<TEntity> FindByIdAsync(object id);

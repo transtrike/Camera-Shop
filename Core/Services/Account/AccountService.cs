@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using Camera_Shop.Database;
 using Data.Models.Classes;
@@ -13,7 +10,7 @@ namespace Camera_Shop.Services.Account
 {
 	public class AccountService
 	{
-		private readonly EntityRepository<User> _repository;
+		private readonly DbRepository<User> _repository;
 		private readonly UserManager<User> _userManager;
 		private readonly SignInManager<User> _signInManager;
 		private readonly IHttpContextAccessor _httpContextAccessor;
@@ -21,7 +18,7 @@ namespace Camera_Shop.Services.Account
 		public AccountService(CameraContext context, UserManager<User> userManager, 
 			SignInManager<User> signInManager, IHttpContextAccessor httpContextAccessor)
 		{
-			this._repository = new EntityRepository<User>(context);
+			this._repository = new DbRepository<User>(context);
 			this._userManager = userManager;
 			this._signInManager = signInManager;
 			this._httpContextAccessor = httpContextAccessor;
@@ -55,7 +52,7 @@ namespace Camera_Shop.Services.Account
 			var currentUser = GetUser(id) ??
 				throw new ArgumentNullException("No logged in user!");
 
-			if(UserExists(user.UserName))
+			if(await UserExists(user.UserName))
 				throw new ArgumentException("Username already exists. Please user a different one!");
 
 			await this._repository.EditAsync(id, user);
@@ -84,19 +81,16 @@ namespace Camera_Shop.Services.Account
 			await this._signInManager.SignOutAsync();
 		}
 
-		private User GetUser(int id)
+		private async Task<User> GetUser(int id)
 		{
-			return this._repository
-				.QueryAll()
-				.FirstOrDefault(x => x.Id == id);
+			return await this._repository.FindByIdAsync(id);
 		}
 		
 		//Validations
-		private bool UserExists(string username)
+		private async Task<bool> UserExists(string username)
 		{
-			return _repository
-				.QueryAll()
-				.Any(x => x.UserName == username);
+			var prop = typeof(User).GetProperty("UserName");
+			return await this._repository.DoesExist(prop, username);
 		}
 	}
 }

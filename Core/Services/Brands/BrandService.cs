@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Camera_Shop.Database;
 using Data.Models.Classes;
@@ -9,11 +8,11 @@ namespace Camera_Shop.Services.Brands
 {
 	public class BrandService
 	{
-		private readonly EntityRepository<Brand> _repository;
+		private readonly DbRepository<Brand> _repository;
 		
 		public BrandService(CameraContext context)
 		{
-			this._repository = new EntityRepository<Brand>(context);
+			this._repository = new DbRepository<Brand>(context);
 		}
 
 		//Create
@@ -24,23 +23,21 @@ namespace Camera_Shop.Services.Brands
 				throw new ArgumentNullException("Brand cannot be empty!");
 			
 			//Check for brand in database
-			if(DoesBrandExist(brand.Name))
+			if(await DoesBrandExist(brand.Name))
 				throw new ArgumentException($"Brand {brand.Name} exists!");
 			
 			await this._repository.AddAsync(brand);
 		}
 		
 		//Read
-		public IEnumerable<Brand> GetAllBrands()
+		public async Task<IEnumerable<Brand>> GetAllBrands()
 		{
-			return this._repository.QueryAll();
+			return await this._repository.QueryAll();
 		}
 		
-		public Brand GetBrand(int id)
+		public async Task<Brand> GetBrand(int id)
 		{
-			return this._repository
-				.QueryAll()
-				.FirstOrDefault(x => x.Id == id);
+			return await this._repository.FindByIdAsync(id);
 		}
 		
 		//Update
@@ -51,11 +48,10 @@ namespace Camera_Shop.Services.Brands
 				throw new ArgumentNullException("Brand cannot be empty!");
 			
 			//Check for brand in database
-			if(DoesBrandExist(brand.Name))
+			if(await DoesBrandExist(brand.Name))
 				throw new ArgumentException($"Brand {brand.Name} exists!");
 
-			var brandToModify = this._repository.QueryAll()
-				.FirstOrDefault(x => x.Id == id);
+			var brandToModify = await this._repository.FindByIdAsync(id);
 
 			//Null check for brand that should be modified
 			if(brandToModify == null)
@@ -67,8 +63,7 @@ namespace Camera_Shop.Services.Brands
 		//Delete
 		public async Task DeleteBrandAsync(int id)
 		{
-			var brandToDelete = this._repository.QueryAll()
-				.FirstOrDefault(x => x.Id == id);
+			var brandToDelete = await this._repository.FindByIdAsync(id);
 
 			//Null check for brand that should be deleted
 			if(brandToDelete == null)
@@ -80,11 +75,10 @@ namespace Camera_Shop.Services.Brands
 		}
 		
 		//Validations
-		private bool DoesBrandExist(string brandName)
+		private async Task<bool> DoesBrandExist(string brandName)
 		{
-			return this._repository
-				.QueryAll()
-				.Any(x => x.Name == brandName);
+			var property = typeof(Brand).GetProperty("Name");
+			return await this._repository.DoesExist(property, brandName);
 		}
 	}
 }
